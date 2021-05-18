@@ -9,7 +9,8 @@ class Question extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'attach_type',
+    protected $fillable = 
+    [
+        'attach_type','attachment'
     ];
 }
