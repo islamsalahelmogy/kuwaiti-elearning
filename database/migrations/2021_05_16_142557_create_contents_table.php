@@ -15,7 +15,21 @@ class CreateContentsTable extends Migration
     {
         Schema::create('contents', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
+            $table->text('description');
+            $table->string('attachment');
+            $table->enum('attach_type',['video','audio']);
+            $table->unsignedBigInteger('topic_id')->nullable();
+            $table->unsignedBigInteger('teacher_id')->nullable();
             $table->timestamps();
+
+            $table->foreign('topic_id')
+            ->references('id')
+            ->on('topics');
+
+            $table->foreign('teacher_id')
+            ->references('id')
+            ->on('teachers');
         });
     }
 
