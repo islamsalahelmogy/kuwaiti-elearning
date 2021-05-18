@@ -15,7 +15,14 @@ class CreateQuestionsTable extends Migration
     {
         Schema::create('questions', function (Blueprint $table) {
             $table->id();
+            $table->string('attachment');
+            $table->enum('attach_type',['text','audio','image']);
+            $table->unsignedBigInteger('activity_id')->nullable();
             $table->timestamps();
+
+            $table->foreign('activity_id')
+            ->references('id')
+            ->on('activities');
         });
     }
 

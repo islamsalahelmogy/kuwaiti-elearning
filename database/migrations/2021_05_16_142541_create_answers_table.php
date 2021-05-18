@@ -15,7 +15,16 @@ class CreateAnswersTable extends Migration
     {
         Schema::create('answers', function (Blueprint $table) {
             $table->id();
+            $table->string('answer');
+            $table->string('attachment');
+            $table->enum('attach_type',['text','image']);
+            $table->enum('correct_answer',['true','false']);
+            $table->unsignedBigInteger('question_id')->nullable();
             $table->timestamps();
+
+            $table->foreign('question_id')
+            ->references('id')
+            ->on('questions');
         });
     }
 
