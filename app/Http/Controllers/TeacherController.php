@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Teacher;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
+
 
 class TeacherController extends Controller
 {
@@ -12,6 +17,24 @@ class TeacherController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware('guest')->except('logout');
+        $this->middleware('guest:teacher')->except('logout');
+    }
+
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:teachers'],
+            'gender' => ['required', 'string', 'max:255'],
+            'phone' => ['required', 'numeric', 'min:11'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+    }
+
     public function index()
     {
         //
@@ -33,10 +56,18 @@ class TeacherController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(array $data)
     {
-        //
-    }
+    
+            return Teacher::create([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'gender' => $data['gender'],
+                'phone' => $data['phone'],
+                'password' => Hash::make($data['password']),
+            ]);
+       
+    }  
 
     /**
      * Display the specified resource.
@@ -82,4 +113,5 @@ class TeacherController extends Controller
     {
         //
     }
+
 }

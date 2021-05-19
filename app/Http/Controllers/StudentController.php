@@ -12,6 +12,13 @@ class StudentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware('guest')->except('logout');
+        $this->middleware('guest:student')->except('logout');
+    }
+    
     public function index()
     {
         //
@@ -33,9 +40,14 @@ class StudentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(array $data)
     {
-        //
+        return Teacher::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'gender' => $data['gender'],
+            'password' => Hash::make($data['password']),
+        ]);
     }
 
     /**
@@ -82,4 +94,6 @@ class StudentController extends Controller
     {
         //
     }
+
+   
 }

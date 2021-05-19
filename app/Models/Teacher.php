@@ -9,6 +9,8 @@ class Teacher extends Model
 {
     use HasFactory;
 
+    protected $guard = 'teacher';
+
     protected $fillable = [
         'name',
         'email',

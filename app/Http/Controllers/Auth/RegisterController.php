@@ -8,6 +8,9 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use App\Models\Student;
+use App\Models\Teacher;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -39,6 +42,8 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+        $this->middleware('guest:teacher')->except('logout');
+        $this->middleware('guest:student')->except('logout');
     }
 
     /**
@@ -47,11 +52,23 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
+    protected function TeacherValidator(array $data)
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:teachers'],
+            'gender' => ['required', 'string', 'max:255'],
+            'phone' => ['required', 'numeric', 'min:11'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+    }
+
+    protected function StudentValidator(array $data)
+    {
+        return Validator::make($data, [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:teachers'],
+            'gender' => ['required', 'string', 'max:255'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
@@ -62,12 +79,41 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\Models\User
      */
-    protected function create(array $data)
+
+
+    public function showTeacherRegisterForm()
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+        return view('auth.teacherRegister');
     }
+
+    protected function createTeacher(Request $request)
+    {
+        $this->TeacherValidator($request->all())->validate();
+        $admin = Teacher::create([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'gender' => $data['gender'],
+                'phone' => $data['phone'],
+                'password' => Hash::make($data['password']), 
+        ]);
+        return redirect()->intended('login/teacher');
+    }
+    
+    public function showStudentRegisterForm()
+    {
+        return view('auth.studentRegister');
+    }
+
+    protected function createStudent(Request $request)
+    {
+        $data=$this->StudentValidator($request->all())->validate();
+        $admin = Student::create([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'gender' => $data['gender'],
+                'password' => Hash::make($data['password']), 
+        ]);
+        return redirect()->intended('login/student');
+    }
+
 }
