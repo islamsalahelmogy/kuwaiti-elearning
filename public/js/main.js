@@ -15,18 +15,18 @@
                         s.removeClass("navbar-scrollUp"),
                         (o = e),
                         a.hasClass("navbar-sticky") &&
-                        (r(this).scrollTop() <= 600 || r(this).width() <= 300) ?
+                        (r(this).scrollTop() <= 150 || r(this).width() <= 300) ?
                         (a.removeClass("navbar-scrollUp"),
                             a.removeClass("navbar-sticky").appendTo(t),
                             t.css("height", "auto")) :
                         !a.hasClass("navbar-sticky") &&
                         300 < r(this).width() &&
-                        600 < r(this).scrollTop() &&
+                        150 < r(this).scrollTop() &&
                         (t.css("height", t.height()),
                             a.addClass("navbar-scrollUp"),
                             a
                             .css({
-                                opacity: "0",
+                                opacity: "1",
                             })
                             .addClass("navbar-sticky"),
                             a.appendTo(r("body")).animate({

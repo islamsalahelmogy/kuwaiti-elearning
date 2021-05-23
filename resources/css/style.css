@@ -3697,7 +3697,7 @@ input[type="button"].btn-block {
     padding: 0.5625rem 1.25rem;
     margin-bottom: 0;
     font-size: 0.875rem;
-    font-weight: 400;
+    font-weight: 600;
     line-height: 1.5;
     color: #495057;
     text-align: center;
@@ -14204,13 +14204,8 @@ a:hover {
     -webkit-transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out;
     z-index: 10;
-    display: none;
 }
-@media (min-width: 768px) {
-    .back-to-top {
-        display: block;
-    }
-}
+
 .back-to-top i {
     color: #fff;
 }

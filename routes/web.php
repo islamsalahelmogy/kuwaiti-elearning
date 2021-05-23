@@ -35,4 +35,22 @@ Route::get('/', function () {
     Route::view('/student', 'home');
 
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/home',function () {
+    return view('app.home');
+})->name('home');
+
+Route::get('/students/profile',function () {
+    return view('students.profile.index');
+})->name('students.profile');
+
+Route::get('/teachers/profile',function () {
+    return view('teachers.profile.index');
+})->name('teachers.profile');
+Route::get('/teachers/password/edit',function () {
+    return view('teachers.password.index');
+})->name('teachers.password.edit');
+Route::get('/students/password/edit',function () {
+    return view('students.password.index');
+})->name('students.password.edit');
