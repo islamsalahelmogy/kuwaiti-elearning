@@ -18,6 +18,22 @@ Route::get('/', function () {
 })->name('welcome');
 
 //Auth::routes();
+    
+    Route::get('/login/teacher', 'Auth\LoginController@showTeacherLoginForm');
+    Route::post('/login/teacher', 'Auth\LoginController@teacherLogin')->name('teacher.login');
+    Route::get('/login/student', 'Auth\LoginController@showStudentLoginForm');
+    Route::post('/login/student', 'Auth\LoginController@studentLogin')->name('student.login');
+    Route::get('/register/teacher', 'Auth\RegisterController@showTeacherRegisterForm');
+    Route::post('/register/teacher', 'Auth\RegisterController@createTeacher')->name('teacher.register');
+    Route::get('/register/student', 'Auth\RegisterController@showStudentRegisterForm');
+    Route::post('/register/student', 'Auth\RegisterController@createStudent')->name('student.register');
+    Route::get('/logout/teacher','Auth\LoginController@teacherLogOut')->name('teacher.logout');
+    Route::get('/logout/student','Auth\LoginController@studentLogOut')->name('student.logout');
+
+    Route::view('/home', 'home')->middleware('auth');
+    Route::view('/teacher', 'home');
+    Route::view('/student', 'home');
+
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
