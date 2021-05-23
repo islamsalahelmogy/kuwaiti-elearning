@@ -4,13 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Auth\Authenticatable;
-use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Student extends Model implements AuthenticatableContract
+class Student extends Authenticatable
 {
     use HasFactory;
-    use Authenticatable;
 
     protected $guard = 'student';
 

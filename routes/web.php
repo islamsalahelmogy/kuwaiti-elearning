@@ -27,6 +27,8 @@ Route::get('/', function () {
     Route::post('/register/teacher', 'Auth\RegisterController@createTeacher')->name('teacher.register');
     Route::get('/register/student', 'Auth\RegisterController@showStudentRegisterForm');
     Route::post('/register/student', 'Auth\RegisterController@createStudent')->name('student.register');
+    Route::get('/logout/teacher','Auth\LoginController@teacherLogOut')->name('teacher.logout');
+    Route::get('/logout/student','Auth\LoginController@studentLogOut')->name('student.logout');
 
     Route::view('/home', 'home')->middleware('auth');
     Route::view('/teacher', 'home');

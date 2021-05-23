@@ -84,4 +84,27 @@ class LoginController extends Controller
         }
         return back()->withInput($request->only('email', 'remember'));
     }
+
+    public function teacherLogout(Request $request)
+    {
+        Auth::guard('teacher')->logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerate();
+
+        return redirect()->guest(route( 'teacher.login' ));
+    }
+
+    public function studentLogout(Request $request)
+    {
+        Auth::guard('student')->logout();
+
+        $request->session()->flush();
+
+        $request->session()->regenerate();
+
+        return redirect()->guest(route( 'student.login' ));
+    }
+
 }
