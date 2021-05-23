@@ -9,6 +9,8 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Auth\ThrottlesLogins;
+
 
 
 class LoginController extends Controller
@@ -25,6 +27,7 @@ class LoginController extends Controller
     */
 
     use AuthenticatesUsers;
+    
 
     /**
      * Where to redirect users after login.
@@ -74,6 +77,7 @@ class LoginController extends Controller
             'password' => 'required|min:6'
         ]);
        
+  
         if (Auth::guard('student')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
           
             return redirect()->intended('/student');

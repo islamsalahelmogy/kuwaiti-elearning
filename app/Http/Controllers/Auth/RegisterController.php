@@ -88,8 +88,8 @@ class RegisterController extends Controller
 
     protected function createTeacher(Request $request)
     {
-        $this->TeacherValidator($request->all())->validate();
-        $admin = Teacher::create([
+       $data= $this->TeacherValidator($request->all())->validate();
+             Teacher::create([
                 'name' => $data['name'],
                 'email' => $data['email'],
                 'gender' => $data['gender'],
@@ -107,7 +107,7 @@ class RegisterController extends Controller
     protected function createStudent(Request $request)
     {
         $data=$this->StudentValidator($request->all())->validate();
-        $admin = Student::create([
+              Student::create([
                 'name' => $data['name'],
                 'email' => $data['email'],
                 'gender' => $data['gender'],

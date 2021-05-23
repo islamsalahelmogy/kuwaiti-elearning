@@ -29,8 +29,8 @@ Route::get('/', function () {
     Route::post('/register/student', 'Auth\RegisterController@createStudent')->name('student.register');
 
     Route::view('/home', 'home')->middleware('auth');
-    Route::view('/teacher', 'teacher');
-    Route::view('/student', 'student');
+    Route::view('/teacher', 'home');
+    Route::view('/student', 'home');
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
