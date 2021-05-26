@@ -14864,6 +14864,26 @@ html[dir="rtl"]
     padding-left: 0 !important;
 }
 
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f5f5f5; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background:#ea7066; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #dc3545; 
+}
+
+
 .rememberMe,
 .gender,
 .log {
@@ -15041,4 +15061,13 @@ html[dir="rtl"]
 
 }
 
+.invalid-feedback {
+    font-size: 100%;
+}
 
+.modal-open .modal{
+    direction:ltr;
+}
+.modal-content{
+    direction:rtl;
+}

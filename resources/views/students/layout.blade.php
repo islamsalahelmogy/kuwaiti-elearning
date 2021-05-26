@@ -36,7 +36,7 @@
                                     text-white
                                     font-weight-medium
                                     opacity-80 mr-1 mr-md-2 mr-lg-1 mr-xl-2
-                                " href="#">
+                                " href="{{ route('student.logout') }}">
                             <span class="bg-purple
                                     icon-header
                                     mr-1 mr-md-2 mr-lg-1 mr-xl-2">
@@ -82,7 +82,7 @@
             navbar-white
                 ">
         <div class="container">
-            <a class="navbar-brand" href="{{ Route('home') }}">
+            <a class="navbar-brand" href="">
                 <img class="d-inline-block" src="{{ asset('img/logo.jpg') }}" alt="Kuwaiti-elearning" />
             </a>
             <a class="btn btn-primary btn-customized open-menu" href="#" role="button">

@@ -7,6 +7,7 @@ use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Student;
 use App\Models\Teacher;
@@ -42,8 +43,8 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
-        $this->middleware('guest:teacher')->except('logout');
-        $this->middleware('guest:student')->except('logout');
+        $this->middleware('guest:teacher')->except('createTeacher');
+        $this->middleware('guest:student');
     }
 
     /**
@@ -55,21 +56,41 @@ class RegisterController extends Controller
     protected function TeacherValidator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:teachers'],
-            'gender' => ['required', 'string', 'max:255'],
-            'phone' => ['required', 'numeric', 'min:11'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+            'name_tr' => ['required', 'string', 'max:255'],
+            'email_tr' => ['required', 'string', 'email', 'max:255', 'unique:teachers,email'],
+            'gender_tr' => ['required', 'string', 'max:255'],
+            'phone_tr' => ['required', 'numeric', 'digits:11'],
+            'password_tr' => ['required', 'string', 'min:8'],
+            'password_confirmation_tr' => ['required', 'string', 'min:8','same:password_tr']
+        ],[
+            'required' => 'ممنوع ترك الحقل فارغاَ',
+            'numeric' => 'يجب ان يحتوى الحقل على ارقام فقط',
+            'phone_tr.digits' => 'الرقم غير صحيح لابد ان يكون مكون من 11 خانه',
+            'min' => 'لابد ان يكون الحقل مكون على الاقل من 8 خانات',
+            'email' => 'هذا الإيميل غير صحيح',
+            'unique' => 'هذا الإيميل موجود بالفعل',
+            'same' => 'كلمة السر غير متطابقه',
+            'string' => 'يجب الحقل ان يحتوى على رموز وارقام وحروف'
+        ]
+        );
     }
 
     protected function StudentValidator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:teachers'],
-            'gender' => ['required', 'string', 'max:255'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'name_str' => ['required', 'string', 'max:255'],
+            'email_str' => ['required', 'string', 'email', 'max:255', 'unique:students,email'],
+            'gender_str' => ['required', 'string', 'max:255'],
+            'password_str' => ['required', 'string', 'min:8'],
+            'password_confirmation_str' => ['required', 'string', 'min:8','same:password_str']
+
+        ],[
+            'required' => 'ممنوع ترك الحقل فارغاَ',
+            'min' => 'لابد ان يكون الحقل مكون على الاقل من 8 خانات',
+            'email' => 'هذا الإيميل غير صحيح',
+            'unique' => 'هذا الإيميل موجود بالفعل',
+            'same' => 'كلمة السر غير متطابقه',
+            'string' => 'يجب الحقل ان يحتوى على رموز وارقام وحروف'
         ]);
     }
 
@@ -86,17 +107,23 @@ class RegisterController extends Controller
         return view('auth.teacherRegister');
     }
 
-    protected function createTeacher(Request $request)
-    {
-       $data= $this->TeacherValidator($request->all())->validate();
-             Teacher::create([
-                'name' => $data['name'],
-                'email' => $data['email'],
-                'gender' => $data['gender'],
-                'phone' => $data['phone'],
-                'password' => Hash::make($data['password']), 
+    protected function createTeacher(Request $request){
+        //dd($request->all());
+        $data =$this->TeacherValidator($request->all());
+        
+        if($data->fails()) {
+            return response()->json(['errors'=>$data->errors()]);
+        }
+        Teacher::create([
+                'name' => $request['name_tr'],
+                'email' => $request['email_tr'],
+                'phone' => $request['phone_tr'],
+                'gender' => $request['gender_tr'],
+                'password' => Hash::make($request['password_tr']), 
         ]);
-        return redirect()->intended('login/teacher');
+        //Auth::guard('teacher')->attempt(['email' => $request->email_tr, 'password' => $request->password_tr]);
+        //return redirect()->intended('/student');
+
     }
     
     public function showStudentRegisterForm()
@@ -104,16 +131,22 @@ class RegisterController extends Controller
         return view('auth.studentRegister');
     }
 
-    protected function createStudent(Request $request)
-    {
-        $data=$this->StudentValidator($request->all())->validate();
-              Student::create([
-                'name' => $data['name'],
-                'email' => $data['email'],
-                'gender' => $data['gender'],
-                'password' => Hash::make($data['password']), 
+    protected function createStudent(Request $request){
+        //dd($request->all());
+        $data =$this->StudentValidator($request->all());
+        
+        if($data->fails()) {
+            return response()->json(['errors'=>$data->errors()]);
+        }
+        Student::create([
+                'name' => $request['name_str'],
+                'email' => $request['email_str'],
+                'gender' => $request['gender_str'],
+                'password' => Hash::make($request['password_str']), 
         ]);
-        return redirect()->intended('login/student');
+        Auth::guard('student')->attempt(['email' => $request->email_str, 'password' => $request->password_str]);
+        //return redirect()->intended('/student');
+
     }
 
 }
