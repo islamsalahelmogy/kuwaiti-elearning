@@ -52,7 +52,9 @@
 
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="img/logo.jpg" rel="shortcut icon" />
+    
     @yield('style')
+    
 
 </head>
 
@@ -108,8 +110,8 @@
         @yield('content')
     </div>
     <!-- ====================================
-              ———	FOOTER
-              ===================================== -->
+        ———	FOOTER
+    ===================================== -->
     <footer id="footer" class="footer-bg-img">
         <!-- Footer Color Bar -->
         <div class="color-bar">
@@ -136,409 +138,9 @@
         <!-- Copy Right -->
         @yield('footer')
     </footer>
-
-    <!-- Modal teacher Login -->
     
-
-    <!-- Modal reset password teacher -->
-    <div class="modal fade" id="modal-reset-password-teacher" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-sm" role="document">
-            <div class="modal-content">
-                <div class="bg-warning rounded-top p-2">
-                    <h3 class="text-white font-weight-bold mb-0 ml-2">
-                        مساعدة كلمة السر
-                    </h3>
-                </div>
-
-                <div class="border rounded-bottom-md border-top-0">
-                    <div class="p-3">
-                        <form action="#" method="POST" role="form">
-                            <div class="form-group form-group-icon">
-                                <div class="input-group mb-3">
-                                    <div class="input-group-append w-40">
-                                        <span class="input-group-text border-right-0 w-100" id="basic-addon2">أدخل
-                                            إيميلك</span>
-                                    </div>
-                                    <input type="email" class="form-control @error('email')  is-invalid @enderror"
-                                        autocomplete="email" dir="ltr">
-                                </div>
-                                @error('email')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-
-
-                            <div class="form-group font-weight-bolder">
-                                <a class="btn btn-danger text-uppercase w-100" href="javascript:void(0)"
-                                    data-dismiss="modal" data-toggle="modal"
-                                    data-target="#modal-change-password-teacher">اٍستمر</a>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!--Modal change Password teacher -->
-    <div class="modal fade" id="modal-change-password-teacher" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-sm" role="document">
-            <div class="modal-content">
-                <div class="bg-warning rounded-top p-2">
-                    <h3 class="text-white font-weight-bold mb-0 ml-2">
-                        تغيير كلمة السر
-                    </h3>
-                </div>
-
-                <div class="border rounded-bottom-md border-top-0">
-                    <div class="p-3">
-                        <form action="#" method="POST" role="form">
-
-                            <div class="form-group form-group-icon">
-                                <div class="input-group mb-3">
-                                    <div class="input-group-append w-40">
-                                        <span class="input-group-text border-right-0 w-100" id="basic-addon2">كلمة سر
-                                            جديد</span>
-                                    </div>
-                                    <input type="password" class="form-control @error('password')  is-invalid @enderror"
-                                        autocomplete="new-password" name="password" dir="ltr">
-                                </div>
-                                @error('password')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                            <div class="form-group form-group-icon">
-                                <div class="input-group mb-3">
-                                    <div class="input-group-append w-40">
-                                        <span class="input-group-text border-right-0 w-100" id="basic-addon2">أعد
-                                            كتابتها</span>
-                                    </div>
-                                    <input type="password" class="form-control" name="password-confirmation" dir="ltr"
-                                        autocomplete="new-password">
-                                </div>
-
-                            </div>
-
-                            <div class="
-                                    form-group
-                                    text-secondary
-                                    row font-weight-bolder
-                                ">
-
-                                <div class="col-12 text-left">
-                                    <input id="log-t" type="checkbox" class="log-input " name="logout-devices">
-                                    <label for="log-t" class="log"></label>
-                                    <span class="text-danger ml-1">قفل الحساب من جميع الأجهزة الأخرى</span>
-                                </div>
-                            </div>
-
-                            <div class="form-group font-weight-bolder">
-                                <button type="button" onclick="submit_form();" name="submit" class="
-                                                            btn btn-danger
-                                                            text-uppercase
-                                                            w-100
-                                                        ">
-                                    تغيير كلمة السر
-                                </button>
-                            </div>
-
-
-
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-
-    <!-- Modal student Login -->
-    <div class="modal fade" id="modal-student-login" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-sm" role="document">
-            <div class="modal-content">
-                <div class="bg-warning rounded-top p-2">
-                    <h3 class="text-white font-weight-bold mb-0 ml-2">
-                        مرحباً
-                    </h3>
-                </div>
-
-                <div class="border rounded-bottom-md border-top-0">
-                    <div class="p-3">
-                        <form action="#" method="POST" role="form">
-                            <div class="form-group form-group-icon">
-                                <div class="input-group mb-3">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text border-right-0"
-                                            id="basic-addon2">الإيميل</span>
-                                    </div>
-                                    <input type="email"
-                                        class="form-control @error('email')  is-invalid @enderror"
-                                        autocomplete="email" dir="ltr">
-                                </div>
-                                @error('email')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-
-                            <div class="form-group form-group-icon">
-                                <div class="input-group mb-3">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text border-right-0" id="basic-addon2">كلمة
-                                            السر</span>
-                                    </div>
-                                    <input type="password"
-                                        class="form-control @error('password')  is-invalid @enderror"
-                                        autocomplete="current-password" dir="ltr">
-                                </div>
-                                @error('password')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-
-                            <div class="form-group font-weight-bolder">
-                                <button type="submit" class="
-                                                        btn btn-danger
-                                                        text-uppercase
-                                                        w-100
-                                                    ">
-                                    دخول
-                                </button>
-                            </div>
-                            <div class="
-                                                    form-group
-                                                    text-secondary
-                                                    mb-0
-                                                    row font-weight-bolder
-                                                ">
-
-                                <div class="col-4 text-left">
-                                    <input id="remember-token-st" type="checkbox" class="rememberMe-input"
-                                        name="remember-token">
-                                    <label for="remember-token-st" class="rememberMe"></label>
-                                    <span class="text-danger ml-1">تذكرنى</label>
-                                </div>
-                                <div class="col-8 text-right">
-                                    <a class="text-danger text-underline" href="javascript:void(0)" data-dismiss="modal"
-                                        data-toggle="modal" data-target="#modal-reset-password-st">هل نسيت كلمة
-                                        السر؟</a>
-                                </div>
-                            </div>
-
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <!-- Modal reset password student -->
-    <div class="modal fade" id="modal-reset-password-st" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-sm" role="document">
-            <div class="modal-content">
-                <div class="bg-warning rounded-top p-2">
-                    <h3 class="text-white font-weight-bold mb-0 ml-2">
-                        مساعدة كلمة السر
-                    </h3>
-                </div>
-
-                <div class="border rounded-bottom-md border-top-0">
-                    <div class="p-3">
-                        <form action="#" method="POST" role="form">
-                            <div class="form-group form-group-icon">
-                                <div class="input-group mb-3">
-                                    <div class="input-group-append w-40">
-                                        <span class="input-group-text border-right-0 w-100" id="basic-addon2">أدخل
-                                            إيميلك</span>
-                                    </div>
-                                    <input type="email" class="form-control @error('email')  is-invalid @enderror"
-                                        autocomplete="email" dir="ltr">
-                                </div>
-                                @error('email')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-
-                            <div class="form-group font-weight-bolder">
-                                <div class="form-group">
-                                    <a class="btn btn-danger text-uppercase w-100" href="javascript:void(0)"
-                                        data-dismiss="modal" data-toggle="modal"
-                                        data-target="#modal-change-password-st">اٍستمر</a>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!--Modal change password Student -->
-
-    <div class="modal fade" id="modal-change-password-st" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-sm" role="document">
-            <div class="modal-content">
-                <div class="bg-warning rounded-top p-2">
-                    <h3 class="text-white font-weight-bold mb-0 ml-2">
-                        تغيير كلمة السر
-                    </h3>
-                </div>
-
-                <div class="border rounded-bottom-md border-top-0">
-                    <div class="p-3">
-                        <form action="#" method="POST" role="form">
-
-                            <div class="form-group form-group-icon">
-                                <div class="input-group mb-3">
-                                    <div class="input-group-append w-40">
-                                        <span class="input-group-text border-right-0 w-100" id="basic-addon2">كلمة سر
-                                            جديد</span>
-                                    </div>
-                                    <input type="password" class="form-control @error('password')  is-invalid @enderror"
-                                        autocomplete="new-password" name="password" dir="ltr">
-                                </div>
-                                @error('password')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                            <div class="form-group form-group-icon">
-                                <div class="input-group mb-3">
-                                    <div class="input-group-append w-40">
-                                        <span class="input-group-text border-right-0 w-100" id="basic-addon2">أعد
-                                            كتابتها</span>
-                                    </div>
-                                    <input type="password" class="form-control" name="password-confirmation" dir="ltr"
-                                        autocomplete="new-password">
-                                </div>
-
-                            </div>
-
-                            <div class="
-                                    form-group
-                                    text-secondary
-                                    row
-                                ">
-
-                                <div class="col-12 text-left font-weight-bolder">
-                                    <input id="log-st" type="checkbox" class="log-input " name="logout-devices">
-                                    <label for="log-st" class="log"></label>
-                                    <span class="text-danger ml-1">قفل الحساب من جميع الأجهزة الأخرى</span>
-                                </div>
-                            </div>
-
-                            <div class="form-group font-weight-bolder">
-                                <button type="button" onclick="submit_form();" name="submit" class="
-                                                            btn btn-danger
-                                                            text-uppercase
-                                                            w-100
-                                                        ">
-                                    تغيير كلمة السر
-                                </button>
-                            </div>
-
-
-
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal student Account -->
+    @yield('modal')
     
-
-
-    <!-- Modal Teacher Account -->
-    <div class="modal fade" id="modal-teacher-register" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-sm rounded" role="document">
-            <div class="modal-content">
-                <div class="bg-warning rounded-top p-2">
-                    <h3 class="text-white font-weight-bold mb-0 ml-2">
-                        أنشاء حساب جديد
-                    </h3>
-                </div>
-
-
-                <div class="border rounded-bottom-md border-top-0">
-                    <div class="p-3">
-                        <form action="#" method="POST" role="form">
-                            <div class="form-group form-group-icon">
-                                <input type="text" name="name" class="form-control border" placeholder="الإسم"
-                                    required="" />
-                            </div>
-
-                            <div class="form-group form-group-icon">
-                                <input type="email" name="email" class="form-control border" placeholder="الإيميل"
-                                    required="" />
-                            </div>
-
-
-                            <div class="form-group form-group-icon">
-                                <input type="password" name="password" class="form-control border"
-                                    placeholder="كلمة السر" required="" />
-                            </div>
-
-                            <div class="form-group form-group-icon">
-                                <input type="password" name="password-confirmation" class="form-control border"
-                                    placeholder="تأكيد كلمة السر" required="" />
-                            </div>
-                            <div class="form-group form-group-icon">
-                                <input type="text" name="phone" class="form-control border" placeholder="رقم الموبايل"
-                                    required="" />
-                            </div>
-                            <div class="form-group form-group-icon pl-4 row font-weight-bolder">
-                                <label class="col-4 text-color">الجنس :</label>
-                                <div class="col-3">
-                                    <input id="male-t" value="male" type="radio" class="gender-input" name="gender"
-                                        checked="true">
-                                    <label for="male-t" class="gender"></label>
-                                    <span class="text-danger ml-1">ذكر</label>
-                                </div>
-                                <div class="col-3">
-                                    <input id="female-t" value="female" type="radio" class="gender-input" name="gender">
-                                    <label for="female-t" class="gender"></label>
-                                    <span class="text-danger ml-1">أنثى</label>
-                                </div>
-                            </div>
-
-                            <div class="form-group font-weight-bolder">
-                                <button type="submit" class="
-                                                        btn btn-danger
-                                                        text-uppercase
-                                                        w-100
-                                                    ">
-                                    أنشئ حسابك
-                                </button>
-                            </div>
-
-
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!--scrolling-->
     <div class="scrolling">
         <a href="#pageTop" class="back-to-top" id="back-to-top" style="opacity: 1">
@@ -581,9 +183,9 @@
             $('.open-menu').css('display','none');
             $('.navbar').css('display','none');
         });
-            var p = $('#footer').position().top;
-            var h = document.documentElement.clientHeight - 59;
-            if(p < h) {
+        var p = $('#footer').position().top;
+        var h = document.documentElement.clientHeight - 59;
+        if(p < h) {
                     $('#footer').css({
                         position : "fixed",bottom : 0,width:'100%'
                     });
@@ -595,8 +197,8 @@
             $(window).resize(function () {
                 var p = $('#footer').position().top;
                 var h = document.documentElement.clientHeight - 59;
-                    console.log(p);
-                    console.log(h);
+                    //console.log(p);
+                    //console.log(h);
                     if(p < h) {
                         $('#footer').css({
                             position : "fixed",bottom : 0,width:'100%'
@@ -614,9 +216,257 @@
             
         })
         
-        
+        $(document).ready(() => {
+            function messageError(errorName,message) {
+                $('input[name='+errorName+']').addClass('is-invalid');
+                    $('input[name='+errorName+']').parent().append(
+                        '<span id='+errorName+' class="invalid-feedback d-block px-2" role="alert">'+
+                                '<strong>'+message+'</strong>'+
+                        '</span>'
+                );
+            }
+            //student login
+            $('#stlogin').submit((e) => {
+                e.preventDefault();
+                axios.post('{{ route('student.login') }}',$(e.target).serialize())
+                .then((res) => {
+                    console.log(res.data)
+
+                    var errors = res.data.errors;
+                    if(errors) {
+                        console.log(errors)
+                        if(errors.email_stl){
+                            messageError('email_stl',errors.email_stl[0]);
+
+                        }
+                        if(errors.password_stl){
+                            messageError('password_stl',errors.password_stl[0]);
+
+                        }
+                        if(errors.invalid_stl){
+                            $(e.target).find('input[type="password"]').val('');
+                            $('#stlogin').prepend(
+                                '<span class="invalid-feedback d-block px-2 invalid form-group" role="alert">'+
+                                        '<strong>'+errors.invalid_stl[0]+'</strong>'+
+                                '</span>'
+                            );
+                        }
+                    }else{
+                        
+                        window.location.replace("http://127.0.0.1:8000/student");
+                    
+                    }
+                })
+            })
+            //student Register
+            $('#stregister').submit((e) => {
+                e.preventDefault();
+
+                axios.post('{{ route('student.register') }}',$(e.target).serialize())
+                .then((res) => {
+                    console.log(res)
+                    var errors = res.data.errors;
+                    if(errors) {
+                        console.log(errors)
+                        if(errors.name_str){
+                            messageError('name_str',errors.name_str[0]);
+                        }
+                        if(errors.email_str){
+                            messageError('email_str',errors.email_str[0]);
+                        }
+                        if(errors.password_str){
+                            messageError('password_str',errors.password_str[0]);
+                        }
+                        if(errors.password_confirmation_str){
+                            messageError('password_confirmation_str',errors.password_confirmation_str[0]);
+                        }
+                    }else {
+                        window.location.replace("http://127.0.0.1:8000/student");
+                    }
+                })
+            })
+            let email = "";
+            //student Reset password
+            $('#strp').submit((e) => {
+                e.preventDefault();
+
+                axios.post('{{ route('student.reset.password') }}',$(e.target).serialize())
+                .then((res) => {
+                    var errors = res.data.errors;
+                    if(errors) {
+                        console.log(errors)
+                    
+                        if(errors.email_strp){
+                            messageError('email_strp',errors.email_strp[0]);
+                        }
+                        if(errors.invalid_strp){
+                            $(e.target).find('input[type="email"]').val('');
+                            $('#strp').prepend(
+                                '<span class="invalid-feedback d-block px-2 invalid form-group" role="alert">'+
+                                        '<strong>'+errors.invalid_strp[0]+'</strong>'+
+                                '</span>'
+                            );
+                        }
+                    }else {
+                    
+                        email = res.data.email_strp;
+                        $('#modal-reset-password-st').modal('hide')
+                        $('#modal-change-password-st').modal('show')
+                    }
+                })
+            })
+            // student change Password
+            $('#stcp').submit((e) => {
+                e.preventDefault();
+                axios.post('{{ route('student.change.password') }}',$(e.target).serialize()+'&email='+email)
+                .then((res) => {
+                    console.log(res)
+                    var errors = res.data.errors;
+                    if(errors) {
+                        console.log(errors)
+                        if(errors.password_stcp){
+                            messageError('password_stcp',errors.password_stcp[0]);
+                        }
+                        if(errors.password_confirmation_stcp){
+                            messageError('password_confirmation_stcp',errors.password_confirmation_stcp[0]);
+                        }
+                    }else {
+                        window.location.replace("http://127.0.0.1:8000/student");
+
+
+                    }
+                })
+            })
+            $('#tlogin').submit((e) => {
+                e.preventDefault();
+                axios.post('{{ route('teacher.login') }}',$(e.target).serialize())
+                .then((res) => {
+                    console.log(res.data)
+
+                    var errors = res.data.errors;
+                    if(errors) {
+                        console.log(errors)
+                        if(errors.email_tl){
+                            messageError('email_tl',errors.email_tl[0]);
+
+                        }
+                        if(errors.password_tl){
+                            messageError('password_tl',errors.password_tl[0]);
+                        }
+                        if(errors.invalid_tl){
+                            $(e.target).find('input[type="password"]').val('');
+                            $('#tlogin').prepend(
+                                '<span class="invalid-feedback d-block px-2 invalid form-group" role="alert">'+
+                                        '<strong>'+errors.invalid_tl[0]+'</strong>'+
+                                '</span>'
+                            );
+                        }
+                    }else{
+                        
+                        window.location.replace("http://127.0.0.1:8000/teacher");
+                    
+                    }
+                })
+            })
+            $('#tregister').submit((e) => {
+                e.preventDefault();
+
+                axios.post('{{ route('teacher.register') }}',$(e.target).serialize())
+                .then((res) => {
+                    console.log(res)
+                    var errors = res.data.errors;
+                    if(errors) {
+                        console.log(errors)
+                        if(errors.name_tr){
+                            messageError('name_tr',errors.name_tr[0]);
+                        }
+                        if(errors.email_tr){
+                            messageError('email_tr',errors.email_tr[0]);
+                        }
+                        if(errors.password_tr){
+                            messageError('password_tr',errors.password_tr[0]);
+                        }
+                        if(errors.password_confirmation_tr){
+                            messageError('password_confirmation_tr',errors.password_confirmation_tr[0]);
+                        }
+                    }else {
+                        $('#modal-teacher-register').modal('hide');
+                        window.location.replace("http://127.0.0.1:8000/teacher/teacherDashboard");
+                    }
+                })
+            })
+            $('#trp').submit((e) => {
+                e.preventDefault();
+
+                axios.post('{{ route('teacher.reset.password') }}',$(e.target).serialize())
+                .then((res) => {
+                    var errors = res.data.errors;
+                    if(errors) {
+                        console.log(errors)
+                    
+                        if(errors.email_trp){
+                            messageError('email_trp',errors.email_trp[0]);
+                        }
+                        if(errors.invalid_trp){
+                            $(e.target).find('input[type="email"]').val('');
+                            $('#trp').prepend(
+                                '<span class="invalid-feedback d-block px-2 invalid form-group" role="alert">'+
+                                        '<strong>'+errors.invalid_trp[0]+'</strong>'+
+                                '</span>'
+                            );
+                        }
+                    }else {
+                    
+                        email = res.data.email_trp;
+                        $('#modal-reset-password-t').modal('hide')
+                        $('#modal-change-password-t').modal('show')
+                    }
+                })
+            })
+            
+            $('#tcp').submit((e) => {
+                e.preventDefault();
+                axios.post('{{ route('teacher.change.password') }}',$(e.target).serialize()+'&email='+email)
+                .then((res) => {
+                    console.log(res)
+                    var errors = res.data.errors;
+                    if(errors) {
+                        console.log(errors)
+                        if(errors.password_tcp){
+                            messageError('password_tcp',errors.password_tcp[0]);
+                        }
+                        if(errors.password_confirmation_tcp){
+                            messageError('password_confirmation_tcp',errors.password_confirmation_tcp[0]);
+                        }
+                    }else {
+                        window.location.replace("http://127.0.0.1:8000/teacher");
+
+
+                    }
+                })
+            })
+
+            $('input').on('focus',(e) => {
+                var input = $(e.target)
+                if(input.hasClass('is-invalid')) {
+                    input.removeClass('is-invalid');
+                    $('#'+input.attr('name')).remove();
+                }
+                if($('span.invalid').length) {
+                    $('span.invalid').remove();
+                }
+            })
+            $('.modal').on('show.bs.modal', (e) =>{
+                $(e.target).find('input.is-invalid').removeClass('is-invalid');
+                $(e.target).find('span.invalid-feedback').remove();
+                $(e.target).find('input.form-control').val('');
+                $(e.target).find('input[type="checkbox"]').prop('checked',false);
+
+            })
+        })
     </script>
     @yield('script')
+    
 
 </body>
 

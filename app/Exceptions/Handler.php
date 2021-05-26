@@ -6,7 +6,6 @@ use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Auth;
-
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -50,11 +49,15 @@ class Handler extends ExceptionHandler
                 return response()->json(['error' => 'Unauthenticated.'], 401);
             }
             if ($request->is('teacher') || $request->is('teacher/*')) {
-                return redirect()->guest('/login/teacher');
+                if(Auth::guard('student')->check() == true)
+                    return redirect('/student');
+                return redirect('/');
             }
             if ($request->is('student') || $request->is('student/*')) {
-                return redirect()->guest('/login/student');
+                if(Auth::guard('teacher')->check() == true)
+                    return redirect('/teacher');
+                return redirect('/');
             }
-            return redirect()->guest(route('login'));
+            return redirect()->guest(route('welcome'));
         }
 }

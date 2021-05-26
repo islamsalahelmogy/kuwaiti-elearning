@@ -28,13 +28,13 @@
                                         
                                     " aria-hidden="true"></i>
                                 </span>
-                                وحدة التحكم للمدرس
+                                وحدة التحكم للطالب
                             </a>
                             <a class="
                                     text-white
                                     font-weight-medium
                                     opacity-80 mr-1 mr-md-2 mr-lg-1 mr-xl-2
-                                " href="#">
+                                " href="{{ route('student.logout') }}">
                                 <span class="bg-purple
                                     icon-header
                                     mr-1 mr-md-2 mr-lg-1 mr-xl-2">
@@ -64,7 +64,7 @@
         navbar-white
             ">
     <div class="container">
-        <a class="navbar-brand" href="{{ Route('home') }}">
+        <a class="navbar-brand" href="#">
             <img class="d-inline-block" src="{{ asset('img/logo.jpg') }}" alt="Kuwaiti-elearning" />
         </a>
 
@@ -76,7 +76,7 @@
         <div class="collapse navbar-collapse" id="navbarContent">
             <ul class="navbar-nav ml-lg-auto">
                 <li class="nav-item dropdown bg-warning">
-                    <a class="nav-link dropdown-toggle" href="{{ Route('home') }}">
+                    <a class="nav-link dropdown-toggle" href="#">
                         <i class="fa fa-home nav-icon" aria-hidden="true"></i>
                         <span>الرئيسية</span>
                     </a>

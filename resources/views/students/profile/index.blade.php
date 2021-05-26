@@ -77,14 +77,14 @@
                             <div class="form-group form-group-icon pl-4 row font-weight-bolder">
                                 <label class="col-4 text-color">الجنس :</label>
                                 <div class="col-3">
-                                    <input id="male-t" value="male" type="radio" class="gender-input" name="gender"
+                                    <input id="male-te" value="male" type="radio" class="gender-input" name="gender"
                                         checked="true">
-                                    <label for="male-t" class="gender"></label>
+                                    <label for="male-te" class="gender"></label>
                                     <span class="text-danger ml-1">ذكر</label>
                                 </div>
                                 <div class="col-3">
-                                    <input id="female-t" value="female" type="radio" class="gender-input" name="gender">
-                                    <label for="female-t" class="gender"></label>
+                                    <input id="female-te" value="female" type="radio" class="gender-input" name="gender">
+                                    <label for="female-te" class="gender"></label>
                                     <span class="text-danger ml-1">أنثى</label>
                                 </div>
                             </div>
