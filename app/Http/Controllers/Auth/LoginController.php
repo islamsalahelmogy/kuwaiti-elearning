@@ -43,9 +43,6 @@ class LoginController extends Controller
     }
 
 
-    public function showTeacherLoginForm(){ 
-        return view('auth.teacherlogin');
-    }
     public function teacherLogin(Request $request){
         $validator = Validator::make($request->all(), [
             'email_tl'   => 'required|email',
@@ -67,8 +64,11 @@ class LoginController extends Controller
     }
     public function teacherLogout(Request $request){
         Auth::guard('teacher')->logout();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
+        header('Cache-Control', 'no-cache, must-revalidate, no-store, max-age=0, private');
+        header("Pragma:no-cache");
+        header("Expires: Sat,26 Jul 1997 05:00:00: GMT");
+        $request->session()->flush();
+        $request->session()->regenerate();
         
         return redirect('/');
     }
@@ -120,12 +120,6 @@ class LoginController extends Controller
     }
 
 
-
-
-
-    public function showStudentLoginForm() {
-        return view('auth.studentLogin');
-    }
     public function studentLogin(Request $request){
         $validator = Validator::make($request->all(), [
             'email_stl'   => 'required|email',
@@ -195,9 +189,11 @@ class LoginController extends Controller
     public function studentLogout(Request $request){
     
         Auth::guard('student')->logout();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-
+       $request->header('Cache-Control', 'no-cache, must-revalidate, no-store, max-age=0, private');
+       $request->header("Pragma:no-cache");
+        $request->header("Expires: Sat,26 Jul 1997 05:00:00: GMT");
+        $request->session()->flush();
+        $request->session()->regenerate();
         return redirect('/');
     }
 
