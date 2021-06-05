@@ -26,12 +26,8 @@ class TeacherStoryController extends Controller
      */
     public function create()
     {
-<<<<<<< HEAD
-        //
-=======
         $topics=Topic::all();
         return view('teachers.stories.create' ,compact('topics'));
->>>>>>> main
     }
 
     /**
@@ -42,9 +38,6 @@ class TeacherStoryController extends Controller
      */
     public function store(Request $request)
     {
-<<<<<<< HEAD
-        //
-=======
        
        
         $request->validate([
@@ -78,7 +71,6 @@ class TeacherStoryController extends Controller
         
         return redirect(route('teacher.stories'));
 
->>>>>>> main
     }
 
     /**
@@ -100,7 +92,6 @@ class TeacherStoryController extends Controller
      */
     public function edit($id)
     {
-<<<<<<< HEAD
         $teacherId = Auth::guard('teacher')->user()->id;
         $story = Content::find($id);
         $topics = Topic::all();
@@ -108,9 +99,6 @@ class TeacherStoryController extends Controller
         if(is_file($path)) {
             return view('teachers.stories.edit',compact('story','path','topics'));
         } 
-=======
-        //
->>>>>>> main
     }
 
     /**
@@ -122,7 +110,6 @@ class TeacherStoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-<<<<<<< HEAD
         $request->validate([
             'title' => 'required|max:255',
             'description' => 'required',
@@ -162,9 +149,6 @@ class TeacherStoryController extends Controller
             $story->save();
         }
         return redirect(route('teacher.stories'));
-=======
-        //
->>>>>>> main
     }
 
     /**
