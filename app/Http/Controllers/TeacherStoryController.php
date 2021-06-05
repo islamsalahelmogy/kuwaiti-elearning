@@ -26,7 +26,12 @@ class TeacherStoryController extends Controller
      */
     public function create()
     {
+<<<<<<< HEAD
         //
+=======
+        $topics=Topic::all();
+        return view('teachers.stories.create' ,compact('topics'));
+>>>>>>> main
     }
 
     /**
@@ -37,7 +42,43 @@ class TeacherStoryController extends Controller
      */
     public function store(Request $request)
     {
+<<<<<<< HEAD
         //
+=======
+       
+       
+        $request->validate([
+            'title' => 'required|max:255',
+            'description' => 'required',
+           'attachment' => 'required|mimes:audio/mpeg,mp3',
+            'topic_id' => 'required',
+         
+        ]);
+     
+        if ($request->hasFile('attachment'))
+        {
+           $audio  =  new Content();
+           $teacher_id=Auth::guard('teacher')->user()->id;  
+           if(is_dir(public_path('storage\stories\\'.$teacher_id))==false)
+           {
+               mkdir(public_path('storage\stories\\'.$teacher_id));
+           }
+           $audio_path=public_path('storage\stories\\'.$teacher_id); 
+           $audio_name=$request->attachment->getClientOriginalName();
+           $audio_file=$request->file('attachment');
+           $audio_file->move($audio_path,$audio_name);
+           $audio->attachment=$audio_name;
+           $audio->title=$request->title;
+           $audio->description=$request->description;
+           $audio->attach_type="audio";
+           $audio->topic_id=$request->topic_id;
+           $audio->teacher_id=$teacher_id;
+           $audio->save();
+        }
+        
+        return redirect(route('teacher.stories'));
+
+>>>>>>> main
     }
 
     /**
@@ -59,6 +100,7 @@ class TeacherStoryController extends Controller
      */
     public function edit($id)
     {
+<<<<<<< HEAD
         $teacherId = Auth::guard('teacher')->user()->id;
         $story = Content::find($id);
         $topics = Topic::all();
@@ -66,6 +108,9 @@ class TeacherStoryController extends Controller
         if(is_file($path)) {
             return view('teachers.stories.edit',compact('story','path','topics'));
         } 
+=======
+        //
+>>>>>>> main
     }
 
     /**
@@ -77,6 +122,7 @@ class TeacherStoryController extends Controller
      */
     public function update(Request $request, $id)
     {
+<<<<<<< HEAD
         $request->validate([
             'title' => 'required|max:255',
             'description' => 'required',
@@ -116,6 +162,9 @@ class TeacherStoryController extends Controller
             $story->save();
         }
         return redirect(route('teacher.stories'));
+=======
+        //
+>>>>>>> main
     }
 
     /**

@@ -9,10 +9,8 @@ class Topic extends Model
 {
     use HasFactory;
     
-    protected $fillable = [
-        'name',
-        'description',
-    ];
+    protected $guarded = ['id'];
+    
     public function contents () {
         return $this->hasMany(Content::Class);
     }

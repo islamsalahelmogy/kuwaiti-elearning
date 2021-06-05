@@ -26,7 +26,8 @@ class TeacherVideoController extends Controller
      */
     public function create()
     {
-        //
+        $topics=Topic::all();
+        return view('teachers.videos.create' ,compact('topics'));
     }
 
     /**
@@ -37,7 +38,39 @@ class TeacherVideoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       
+       
+        $request->validate([
+            'title' => 'required|max:255',
+            'description' => 'required',
+           'attachment' => 'required|mimetypes:video/x-msvideo,video/mpeg,video/mp4,video/x-matroska',
+            'topic_id' => 'required',
+         
+        ]);
+     
+        if ($request->hasFile('attachment'))
+        {
+           $video  =  new Content();
+           $teacher_id=Auth::guard('teacher')->user()->id;  
+           if(is_dir(public_path('storage\videos\\'.$teacher_id))==false)
+           {
+               mkdir(public_path('storage\videos\\'.$teacher_id));
+           }
+           $video_path=public_path('storage\videos\\'.$teacher_id); 
+           $video_name=$request->attachment->getClientOriginalName();
+           $video_file=$request->file('attachment');
+           $video_file->move($video_path,$video_name);
+           $video->attachment=$video_name;
+           $video->title=$request->title;
+           $video->description=$request->description;
+           $video->attach_type="video";
+           $video->topic_id=$request->topic_id;
+           $video->teacher_id=$teacher_id;
+           $video->save();
+        }
+        
+        return redirect(route('teacher.videos'));
+
     }
 
     /**
