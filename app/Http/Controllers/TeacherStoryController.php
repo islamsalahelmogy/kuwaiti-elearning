@@ -7,7 +7,7 @@ use App\Models\Content;
 use App\Models\Topic;
 use Illuminate\Support\Facades\Auth;
 
-class TeacherVideoController extends Controller
+class TeacherStoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +27,7 @@ class TeacherVideoController extends Controller
     public function create()
     {
         $topics=Topic::all();
-        return view('teachers.videos.create' ,compact('topics'));
+        return view('teachers.stories.create' ,compact('topics'));
     }
 
     /**
@@ -43,33 +43,33 @@ class TeacherVideoController extends Controller
         $request->validate([
             'title' => 'required|max:255',
             'description' => 'required',
-           'attachment' => 'required|mimetypes:video/x-msvideo,video/mpeg,video/mp4,video/x-matroska',
+           'attachment' => 'required|mimes:audio/mpeg,mp3',
             'topic_id' => 'required',
          
         ]);
      
         if ($request->hasFile('attachment'))
         {
-           $video  =  new Content();
+           $audio  =  new Content();
            $teacher_id=Auth::guard('teacher')->user()->id;  
-           if(is_dir(public_path('storage\videos\\'.$teacher_id))==false)
+           if(is_dir(public_path('storage\stories\\'.$teacher_id))==false)
            {
-               mkdir(public_path('storage\videos\\'.$teacher_id));
+               mkdir(public_path('storage\stories\\'.$teacher_id));
            }
-           $video_path=public_path('storage\videos\\'.$teacher_id); 
-           $video_name=$request->attachment->getClientOriginalName();
-           $video_file=$request->file('attachment');
-           $video_file->move($video_path,$video_name);
-           $video->attachment=$video_name;
-           $video->title=$request->title;
-           $video->description=$request->description;
-           $video->attach_type="video";
-           $video->topic_id=$request->topic_id;
-           $video->teacher_id=$teacher_id;
-           $video->save();
+           $audio_path=public_path('storage\stories\\'.$teacher_id); 
+           $audio_name=$request->attachment->getClientOriginalName();
+           $audio_file=$request->file('attachment');
+           $audio_file->move($audio_path,$audio_name);
+           $audio->attachment=$audio_name;
+           $audio->title=$request->title;
+           $audio->description=$request->description;
+           $audio->attach_type="audio";
+           $audio->topic_id=$request->topic_id;
+           $audio->teacher_id=$teacher_id;
+           $audio->save();
         }
         
-        return redirect(route('teacher.videos'));
+        return redirect(route('teacher.stories'));
 
     }
 

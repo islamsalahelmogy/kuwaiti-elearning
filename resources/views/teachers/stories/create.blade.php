@@ -6,19 +6,19 @@
                 <div class="col-10 col-sm-8 col-md-6 col-lg-4 offset-1 offset-sm-2 offset-md-3 offset-lg-4 row">
                     <div class="mb-4 mb-sm-0">
                         <h1 class="element-title font-weight-bold text-center mb-1">
-                            إضافة فيديو جديد
+                            اضافة قصة جديدة
                         </h1>
 
                         <div class="border rounded-bottom-md border-top-0">
                             <div class="p-3">
-                                <form action="{{route('teacher.video.store')}}" method="POST" role="form" enctype="multipart/form-data">
+                                <form action="{{route('teacher.story.store')}}" method="POST" role="form" enctype="multipart/form-data">
                                     @csrf
 
                                     <div class="form-group check-step-gray">
                                         <div class="input-group mb-3">
                                             <div class="input-group-append">
                                                 <span class="input-group-text border-right-0"
-                                                    id="basic-addon2">اكتب عنوان الفيديو</span>
+                                                    id="basic-addon2">اكتب عنوان القصة</span>
                                             </div>
                                             <input type="text" required name="title" value="{{ old('title') }}" class="form-control
                                                 @error('title')  is-invalid @enderror" autocomplete="title"
@@ -37,7 +37,7 @@
                                         <div class="input-group mb-3">
                                             <div class="input-group-append">
                                                 <span class="input-group-text border-right-0"
-                                                    id="basic-addon2">اكتب  وصف الفيديو</span>
+                                                    id="basic-addon2">اكتب  وصف القصة</span>
                                             </div>
                                            
                                             
@@ -54,7 +54,7 @@
 
                                     <div class="form-group check-step-gray">
                                         <select class="form-control" id="content-video" name="topic_id" required>
-                                         <option selected  disabled>اختار موضوع الفيديو</option>
+                                         <option selected  disabled>اختار موضوع القصة</option>
                                         @foreach($topics as $t)
                                            <option value="{{ $t->id }}" @if(old('topic_id')==$t->id) selected @endif >{{  $t->name }}</option>
                                            
@@ -67,7 +67,7 @@
                                         <div class="input-group mb-3">
                                             <div class="input-group-append">
                                                 <span class="input-group-text border-right-0"
-                                                    id="basic-addon2">ارفع الفيديو</span>
+                                                    id="basic-addon2">ارفع القصة </span>
                                             </div>
                                             <input type="file" name="attachment" class="form-control
                                                 @error('attachment')  is-invalid @enderror"
