@@ -27,6 +27,15 @@ Route::get('/', function () {
     Route::post('/login/teacher/change/password', 'Auth\LoginController@teacherChangePassword')->name('teacher.change.password');
     Route::get('/logout/teacher','Auth\LoginController@teacherLogout')->name('teacher.logout');
     Route::view('/teacher', 'teachers/profile/index')->middleware('isteacher:teacher');
+    Route::get('/teacher/video/edit/{id}', 'TeacherVideoController@edit')->middleware('isteacher:teacher');
+    Route::post('/teacher/video/update/{id}', 'TeacherVideoController@update')->middleware('isteacher:teacher')->name('teacher.video.update');
+    Route::get('/teacher/story/edit/{id}', 'TeacherStoryController@edit')->middleware('isteacher:teacher');
+    Route::post('/teacher/story/update/{id}', 'TeacherStoryController@update')->middleware('isteacher:teacher')->name('teacher.story.update');
+    Route::get('/teacher/video', 'TeacherVideoController@index')->name('teacher.videos')->middleware('isteacher:teacher');
+    Route::get('/teacher/story', 'TeacherStoryController@index')->name('teacher.stories')->middleware('isteacher:teacher');
+
+
+
 
 
 

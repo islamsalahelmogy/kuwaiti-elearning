@@ -13,4 +13,7 @@ class Topic extends Model
         'name',
         'description',
     ];
+    public function contents () {
+        return $this->hasMany(Content::Class);
+    }
 }

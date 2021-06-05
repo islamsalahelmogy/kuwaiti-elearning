@@ -13,6 +13,11 @@ class Content extends Model
     protected $fillable = 
     [
         'description',
-        'attachment'
+        'attachment',
+        'attach_type',
+        'title'
     ];
+    public function topic () {
+        return $this->belongsTo(Topic::Class);
+    }
 }

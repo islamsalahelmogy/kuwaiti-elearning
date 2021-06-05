@@ -6,8 +6,8 @@ use App\Models\Content;
 use App\Models\Topic;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\File;
-class TeacherVideoController extends Controller
+
+class TeacherStoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -60,13 +60,12 @@ class TeacherVideoController extends Controller
     public function edit($id)
     {
         $teacherId = Auth::guard('teacher')->user()->id;
-        $video = Content::find($id);
+        $story = Content::find($id);
         $topics = Topic::all();
-        $path = public_path('storage\videos\\'.$teacherId.'\\'.$video->attachment);
+        $path = public_path('storage\stories\\'.$teacherId.'\\'.$story->attachment);
         if(is_file($path)) {
-            return view('teachers.videos.edit',compact('video','path','topics'));
+            return view('teachers.stories.edit',compact('story','path','topics'));
         } 
-        
     }
 
     /**
@@ -87,38 +86,36 @@ class TeacherVideoController extends Controller
         if($request->hasFile('attachment')) {
             //dd($request);
             $request->validate([
-                'attachment' => 'required|mimetypes:video/x-msvideo,video/mpeg,video/mp4,video/x-matroska',
+                'attachment' => 'required|mimes:audio/mpeg,mp3',
             ]);
-            $video = Content::find($id);
+            $story = Content::find($id);
             $teacherId = Auth::guard('teacher')->user()->id;
             $file = $request->file('attachment');
-            $video_path = public_path('storage\videos\\'.$teacherId);
-            $old_video = $video_path.$video->attachment;
-            $video_name = $file->getClientOriginalName();
-            $file->move($video_path,$video_name);
-            $video->title = $request->title;
-            $video->topic_id = $request->topic_id;
-            $video->attachment = $video_name;
-            $video->description = $request->description;
-            $video->teeacher_id = $teacherId;
-            $video->save();
-            if(is_file($old_video)) {
-                File::delete($old_video);
+            $story_path = public_path('storage\stories\\'.$teacherId);
+            $old_story = $story_path.$story->attachment;
+            $story_name = $file->getClientOriginalName();
+            $file->move($story_path,$story_name);
+            $story->title = $request->title;
+            $story->topic_id = $request->topic_id;
+            $story->attachment = $story_name;
+            $story->description = $request->description;
+            $story->teeacher_id = $teacherId;
+            $story->save();
+            if(is_file($old_story)) {
+                File::delete($old_story);
             }
             
         } else {
-            $video = Content::find($id);
+            $story = Content::find($id);
             //dd($request);
             $teacherId = Auth::guard('teacher')->user()->id;
-            $video->title = $request->title;
-            $video->topic_id = $request->topic_id;
-            $video->description = $request->description;
-            $video->teeacher_id = $teacherId;
-            $video->save();
+            $story->title = $request->title;
+            $story->topic_id = $request->topic_id;
+            $story->description = $request->description;
+            $story->teeacher_id = $teacherId;
+            $story->save();
         }
-        return redirect(route('teacher.videos'));
-        
-
+        return redirect(route('teacher.stories'));
     }
 
     /**
@@ -129,6 +126,6 @@ class TeacherVideoController extends Controller
      */
     public function destroy($id)
     {
-        
+        //
     }
 }
