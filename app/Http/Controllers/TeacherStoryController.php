@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Content;
 use App\Models\Topic;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class TeacherStoryController extends Controller
@@ -26,8 +26,12 @@ class TeacherStoryController extends Controller
      */
     public function create()
     {
+<<<<<<< HEAD
+        //
+=======
         $topics=Topic::all();
         return view('teachers.stories.create' ,compact('topics'));
+>>>>>>> main
     }
 
     /**
@@ -38,6 +42,9 @@ class TeacherStoryController extends Controller
      */
     public function store(Request $request)
     {
+<<<<<<< HEAD
+        //
+=======
        
        
         $request->validate([
@@ -71,6 +78,7 @@ class TeacherStoryController extends Controller
         
         return redirect(route('teacher.stories'));
 
+>>>>>>> main
     }
 
     /**
@@ -92,7 +100,17 @@ class TeacherStoryController extends Controller
      */
     public function edit($id)
     {
+<<<<<<< HEAD
+        $teacherId = Auth::guard('teacher')->user()->id;
+        $story = Content::find($id);
+        $topics = Topic::all();
+        $path = public_path('storage\stories\\'.$teacherId.'\\'.$story->attachment);
+        if(is_file($path)) {
+            return view('teachers.stories.edit',compact('story','path','topics'));
+        } 
+=======
         //
+>>>>>>> main
     }
 
     /**
@@ -104,7 +122,49 @@ class TeacherStoryController extends Controller
      */
     public function update(Request $request, $id)
     {
+<<<<<<< HEAD
+        $request->validate([
+            'title' => 'required|max:255',
+            'description' => 'required',
+            'topic_id' => 'required',
+        ]);
+
+        if($request->hasFile('attachment')) {
+            //dd($request);
+            $request->validate([
+                'attachment' => 'required|mimes:audio/mpeg,mp3',
+            ]);
+            $story = Content::find($id);
+            $teacherId = Auth::guard('teacher')->user()->id;
+            $file = $request->file('attachment');
+            $story_path = public_path('storage\stories\\'.$teacherId);
+            $old_story = $story_path.$story->attachment;
+            $story_name = $file->getClientOriginalName();
+            $file->move($story_path,$story_name);
+            $story->title = $request->title;
+            $story->topic_id = $request->topic_id;
+            $story->attachment = $story_name;
+            $story->description = $request->description;
+            $story->teeacher_id = $teacherId;
+            $story->save();
+            if(is_file($old_story)) {
+                File::delete($old_story);
+            }
+            
+        } else {
+            $story = Content::find($id);
+            //dd($request);
+            $teacherId = Auth::guard('teacher')->user()->id;
+            $story->title = $request->title;
+            $story->topic_id = $request->topic_id;
+            $story->description = $request->description;
+            $story->teeacher_id = $teacherId;
+            $story->save();
+        }
+        return redirect(route('teacher.stories'));
+=======
         //
+>>>>>>> main
     }
 
     /**
