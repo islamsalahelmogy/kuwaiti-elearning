@@ -20,8 +20,8 @@ class TeacherVideoController extends Controller
     public function index()
     {
         $teacherId = Auth::guard('teacher')->user()->id; 
-        $videos = Content::where('teacher_id',$teacherId)->get();
-        //dd($videos->all());
+        $videos = Content::where('teacher_id',$teacherId)->where('attach_type','video')->get();
+        dd($videos->all());
         return view('teachers.videos.index',compact('videos'));
     }
 

@@ -17,7 +17,7 @@ class TeacherStoryController extends Controller
     public function index()
     {
             $teacherId = Auth::guard('teacher')->user()->id; 
-            $stories = Content::where('teacher_id',$teacherId)->get();
+            $stories = Content::where('teacher_id',$teacherId)->where('attach_type','audio')->get();
             //dd($stories->toArray());
             return view('teachers.stories.index',compact('stories'));
     }
