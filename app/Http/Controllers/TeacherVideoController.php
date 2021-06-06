@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 class TeacherVideoController extends Controller
 {
+
+
+    
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +19,10 @@ class TeacherVideoController extends Controller
      */
     public function index()
     {
-        //
+        $teacherId = Auth::guard('teacher')->user()->id; 
+        $videos = Content::where('teacher_id',$teacherId)->get();
+        //dd($videos->all());
+        return view('teachers.videos.index',compact('videos'));
     }
 
     /**
@@ -81,7 +87,9 @@ class TeacherVideoController extends Controller
      */
     public function show($id)
     {
-        //
+        $video = Content::find($id);
+        //dd($video);
+        return view('teachers.videos.show',compact('video'));
     }
 
     /**
@@ -162,6 +170,15 @@ class TeacherVideoController extends Controller
      */
     public function destroy($id)
     {
-        
+        $video = Content::find($id);
+        $videoName = $video->attachment;
+        $teacherId = Auth::guard('teacher')->user()->id;
+        $file = public_path('storage\videos\\'.$teacherId."\\".$videoName);
+        if(file_exists($file)) {
+                File::delete($file);
+        }
+        $video->delete();
+        return redirect(route('teacher.videos'));
+
     }
 }

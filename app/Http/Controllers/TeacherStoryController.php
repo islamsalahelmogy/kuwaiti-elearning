@@ -16,7 +16,10 @@ class TeacherStoryController extends Controller
      */
     public function index()
     {
-        //
+            $teacherId = Auth::guard('teacher')->user()->id; 
+            $stories = Content::where('teacher_id',$teacherId)->get();
+            //dd($stories->toArray());
+            return view('teachers.stories.index',compact('stories'));
     }
 
     /**
@@ -81,7 +84,9 @@ class TeacherStoryController extends Controller
      */
     public function show($id)
     {
-        //
+        $story = Content::find($id);
+        //dd($story);
+        return view('teachers.stories.show',compact('story'));
     }
 
     /**
@@ -159,6 +164,14 @@ class TeacherStoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $story = Content::find($id);
+        $storyName = $story->attachment;
+        $teacherId = Auth::guard('teacher')->user()->id;
+        $file = public_path('storage\stories\\'.$teacherId."\\".$storyName);
+        if(file_exists($file)) {
+                File::delete($file);
+        }
+        $story->delete();
+        return redirect(route('teacher.stories'));
     }
 }
