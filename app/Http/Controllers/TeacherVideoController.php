@@ -133,7 +133,7 @@ class TeacherVideoController extends Controller
             $video->topic_id = $request->topic_id;
             $video->attachment = $video_name;
             $video->description = $request->description;
-            $video->teeacher_id = $teacherId;
+            $video->teacher_id = $teacherId;
             $video->save();
             if(is_file($old_video)) {
                 File::delete($old_video);
@@ -146,7 +146,7 @@ class TeacherVideoController extends Controller
             $video->title = $request->title;
             $video->topic_id = $request->topic_id;
             $video->description = $request->description;
-            $video->teeacher_id = $teacherId;
+            $video->teacher_id = $teacherId;
             $video->save();
         }
         return redirect(route('teacher.videos'));

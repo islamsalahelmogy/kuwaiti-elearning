@@ -132,7 +132,7 @@ class TeacherStoryController extends Controller
             $story->topic_id = $request->topic_id;
             $story->attachment = $story_name;
             $story->description = $request->description;
-            $story->teeacher_id = $teacherId;
+            $story->teacher_id = $teacherId;
             $story->save();
             if(is_file($old_story)) {
                 File::delete($old_story);
@@ -145,7 +145,7 @@ class TeacherStoryController extends Controller
             $story->title = $request->title;
             $story->topic_id = $request->topic_id;
             $story->description = $request->description;
-            $story->teeacher_id = $teacherId;
+            $story->teacher_id = $teacherId;
             $story->save();
         }
         return redirect(route('teacher.stories'));
