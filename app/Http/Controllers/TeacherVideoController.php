@@ -126,7 +126,7 @@ class TeacherVideoController extends Controller
             $teacherId = Auth::guard('teacher')->user()->id;
             $file = $request->file('attachment');
             $video_path = public_path('storage\videos\\'.$teacherId);
-            $old_video = $video_path.$video->attachment;
+            $old_video = $video_path.'\\'.$video->attachment;
             $video_name = $file->getClientOriginalName();
             $file->move($video_path,$video_name);
             $video->title = $request->title;
@@ -135,7 +135,7 @@ class TeacherVideoController extends Controller
             $video->description = $request->description;
             $video->teacher_id = $teacherId;
             $video->save();
-            if(is_file($old_video)) {
+            if(file_exists($old_video)) {
                 File::delete($old_video);
             }
             

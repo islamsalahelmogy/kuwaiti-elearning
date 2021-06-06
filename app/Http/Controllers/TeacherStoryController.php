@@ -125,7 +125,7 @@ class TeacherStoryController extends Controller
             $teacherId = Auth::guard('teacher')->user()->id;
             $file = $request->file('attachment');
             $story_path = public_path('storage\stories\\'.$teacherId);
-            $old_story = $story_path.$story->attachment;
+            $old_story = $story_path.'\\'.$story->attachment;
             $story_name = $file->getClientOriginalName();
             $file->move($story_path,$story_name);
             $story->title = $request->title;
@@ -134,7 +134,7 @@ class TeacherStoryController extends Controller
             $story->description = $request->description;
             $story->teacher_id = $teacherId;
             $story->save();
-            if(is_file($old_story)) {
+            if(file_exists($old_story)) {
                 File::delete($old_story);
             }
             
