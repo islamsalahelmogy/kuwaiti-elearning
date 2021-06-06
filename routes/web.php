@@ -46,20 +46,22 @@ Route::get('/', function () {
     Route::view('/teacher', 'teachers/profile/index')->name('teachers')->middleware('isteacher:teacher');
 
     // video routes
-    Route::get('teacher/video/create', 'TeacherVideoController@create')->middleware('isteacher:teacher');
-    Route::post('teacher/video/store', 'TeacherVideoController@store')->name('teacher.video.store')->middleware('isteacher:teacher');
-    Route::get('teacher/video','TeacherVideoController@index')->name('teacher.videos')->middleware('isteacher:teacher');
+    Route::get('/teacher/video/create', 'TeacherVideoController@create')->middleware('isteacher:teacher');
+    Route::post('/teacher/video/store', 'TeacherVideoController@store')->name('teacher.video.store')->middleware('isteacher:teacher');
+    Route::get('teacher/videos','TeacherVideoController@index')->name('teacher.videos')->middleware('isteacher:teacher');
     Route::get('/teacher/video/edit/{id}', 'TeacherVideoController@edit')->middleware('isteacher:teacher');
     Route::post('/teacher/video/update/{id}', 'TeacherVideoController@update')->middleware('isteacher:teacher')->name('teacher.video.update');
-
+    Route::get('/teacher/video/show/{id}', 'TeacherVideoController@show')->middleware('isteacher:teacher')->name('teacher.video.show');
+    Route::get('/teacher/video/delete/{id}', 'TeacherVideoController@destroy')->middleware('isteacher:teacher')->name('teacher.video.delete');
     // story routes
 
-    Route::get('teacher/story/create', 'TeacherStoryController@create')->middleware('isteacher:teacher');
-    Route::post('teacher/story/store', 'TeacherStoryController@store')->name('teacher.story.store')->middleware('isteacher:teacher');
-    Route::get('teacher/story','TeacherStoryController@index')->name('teacher.stories')->middleware('isteacher:teacher');
+    Route::get('/teacher/story/create', 'TeacherStoryController@create')->middleware('isteacher:teacher');
+    Route::post('/teacher/story/store', 'TeacherStoryController@store')->name('teacher.story.store')->middleware('isteacher:teacher');
+    Route::get('/teacher/stories','TeacherStoryController@index')->name('teacher.stories')->middleware('isteacher:teacher');
     Route::get('/teacher/story/edit/{id}', 'TeacherStoryController@edit')->middleware('isteacher:teacher');
     Route::post('/teacher/story/update/{id}', 'TeacherStoryController@update')->middleware('isteacher:teacher')->name('teacher.story.update');
-    
+    Route::get('/teacher/story/show/{id}', 'TeacherStoryController@show')->middleware('isteacher:teacher')->name('teacher.story.show');
+    Route::get('/teacher/story/delete/{id}', 'TeacherStoryController@destroy')->middleware('isteacher:teacher')->name('teacher.story.delete');
 
 
 
