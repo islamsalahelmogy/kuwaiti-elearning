@@ -71,9 +71,14 @@
             <li>
                 <a class="scroll-link" href="#"><i class="fa fa-user mx-2"></i>الصفحة الشخصية</a>
             </li>
+            @if (auth('teacher')->user()->role=='admin')
+
             <li>
                 <a class="scroll-link" href="#"><i class="fa fa-user mx-2"></i>المدرسين</a>
             </li>
+                
+            @endif
+            
             <li>
                 <a class="scroll-link" href="#"><i class="fa fa-user mx-2"></i>الفيديوهات</a>
             </li>
