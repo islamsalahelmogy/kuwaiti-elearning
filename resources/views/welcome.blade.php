@@ -7,96 +7,47 @@
                 <img class="d-block w-100 h-100 mx-auto" src="img/logo.jpg" alt="Kuwaiti-elearning" />
             </div>
             <div class="col-12 row">
-                <div class="col-md-6 offset-lg-1 col-lg-5">
+                <div class="col-5 offset-1 col-sm-4 offset-sm-2 col-lg-3 offset-lg-3">
                     <div class="mb-4 mb-sm-0 ">
-                        <h1 class="element-title font-weight-bold text-center mb-1">
-                            المدرس
-                        </h1>
-                        <div class="bg-warning rounded-top p-2">
-                            <h3 class="text-white font-weight-bold mb-0 ml-2">
-                                مرحباً
-                            </h3>
-                        </div>
-
-                        <div class="border rounded-bottom-md border-top-0">
-                            <div class="p-3">
-                                <form id="tlogin" action="" method="POST" role="form">
-                                    <div class="form-group form-group-icon">
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-append">
-                                                <span class="input-group-text border-right-0"
-                                                    id="basic-addon2">الإيميل</span>
-                                            </div>
-                                            <input type="email" name="email_tl"
-                                                class="form-control"
-                                                autocomplete="email_tl" dir="ltr">
-                                        </div>
-                                        
-                                    </div>
-
-                                    <div class="form-group form-group-icon">
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-append">
-                                                <span class="input-group-text border-right-0" id="basic-addon2">كلمة
-                                                    السر</span>
-                                            </div>
-                                            <input type="password" name="password_tl"
-                                                class="form-control"
-                                                autocomplete="password_tl" dir="ltr">
-                                        </div>
-                                        
-                                    </div>
-
-                                    <div class="form-group font-weight-bolder">
-                                        <button type="submit" class="
-                                                    btn btn-danger
-                                                    text-uppercase
-                                                    w-100
-                                                ">
-                                            دخول
-                                        </button>
-                                    </div>
-                                    <div class="
-                                            form-group 
-                                                text-secondary
-                                                mb-0
-                                                row font-weight-bolder
-                                            ">
-
-                                        <div class="col-4 text-left">
-                                            <input id="remember-token-t" type="checkbox" class="rememberMe-input"
-                                                name="remember_tl" {{ old('remember-tl') ? 'checked' : '' }}>
-                                            <label for="remember-token-t" class="rememberMe"></label>
-                                            <span class="text-danger ml-1">تذكرنى</span>
-                                        </div>
-                                        <div class="col-8 text-right">
-                                            <a class="text-danger text-underline" href="javascript:void(0)"
-                                                data-dismiss="modal" data-toggle="modal"
-                                                data-target="#modal-reset-password-t">هل نسيت كلمة
-                                                السر؟</a>
-                                        </div>
-                                    </div>
-
-
-                                </form>
-                            </div>
+                        <div class="form-group font-weight-bolder">
+                            <a class=" btn btn-danger text-uppercase w-100 " href="javascript:void(0)"
+                                data-dismiss="modal" data-toggle="modal"
+                                data-target="#modal-login-t">
+                                المدرس
+                            </a>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-5">
+                <div class="col-5 col-sm-4 col-lg-3 ml-sm-6">
                     <div class="mb-4 mb-sm-0">
-                        <h1 class="element-title font-weight-bold text-center mb-1">
-                            الطالب
-                        </h1>
-                        <div class="bg-warning rounded-top p-2">
-                            <h3 class="text-white font-weight-bold mb-0 ml-2">
-                                أنشاء حساب جديد
-                            </h3>
+                        <div class="form-group font-weight-bolder">
+                            <a class=" btn btn-danger text-uppercase w-100 " href="javascript:void(0)"
+                                data-dismiss="modal" data-toggle="modal"
+                                data-target="#modal-register-st">
+                                الطالب
+                            </a>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@endsection
+@section('modal')
+    <div class="modal fade" id="modal-register-st" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="bg-warning rounded-top p-2">
+                    <h3 class="text-white font-weight-bold mb-0 ml-2">
+                        انشئ حساب جديد
+                    </h3>
+                </div>
 
-                        <div class="border rounded-bottom-md border-top-0">
-                            <div class="p-3">
-                                <form id="stregister" action="" method="POST" role="form">
+                <div class="border rounded-bottom-md border-top-0">
+                    <div class="p-3">
+                        <form id="stregister" action="" method="POST" role="form">
                                     @csrf
                                     <div class="form-group form-group-icon">
                                         <div class="input-group mb-3">
@@ -202,16 +153,87 @@
                                         </p>
                                     </div>
                                 </form>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</section>
-@endsection
-@section('modal')
+    <div class="modal fade" id="modal-login-t" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="bg-warning rounded-top p-2">
+                    <h3 class="text-white font-weight-bold mb-0 ml-2">
+                        مرحباً
+                    </h3>
+                </div>
+
+                <div class="border rounded-bottom-md border-top-0">
+                    <div class="p-3">
+                        <form id="tlogin" action="" method="POST" role="form">
+                                    <div class="form-group form-group-icon">
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text border-right-0"
+                                                    id="basic-addon2">الإيميل</span>
+                                            </div>
+                                            <input type="email" name="email_tl"
+                                                class="form-control"
+                                                autocomplete="email_tl" dir="ltr">
+                                        </div>
+                                        
+                                    </div>
+
+                                    <div class="form-group form-group-icon">
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text border-right-0" id="basic-addon2">كلمة
+                                                    السر</span>
+                                            </div>
+                                            <input type="password" name="password_tl"
+                                                class="form-control"
+                                                autocomplete="password_tl" dir="ltr">
+                                        </div>
+                                        
+                                    </div>
+
+                                    <div class="form-group font-weight-bolder">
+                                        <button type="submit" class="
+                                                    btn btn-danger
+                                                    text-uppercase
+                                                    w-100
+                                                ">
+                                            دخول
+                                        </button>
+                                    </div>
+                                    <div class="
+                                            form-group 
+                                                text-secondary
+                                                mb-0
+                                                row font-weight-bolder
+                                            ">
+
+                                        <div class="col-4 text-left">
+                                            <input id="remember-token-t" type="checkbox" class="rememberMe-input"
+                                                name="remember_tl" {{ old('remember-tl') ? 'checked' : '' }}>
+                                            <label for="remember-token-t" class="rememberMe"></label>
+                                            <span class="text-danger ml-1">تذكرنى</span>
+                                        </div>
+                                        <div class="col-8 text-right">
+                                            <a class="text-danger text-underline" href="javascript:void(0)"
+                                                data-dismiss="modal" data-toggle="modal"
+                                                data-target="#modal-reset-password-t">هل نسيت كلمة
+                                                السر؟</a>
+                                        </div>
+                                    </div>
+
+
+                                </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <!--modal reset password teacher-->
     <div class="modal fade" id="modal-reset-password-t" tabindex="-1" role="dialog"
         aria-labelledby="exampleModalLabel" aria-hidden="true">
