@@ -112,8 +112,7 @@ class LoginController extends Controller
         
         //return response()->json([$student]);
 
-        if($request->logout_devices_tcp == "on")
-            Auth::guard('teacher')->logoutOtherDevices($request->password_tcp);
+        
 
         Auth::guard('teacher')->attempt(['email' => $request->email, 'password' => $request->password_tcp]);
 
@@ -178,9 +177,6 @@ class LoginController extends Controller
         Student::where('email',$request->email)->update(['password'=>Hash::make($request->password_stcp)]);
         
         //return response()->json([$student]);
-
-        if($request->logout_devices_stcp == "on")
-            Auth::guard('student')->logoutOtherDevices($request->password_stcp);
 
         Auth::guard('student')->attempt(['email' => $request->email, 'password' => $request->password_stcp]);
 

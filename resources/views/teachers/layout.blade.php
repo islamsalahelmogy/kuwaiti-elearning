@@ -1,4 +1,37 @@
 @extends('layouts.app')
+@section('style')
+    <style>
+    .wrapper{
+    padding: 5px;
+    text-align:center;
+    color: #495057;
+    border: 3px solid #CED4DA;
+    border-radius:0.625rem;
+    }
+    .wrapper h2{
+    padding-bottom: 5px;
+    }
+    .wrapper #file-input{
+    display:none;
+    }
+
+    .wrapper label[for='file-input'] *{
+    vertical-align:middle;
+    cursor:pointer;
+    }
+
+    .wrapper label[for='file-input'] span{
+    margin-left: 10px
+    }
+
+    .wrapper i.remove{
+    vertical-align:middle;
+    margin-left: 5px;
+    cursor:pointer;
+    display:none;
+    }
+</style>
+@endsection
 @section('topBar')
 <div class="overlay"></div>
 
@@ -19,7 +52,7 @@
                                     text-white
                                     font-weight-medium
                                     opacity-80 mr-1 mr-md-2 mr-lg-1 mr-xl-2
-                                " href="#">
+                                " href="{{ route('teacher.dashboard') }}">
                             <span class="bg-purple
                                     icon-header
                                     mr-1 mr-md-2 mr-lg-1 mr-xl-2">
@@ -30,7 +63,7 @@
                                         
                                     " aria-hidden="true"></i>
                             </span>
-                            وحدة التحكم للمدرس
+                            {{ Auth::guard('teacher')->user()->name }}
                         </a>
                         <a class="
                                     text-white
@@ -68,23 +101,35 @@
         
 
         <ul class="list-unstyled menu-elements mt-7 text-left">
-            <li>
-                <a class="scroll-link" href="#"><i class="fa fa-user mx-2"></i>الصفحة الشخصية</a>
+            <li class ="@if (str_contains(Route::currentRouteName(),'dashboard'))
+                active
+            @endif">
+                <a class="scroll-link" href="{{ route('teacher.dashboard') }}"><i class="fa fa-user mx-2"></i>الصفحة الشخصية</a>
             </li>
-            <li>
-                <a class="scroll-link" href="#"><i class="fa fa-user mx-2"></i>المدرسين</a>
+            <li class ="@if (str_contains(Route::currentRouteName(),'admin'))
+                active
+            @endif">
+                <a class="scroll-link" href="{{-- {{ route('admin.teachers') }} --}}"><i class="fa fa-user mx-2"></i>المدرسين</a>
             </li>
-            <li>
-                <a class="scroll-link" href="#"><i class="fa fa-user mx-2"></i>الفيديوهات</a>
+            <li class ="@if (str_contains(Route::currentRouteName(),'video'))
+                active
+            @endif">
+                <a class="scroll-link" href="{{ route('teacher.videos') }}"><i class="fa fa-user mx-2"></i>الفيديوهات</a>
             </li>
-            <li>
-                <a class="scroll-link" href="#"><i class="fa fa-user mx-2"></i>القصص</a>
+            <li class ="@if (str_contains(Route::currentRouteName(),'stor'))
+                active
+            @endif">
+                <a class="scroll-link" href="{{ route('teacher.stories') }}"><i class="fa fa-user mx-2"></i>القصص</a>
             </li>
-            <li>
-                <a class="scroll-link" href="#"><i class="fa fa-user mx-2"></i>الأنشطة</a>
+            <li class ="@if(str_contains(Route::currentRouteName(),'activit'))
+                active
+            @endif">
+                <a class="scroll-link" href="{{-- {{ route('teacher.activities') }} --}}"><i class="fa fa-user mx-2"></i>الأنشطة</a>
             </li>
-            <li>
-                <a class="scroll-link" href="#"><i class="fa fa-key mx-2"></i>تغيير كلمة السر</a>
+            <li class ="@if (str_contains(Route::currentRouteName(),'password'))
+                active
+            @endif">
+                <a class="scroll-link" href="{{ route('teacher.password.edit') }}"><i class="fa fa-key mx-2"></i>تغيير كلمة السر</a>
             </li>
         </ul>
 
@@ -118,11 +163,46 @@
     </div>
 </div>
 @endsection
-
-
 @section('script')
-    @parent
-    <script>
-    
-    </script>
+<script>
+        $('document').ready(function(){
+            
+            var $file = $('#file-input'),
+                $label = $file.next('label'),
+                $labelText = $label.find('span'),
+                $labelRemove = $('i.remove'),
+                labelDefault = $labelText.text();
+                
+            // on file change
+            $file.on('change', function(event){
+                //console.log(event.target);
+                var fileName = $file.val().split( '\\' ).pop();
+                
+                if( fileName ){
+                        //console.log($file)
+                        $labelText.text(fileName);
+                        $labelRemove.show();
+                }else{
+                    $labelText.text(labelDefault);
+                    $labelRemove.hide();
+                }
+                
+                if($file.hasClass('is-invalid')) {
+                    //console.log($file);
+                    $file.removeClass('is-invalid');
+                    $('#'+$file.attr('name')).remove();
+                }
+            });
+            
+            // Remove file   
+            $labelRemove.on('click', function(event){
+                $file.val("");
+                $labelText.text(labelDefault);
+                $labelRemove.hide();
+                //console.log($file)
+            });
+            
+            
+        })
+</script>
 @endsection

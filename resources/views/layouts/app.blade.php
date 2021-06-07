@@ -51,7 +51,7 @@
     <link href="{{ asset('plugins/revolution/css/navigation.css') }}" rel="stylesheet" />
 
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="img/logo.jpg" rel="shortcut icon" />
+    <link href="{{ asset('img/logo.jpg') }}" rel="shortcut icon" />
     
     @yield('style')
     
@@ -257,7 +257,7 @@
                         }
                     }else{
                         
-                        window.location.replace("http://127.0.0.1:8000/student");
+                        window.location.replace("http://127.0.0.1:8000/student/dashboard");
                     
                     }
                 })
@@ -265,7 +265,6 @@
             //student Register
             $('#stregister').submit((e) => {
                 e.preventDefault();
-
                 axios.post('{{ route('student.register') }}',$(e.target).serialize())
                 .then((res) => {
                     console.log(res)
@@ -285,7 +284,7 @@
                             messageError('password_confirmation_str',errors.password_confirmation_str[0]);
                         }
                     }else {
-                        window.location.replace("http://127.0.0.1:8000/student");
+                        window.location.replace("http://127.0.0.1:8000/student/dashboard");
                     }
                 })
             })
@@ -335,7 +334,7 @@
                             messageError('password_confirmation_stcp',errors.password_confirmation_stcp[0]);
                         }
                     }else {
-                        window.location.replace("http://127.0.0.1:8000/student");
+                        window.location.replace("http://127.0.0.1:8000/student/dashboard");
 
 
                     }
@@ -367,7 +366,7 @@
                         }
                     }else{
                         
-                        window.location.replace("http://127.0.0.1:8000/teacher");
+                        window.location.replace("http://127.0.0.1:8000/teacher/dashboard");
                     
                     }
                 })
@@ -386,6 +385,9 @@
                         }
                         if(errors.email_tr){
                             messageError('email_tr',errors.email_tr[0]);
+                        }
+                        if(errors.phone_tr){
+                            messageError('phone_tr',errors.phone_tr[0]);
                         }
                         if(errors.password_tr){
                             messageError('password_tr',errors.password_tr[0]);
@@ -443,7 +445,7 @@
                             messageError('password_confirmation_tcp',errors.password_confirmation_tcp[0]);
                         }
                     }else {
-                        window.location.replace("http://127.0.0.1:8000/teacher");
+                        window.location.replace("http://127.0.0.1:8000/teacher/dashboard");
 
 
                     }
@@ -466,7 +468,6 @@
                 $(e.target).find('span.invalid-feedback').remove();
                 $(e.target).find('input.form-control').val('');
                 $(e.target).find('input[type="checkbox"]').prop('checked',false);
-
             })
         })
     </script>

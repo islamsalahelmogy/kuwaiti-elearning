@@ -14,22 +14,18 @@
 
                     <div class="border rounded-bottom-md border-top-0">
                         <div class="p-3">
-                            <form action="#" method="POST" role="form">
+                            <form action="" id="tpu" method="POST" role="form">
                                 <div class="form-group form-group-icon">
                                     <div class="input-group mb-3">
                                         <div class="input-group-append">
                                             <span class="input-group-text border-right-0" id="basic-addon2">كلمة السر
                                                 القديمة</span>
                                         </div>
-                                        <input type="password"
-                                            class="form-control @error('password')  is-invalid @enderror"
-                                            autocomplete="password" dir="ltr">
+                                        <input type="password" name="old_password_t"
+                                            class="form-control"
+                                            dir="ltr">
                                     </div>
-                                    @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
+                                    
                                 </div>
 
                                 <div class="form-group form-group-icon">
@@ -38,15 +34,11 @@
                                             <span class="input-group-text border-right-0 w-100" id="basic-addon2">كلمة السر الجديدة
                                                 </span>
                                         </div>
-                                        <input type="password"
-                                            class="form-control @error('password')  is-invalid @enderror"
-                                            autocomplete="new-password" name="password" dir="ltr">
+                                        <input type="password" name="new_password_t"
+                                            class="form-control"
+                                            autocomplete="new_password_t"  dir="ltr">
                                     </div>
-                                    @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
+                                    
                                 </div>
                                 <div class="form-group form-group-icon">
                                     <div class="input-group mb-3">
@@ -54,27 +46,27 @@
                                             <span class="input-group-text border-right-0 w-100" id="basic-addon2">أعد
                                                 كتابتها</span>
                                         </div>
-                                        <input type="password" class="form-control" name="password-confirmation"
-                                            dir="ltr" autocomplete="new-password">
+                                        <input type="password" class="form-control" name="new_password_confirmation_t"
+                                            dir="ltr" autocomplete="new_password_confirmation_t">
                                     </div>
 
                                 </div>
 
-                                <div class="
+                                {{-- <div class="
                                     form-group
                                     text-secondary
                                     row
                                 ">
 
-                                    <div class="col-12 text-left font-weight-bolder">
-                                        <input id="t-log-t" type="checkbox" class="log-input " name="logout-devices">
+                                     <div class="col-12 text-left font-weight-bolder">
+                                        <input id="t-log-t" type="checkbox" class="log-input" name="logout_devices_t">
                                         <label for="t-log-t" class="log"></label>
                                         <span class="text-danger ml-1">قفل الحساب من جميع الأجهزة الأخرى</span>
-                                    </div>
-                                </div>
+                                    </div> 
+                                </div> --}}
 
                                 <div class="form-group font-weight-bolder">
-                                    <button type="button" onclick="submit_form();" name="submit" class="
+                                    <button type="submit" name="submit" class="
                                                             btn btn-danger
                                                             text-uppercase
                                                             w-100
@@ -92,4 +84,42 @@
         </div>
     </div>
 </section>
+@endsection
+@section('script')
+    @parent
+    <script>
+        $(document).ready(() => {
+            function messageError(errorName,message) {
+                $('input[name='+errorName+']').addClass('is-invalid');
+                    $('input[name='+errorName+']').parent().append(
+                        '<span id='+errorName+' class="invalid-feedback d-block px-2" role="alert">'+
+                                '<strong>'+message+'</strong>'+
+                        '</span>'
+                );
+            }
+            $('#tpu').submit((e) => {
+                e.preventDefault();
+                axios.post('{{ route('teacher.password.update') }}',$(e.target).serialize())
+                .then((res) => {
+                    console.log(res)
+                    var errors = res.data.errors;
+                    if(errors) {
+                        console.log(errors)
+                        if(errors.old_password_t){
+                            messageError('old_password_t',errors.old_password_t[0]);
+                        }
+                        if(errors.new_password_t){
+                            messageError('new_password_t',errors.new_password_t[0]);
+                        }
+                        if(errors.new_password_confirmation_t){
+                            messageError('new_password_confirmation_t',errors.new_password_confirmation_t[0]);
+                        }
+                    }else {
+                        
+                        window.location.replace("http://127.0.0.1:8000/teacher/dashboard");
+                    }
+                })
+            })
+        })
+    </script>
 @endsection

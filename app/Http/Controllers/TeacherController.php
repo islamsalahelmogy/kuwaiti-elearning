@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Teacher;
 use Illuminate\Http\Request;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\ValidationException;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Hash;
 
 
 class TeacherController extends Controller
@@ -18,11 +18,8 @@ class TeacherController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function __construct()
-    {
-        $this->middleware('guest')->except('logout');
-        $this->middleware('guest:teacher')->except('logout');
-    }
+    use AuthenticatesUsers;
+
 
     protected function validator(array $data)
     {
@@ -77,7 +74,7 @@ class TeacherController extends Controller
      */
     public function show(Teacher $teacher)
     {
-        //
+        return view('teachers.profile.index');
     }
 
     /**
@@ -102,7 +99,51 @@ class TeacherController extends Controller
     {
         //
     }
+    
+    public function editPassword()
+    {
+        return view('teachers.password.index');
+    }
 
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function updatePassword(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'old_password_t' => ['required', 'string', 'min:8'],
+            'new_password_t' => ['required', 'string', 'min:8'],
+            'new_password_confirmation_t' => ['required', 'string', 'min:8','same:new_password_t']
+
+        ],[
+            'required' => 'ممنوع ترك الحقل فارغاَ',
+            'min' => 'لابد ان يكون الحقل مكون على الاقل من 8 خانات',
+            'same' => 'كلمة السر غير متطابقه',
+            'string' => 'يجب الحقل ان يحتوى على رموز وارقام وحروف'
+        ]);
+        if($validator->fails()) {
+            return response()->json(['errors'=>$validator->errors()]);
+        }
+        $id = Auth::guard('teacher')->user()->id;
+        $teacher = Teacher::find($id);
+        
+        if (Hash::check($request->old_password_t, $teacher->password)) {
+            $teacher->password = Hash::needsRehash($request->new_password_t) ? Hash::make($request->new_password_t) : $request->new_password_t;
+            $teacher->save();
+            Auth::guard('teacher')->attempt(['email' => $teacher->email, 'password' => $request->new_password_t]);
+
+        } else {
+            return response()->json(['errors' => ['old_password_t' => ['كلمة السر غير صحيحة']]]);
+        }
+
+        
+        //return response()->json([$student]);
+
+        
+    }
     /**
      * Remove the specified resource from storage.
      *

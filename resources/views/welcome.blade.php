@@ -291,18 +291,18 @@
 
                             </div>
 
-                            <div class="
+                            {{-- <div class="
                                         form-group
                                         text-secondary
                                         row font-weight-bolder
                                     ">
 
-                                <div class="col-12 text-left">
+                                {{-- <div class="col-12 text-left">
                                     <input id="log-t" type="checkbox" class="log-input " name="logout-devices_tcp">
                                     <label for="log-t" class="log"></label>
                                     <span class="text-danger ml-1">قفل الحساب من جميع الأجهزة الأخرى</span>
                                 </div>
-                            </div>
+                            </div> --}}
 
                             <div class="form-group font-weight-bolder">
                                 <button type="submit" class="
@@ -484,7 +484,7 @@
 
                             </div>
 
-                            <div class="
+                            {{-- <div class="
                                         form-group
                                         text-secondary
                                         row
@@ -495,7 +495,7 @@
                                     <label for="log-st" class="log"></label>
                                     <span class="text-danger ml-1">قفل الحساب من جميع الأجهزة الأخرى</span>
                                 </div>
-                            </div>
+                            </div> --}}
 
                             <div class="form-group font-weight-bolder">
                                 <button type="submit" class="
@@ -515,10 +515,4 @@
             </div>
         </div>
     </div>
-@endsection
-@section('script')
-    <script>
-        
-        
-    </script>
 @endsection
