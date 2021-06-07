@@ -52,7 +52,7 @@ class Content extends Model
     }
     
     public function getPathAttribute() {
-        $path = public_path('storage');
+        $path = asset('storage');
         if($this->attach_type == 'video') {
             return $path."\\videos\\".$this->teacher_id."\\".$this->attachment ;
         } else {
