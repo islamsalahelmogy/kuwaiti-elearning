@@ -15,14 +15,28 @@
                                     @csrf
 
                                     <div class="form-group check-step-gray">
+                                        <select class="form-control  @error('topic_id') is-invalid @enderror" id="content-video" name="topic_id">
+                                            <option selected disabled>اختار موضوع القصة</option>
+                                                @foreach ($topics as $topic)
+                                                <option value="{{ $topic->id }}" @if($topic->id == old('topic_id')) selected
+                                                    @endif>{{ $topic->name }}</option>
+                                                @endforeach
+                                        </select>
+                                        @error('topic_id')
+                                        <span id="topic_id" class="invalid-feedback d-block px-2 font-weight-bolder" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group form-group-icon">
                                         <div class="input-group mb-3">
                                             <div class="input-group-append">
                                                 <span class="input-group-text border-right-0"
                                                     id="basic-addon2">اكتب عنوان القصة</span>
                                             </div>
-                                            <input type="text" required name="title" value="{{ old('title') }}" class="form-control
-                                                @error('title')  is-invalid @enderror" autocomplete="title"
-                                                dir="ltr">
+                                            <input type="text" name="title" value="{{ old('title') }}"class="form-control
+                                                @error('title') is-invalid @enderror"
+                                                autocomplete="title" dir="rtl">
                                         </div>
                                         @error('title')
                                         <span id="title" class="invalid-feedback d-block px-2 font-weight-bolder" role="alert">
@@ -30,64 +44,33 @@
                                         </span>
                                         @enderror
                                     </div>
-
-
-
-                                    <div class="form-group check-step-gray">
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-append">
-                                                <span class="input-group-text border-right-0"
-                                                    id="basic-addon2">اكتب  وصف القصة</span>
-                                            </div>
-                                           
-                                            
-                                             <textarea name="description" required  class="form-control
-                                                @error('description')  is-invalid @enderror"> {{ old('description') }}  </textarea>
-
-                                        </div>
-                                        @error('description')
-                                        <span id="title" class="invalid-feedback d-block px-2 font-weight-bolder" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                        @enderror
-                                    </div>
-
-                                    <div class="form-group check-step-gray">
-                                        <select class="form-control" id="content-video" name="topic_id" required>
-                                         <option selected  disabled>اختار موضوع القصة</option>
-                                        @foreach($topics as $t)
-                                           <option value="{{ $t->id }}" @if(old('topic_id')==$t->id) selected @endif >{{  $t->name }}</option>
-                                           
-                                        @endforeach
-                                            
-                                        </select>
-                                    </div>
-
-                                    <div class="form-group form-group-icon">
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-append">
-                                                <span class="input-group-text border-right-0"
-                                                    id="basic-addon2">ارفع القصة </span>
-                                            </div>
-                                            <input type="file" name="attachment" class="form-control
-                                                @error('attachment')  is-invalid @enderror"
-                                                autocomplete="attachment" dir="ltr">
-                                        </div>
+                                    <div class="form-group wrapper">
+                                        <h2>ارفع القصة</h2>
+                                        <input type="file" id="file-input" name="attachment" 
+                                                class="@error('attachment') is-invalid @enderror">
+                                        <label for="file-input">
+                                            <i class="fa fa-paperclip fa-2x"></i>
+                                            <span></span>
+                                        </label>
+                                        <i class="fa fa-times-circle remove"></i>
                                         @error('attachment')
-                                        <span class="invalid-feedback d-block px-2 font-weight-bolder" role="alert">
+                                            <span id="attachment" class="invalid-feedback d-block px-2 font-weight-bolder"
+                                                            role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleFormControlTextarea1" 
+                                            style="color: #495057;padding-right: 13px;font-weight: 600;">اكتب وصف القصة</label>
+                                        <textarea class="form-control @error('description')  is-invalid @enderror" id="exampleFormControlTextarea1" 
+                                            rows="3" name="description">{{ old('description') }}</textarea>
+                                        @error('description')
+                                        <span id="description" class="invalid-feedback d-block px-2 font-weight-bolder" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                         @enderror
                                     </div>
-
-                                    
-
-                                    
-
-                                    
-
-                
-
                                     <div class="form-group font-weight-bolder">
                                         <button type="submit" 
                                             class="

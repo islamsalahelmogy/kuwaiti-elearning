@@ -40,114 +40,114 @@
         </div>
         <div class="modal fade" id="modal-Edit-teacher" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
-        <div class="modal-dialog modal-sm rounded" role="document">
-            <div class="modal-content">
-                <div class="bg-warning rounded-top p-2">
-                    <h3 class="text-white font-weight-bold mb-0 ml-2">
-                        تعديل بياناتك الشخصية
-                    </h3>
-                </div>
+            <div class="modal-dialog modal-sm rounded" role="document">
+                <div class="modal-content">
+                    <div class="bg-warning rounded-top p-2">
+                        <h3 class="text-white font-weight-bold mb-0 ml-2">
+                            تعديل بياناتك الشخصية
+                        </h3>
+                    </div>
 
 
-                <div class="border rounded-bottom-md border-top-0">
-                    <div class="p-3">
-                        <form action="#" method="POST" role="form">
-                            <div class="form-group form-group-icon">
-                                <div class="input-group mb-3">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text border-right-0"
-                                            id="basic-addon2">الأسم</span>
+                    <div class="border rounded-bottom-md border-top-0">
+                        <div class="p-3">
+                            <form action="" method="POST" role="form">
+                                <div class="form-group form-group-icon">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text border-right-0"
+                                                id="basic-addon2">الأسم</span>
+                                        </div>
+                                        <input type="text"
+                                            class="form-control @error('name')  is-invalid @enderror"
+                                            autocomplete="name" dir="rtl">
                                     </div>
-                                    <input type="text"
-                                        class="form-control @error('name')  is-invalid @enderror"
-                                        autocomplete="name" dir="rtl">
+                                    @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
-                                @error('name')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
 
-                            <div class="form-group form-group-icon">
-                                <div class="input-group mb-3">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text border-right-0"
-                                            id="basic-addon2">الإيميل</span>
+                                <div class="form-group form-group-icon">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text border-right-0"
+                                                id="basic-addon2">الإيميل</span>
+                                        </div>
+                                        <input type="email"
+                                            class="form-control @error('email')  is-invalid @enderror"
+                                            autocomplete="email" dir="ltr">
                                     </div>
-                                    <input type="email"
-                                        class="form-control @error('email')  is-invalid @enderror"
-                                        autocomplete="email" dir="ltr">
+                                    @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
-                                @error('email')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
 
-                            <div class="form-group form-group-icon">
-                                <div class="input-group mb-3">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text border-right-0"
-                                            id="basic-addon2">رقم الموبايل</span>
+                                <div class="form-group form-group-icon">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text border-right-0"
+                                                id="basic-addon2">رقم الموبايل</span>
+                                        </div>
+                                        <input type="text" name="phone"
+                                            class="form-control @error('phone')  is-invalid @enderror"
+                                            autocomplete="phone" dir="ltr">
                                     </div>
-                                    <input type="text" name="phone"
-                                        class="form-control @error('phone')  is-invalid @enderror"
-                                        autocomplete="phone" dir="ltr">
+                                    @error('phone')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
-                                @error('phone')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                            <div class="form-group form-group-icon pl-4 row font-weight-bolder">
-                                <label class="col-4 text-color">الجنس :</label>
-                                <div class="col-3">
-                                    <input id="male-t" value="male" type="radio" class="gender-input" name="gender"
-                                        checked="true">
-                                    <label for="male-t" class="gender"></label>
-                                    <span class="text-danger ml-1">ذكر</label>
-                                </div>
-                                <div class="col-3">
-                                    <input id="female-t" value="female" type="radio" class="gender-input" name="gender">
-                                    <label for="female-t" class="gender"></label>
-                                    <span class="text-danger ml-1">أنثى</label>
-                                </div>
-                            </div>
-                            <div class="form-group form-group-icon">
-                                <div class="input-group mb-3">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text border-right-0"
-                                            id="basic-addon2">كلمة السر</span>
+                                <div class="form-group form-group-icon pl-4 row font-weight-bolder">
+                                    <label class="col-4 text-color">الجنس :</label>
+                                    <div class="col-3">
+                                        <input id="male-t" value="male" type="radio" class="gender-input" name="gender"
+                                            checked="true">
+                                        <label for="male-t" class="gender"></label>
+                                        <span class="text-danger ml-1">ذكر</label>
                                     </div>
-                                    <input type="password"
-                                        class="form-control @error('password')  is-invalid @enderror"
-                                        autocomplete="password" dir="ltr">
+                                    <div class="col-3">
+                                        <input id="female-t" value="female" type="radio" class="gender-input" name="gender">
+                                        <label for="female-t" class="gender"></label>
+                                        <span class="text-danger ml-1">أنثى</label>
+                                    </div>
                                 </div>
-                                @error('password')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                            <div class="form-group font-weight-bolder">
-                                <button type="submit" class="
-                                                        btn btn-success
-                                                        text-uppercase
-                                                        w-100
-                                                    ">
-                                     حفظ التغييرات
-                                </button>
-                            </div>
+                                <div class="form-group form-group-icon">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text border-right-0"
+                                                id="basic-addon2">كلمة السر</span>
+                                        </div>
+                                        <input type="password"
+                                            class="form-control @error('password')  is-invalid @enderror"
+                                            autocomplete="password" dir="ltr">
+                                    </div>
+                                    @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                                <div class="form-group font-weight-bolder">
+                                    <button type="submit" class="
+                                                            btn btn-success
+                                                            text-uppercase
+                                                            w-100
+                                                        ">
+                                        حفظ التغييرات
+                                    </button>
+                                </div>
 
 
-                        </form>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     </section>
 @endsection

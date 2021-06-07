@@ -19,7 +19,7 @@
                                     text-white
                                     font-weight-medium
                                     opacity-80 mr-1 mr-md-2 mr-lg-1 mr-xl-2
-                                " href="#">
+                                " href="{{ route('student.dashboard') }}">
                             <span class="bg-purple
                                     icon-header
                                     mr-1 mr-md-2 mr-lg-1 mr-xl-2">
@@ -30,7 +30,7 @@
                                         
                                     " aria-hidden="true"></i>
                             </span>
-                            وحدة التحكم للطالب
+                            {{ Auth::guard('student')->user()->name }}
                         </a>
                         <a class="
                                     text-white
@@ -68,11 +68,15 @@
         
 
         <ul class="list-unstyled menu-elements mt-7 text-left">
-            <li>
-                <a class="scroll-link" href="#"><i class="fa fa-user mx-2"></i>الصفحة الشخصية</a>
+            <li class ="@if (str_contains(Route::currentRouteName(),'dashboard'))
+                active
+            @endif">
+                <a class="scroll-link" href="{{ route('student.dashboard') }}"><i class="fa fa-user mx-2"></i>الصفحة الشخصية</a>
             </li>
-            <li>
-                <a class="scroll-link" href="#"><i class="fa fa-key mx-2"></i>تغيير كلمة السر</a>
+            <li class ="@if (str_contains(Route::currentRouteName(),'password'))
+                active
+            @endif">
+                <a class="scroll-link" href="{{ route(student.password) }}"><i class="fa fa-key mx-2"></i>تغيير كلمة السر</a>
             </li>
         </ul>
 

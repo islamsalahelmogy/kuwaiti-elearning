@@ -21,6 +21,7 @@ class TeacherVideoController extends Controller
     {
         $teacherId = Auth::guard('teacher')->user()->id; 
         $videos = Content::where('teacher_id',$teacherId)->where('attach_type','video')->get();
+        //dd($videos->all());
         return view('teachers.videos.index',compact('videos'));
     }
 

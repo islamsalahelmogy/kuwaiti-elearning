@@ -1,37 +1,5 @@
 @extends('teachers.layout')
-@section('style')
-    <style>
-    .wrapper{
-    padding: 5px;
-    text-align:center;
-    color: #495057;
-    border: 3px solid #CED4DA;
-    border-radius:0.625rem;
-    }
-    .wrapper h2{
-    padding-bottom: 5px;
-    }
-    .wrapper #file-input{
-    display:none;
-    }
 
-    .wrapper label[for='file-input'] *{
-    vertical-align:middle;
-    cursor:pointer;
-    }
-
-    .wrapper label[for='file-input'] span{
-    margin-left: 10px
-    }
-
-    .wrapper i.remove{
-    vertical-align:middle;
-    margin-left: 5px;
-    cursor:pointer;
-    display:none;
-    }
-</style>
-@endsection
 
 @section('content')
 <section class="pt-10 my-md-5 h-100">
@@ -112,55 +80,4 @@
         </div>
     </div>
 </section>
-@endsection
-@section('script')
-<script>
-        $('document').ready(function(){
-            
-            var $file = $('#file-input'),
-                $label = $file.next('label'),
-                $labelText = $label.find('span'),
-                $labelRemove = $('i.remove'),
-                labelDefault = $labelText.text();
-                
-                /* if (!$file.hasClass('is-invalid')) {
-                    console.log()
-                    $path = {!! json_encode($path) !!}.split('\\').pop(),
-                    labelDefault = $labelText.text($path);
-                    $labelRemove.show();
-                } */
-                //var $old = {!! old('attachment') !!};
-                //console.log($old);
-            // on file change
-            $file.on('change', function(event){
-                //console.log(event.target);
-                var fileName = $file.val().split( '\\' ).pop();
-                
-                if( fileName ){
-                        //console.log($file)
-                        $labelText.text(fileName);
-                        $labelRemove.show();
-                }else{
-                    $labelText.text(labelDefault);
-                    $labelRemove.hide();
-                }
-                
-                if($file.hasClass('is-invalid')) {
-                    //console.log($file);
-                    $file.removeClass('is-invalid');
-                    $('#'+$file.attr('name')).remove();
-                }
-            });
-            
-            // Remove file   
-            $labelRemove.on('click', function(event){
-                $file.val("");
-                $labelText.text(labelDefault);
-                $labelRemove.hide();
-                //console.log($file)
-            });
-            
-            
-        })
-</script>
 @endsection
