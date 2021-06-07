@@ -39,6 +39,8 @@ Route::get('/', function () {
     Route::post('/login/teacher/reset/password', 'Auth\LoginController@teacherResetPassword')->name('teacher.reset.password');
     Route::post('/login/teacher/change/password', 'Auth\LoginController@teacherChangePassword')->name('teacher.change.password');
     Route::get('/logout/teacher','Auth\LoginController@teacherLogout')->name('teacher.logout'); 
+    Route::get('/teacher/dashboard', 'TeacherController@show')->middleware('isteacher:teacher')->name('teacher.dashboard');
+    Route::post('/teacher/update', 'TeacherController@update')->middleware('isteacher:teacher')->name('teacher.update');
    
     
 

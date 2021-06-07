@@ -50,6 +50,7 @@ class Content extends Model
         }
         
     }
+    
     public function getPathAttribute() {
         $path = public_path('storage');
         if($this->attach_type == 'video') {
@@ -59,7 +60,11 @@ class Content extends Model
 
         }
     }
+
+
     protected $appends = ['ext_type','path'];
+
+
     public function topic () {
         return $this->belongsTo(Topic::Class);
     }

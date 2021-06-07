@@ -463,12 +463,7 @@
                     $('span.invalid').remove();
                 }
             })
-            $('.modal').on('show.bs.modal', (e) =>{
-                $(e.target).find('input.is-invalid').removeClass('is-invalid');
-                $(e.target).find('span.invalid-feedback').remove();
-                $(e.target).find('input.form-control').val('');
-                $(e.target).find('input[type="checkbox"]').prop('checked',false);
-            })
+           
         })
     </script>
     @yield('script')

@@ -21,15 +21,24 @@ class TeacherController extends Controller
     use AuthenticatesUsers;
 
 
-    protected function validator(array $data)
+    protected function TeacherValidator(array $data)
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:teachers'],
+            'email' => ['required', 'string', 'email', 'max:255'],
             'gender' => ['required', 'string', 'max:255'],
-            'phone' => ['required', 'numeric', 'min:11'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+            'phone' => ['required', 'numeric', 'digits:11'],
+            'password' => ['required', 'string', 'min:8'],
+            
+        ],[
+            'required' => 'ممنوع ترك الحقل فارغاَ',
+            'numeric' => 'يجب ان يحتوى الحقل على ارقام فقط',
+            'phone.digits' => 'الرقم غير صحيح لابد ان يكون مكون من 11 خانه',
+            'min' => 'لابد ان يكون الحقل مكون على الاقل من 8 خانات',
+            'email' => 'هذا الإيميل غير صحيح',
+            'string' => 'يجب الحقل ان يحتوى على رموز وارقام وحروف'
+        ]
+        );
     }
 
     public function index()
@@ -72,9 +81,10 @@ class TeacherController extends Controller
      * @param  \App\Models\Teacher  $teacher
      * @return \Illuminate\Http\Response
      */
-    public function show(Teacher $teacher)
-    {
-        return view('teachers.profile.index');
+    public function show()
+    {   
+        $teacher=Auth::guard('teacher')->user();
+        return view('teachers.teacher.show',compact('teacher'));
     }
 
     /**
@@ -85,7 +95,7 @@ class TeacherController extends Controller
      */
     public function edit(Teacher $teacher)
     {
-        //
+        
     }
 
     /**
@@ -95,9 +105,30 @@ class TeacherController extends Controller
      * @param  \App\Models\Teacher  $teacher
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Teacher $teacher)
+    public function update(Request $request)
     {
-        //
+        $data =$this->TeacherValidator($request->all());
+        
+        if($data->fails()) {
+            return response()->json(['errors'=>$data->errors()]);
+        }
+    
+        $teacher=Auth::guard('teacher')->user();
+
+         if(Hash::check($request->password,$teacher->password))
+         {  
+            $teacher->update([
+                'name' => $request['name'],
+                'email' => $request['email'],
+                'phone' => $request['phone'],
+                'gender' => $request['gender'],      
+        ]);
+
+         }
+         else{
+            return response()->json(['errors'=>['password'=>['كلمة المرور غير صحيحة']]]);
+         }
+
     }
     
     public function editPassword()

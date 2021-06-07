@@ -106,15 +106,20 @@
             @endif">
                 <a class="scroll-link" href="{{ route('teacher.dashboard') }}"><i class="fa fa-user mx-2"></i>الصفحة الشخصية</a>
             </li>
+            @if (auth('teacher')->user()->role=='admin')
             <li class ="@if (str_contains(Route::currentRouteName(),'admin'))
                 active
             @endif">
                 <a class="scroll-link" href="{{-- {{ route('admin.teachers') }} --}}"><i class="fa fa-user mx-2"></i>المدرسين</a>
             </li>
+            @endif
             <li class ="@if (str_contains(Route::currentRouteName(),'video'))
                 active
             @endif">
                 <a class="scroll-link" href="{{ route('teacher.videos') }}"><i class="fa fa-user mx-2"></i>الفيديوهات</a>
+            
+            <li>
+                <a class="scroll-link" href="#"><i class="fa fa-user mx-2"></i>الفيديوهات</a>
             </li>
             <li class ="@if (str_contains(Route::currentRouteName(),'stor'))
                 active
