@@ -118,9 +118,7 @@
             @endif">
                 <a class="scroll-link" href="{{ route('teacher.videos') }}"><i class="fa fa-user mx-2"></i>الفيديوهات</a>
             
-            <li>
-                <a class="scroll-link" href="#"><i class="fa fa-user mx-2"></i>الفيديوهات</a>
-            </li>
+           </li>
             <li class ="@if (str_contains(Route::currentRouteName(),'stor'))
                 active
             @endif">

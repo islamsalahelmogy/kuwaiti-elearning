@@ -20,13 +20,12 @@ class IsStudent
     {
        if(Auth::guard('teacher')->check())
         {
-           return redirect('/teacher');
+           return redirect('/teacher/dashboard');
         }
         else if(!Auth::guard($guard)->check())
         {
             return redirect('/');
         }
-     
         return $next($request);
     }
 }

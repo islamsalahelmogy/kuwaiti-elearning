@@ -20,10 +20,10 @@ class RedirectIfAuthenticated
     public function handle($request, Closure $next, $guard = null)
     {
         if ($guard == "teacher" && Auth::guard($guard)->check()) {
-            return redirect('/teacher');
+            return redirect('/teacher/dashboard');
         }
         if ($guard == "student" && Auth::guard($guard)->check()) {
-            return redirect('/student');
+            return redirect('/student/dashboard');
         }
          if (Auth::guard($guard)->check()) {
              return redirect('/');

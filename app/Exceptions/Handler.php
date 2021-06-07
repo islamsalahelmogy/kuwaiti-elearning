@@ -50,12 +50,12 @@ class Handler extends ExceptionHandler
             }
             if ($request->is('teacher') || $request->is('teacher/*')) {
                 if(Auth::guard('student')->check() == true)
-                    return redirect('/student');
+                    return redirect('/student/dashboard');
                 return redirect('/');
             }
             if ($request->is('student') || $request->is('student/*')) {
                 if(Auth::guard('teacher')->check() == true)
-                    return redirect('/teacher');
+                    return redirect('/teacher/dashboard');
                 return redirect('/');
             }
             return redirect()->guest(route('welcome'));

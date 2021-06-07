@@ -84,7 +84,7 @@ class TeacherController extends Controller
     public function show()
     {   
         $teacher=Auth::guard('teacher')->user();
-        return view('teachers.teacher.show',compact('teacher'));
+        return view('teachers.profile.show',compact('teacher'));
     }
 
     /**

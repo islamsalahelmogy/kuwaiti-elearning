@@ -13,11 +13,7 @@ class StudentController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function __construct()
-    {
-        $this->middleware('guest')->except('logout');
-        $this->middleware('guest:student')->except('logout');
-    }
+   
     
     public function index()
     {
@@ -57,8 +53,8 @@ class StudentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Student $student)
-    {
-        //
+    { 
+       return view('students.profile.show');
     }
 
     /**
