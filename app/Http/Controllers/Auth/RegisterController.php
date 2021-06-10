@@ -59,13 +59,13 @@ class RegisterController extends Controller
             'name_tr' => ['required', 'string', 'max:255'],
             'email_tr' => ['required', 'string', 'email', 'max:255', 'unique:teachers,email'],
             'gender_tr' => ['required', 'string', 'max:255'],
-            'phone_tr' => ['required', 'numeric', 'digits:11'],
+            'phone_tr' => ['required', 'numeric', 'digits:8'],
             'password_tr' => ['required', 'string', 'min:8'],
             'password_confirmation_tr' => ['required', 'string', 'min:8','same:password_tr']
         ],[
             'required' => 'ممنوع ترك الحقل فارغاَ',
             'numeric' => 'يجب ان يحتوى الحقل على ارقام فقط',
-            'phone_tr.digits' => 'الرقم غير صحيح لابد ان يكون مكون من 11 خانه',
+            'phone_tr.digits' => 'الرقم غير صحيح لابد ان يكون مكون من 8 خانات',
             'min' => 'لابد ان يكون الحقل مكون على الاقل من 8 خانات',
             'email' => 'هذا الإيميل غير صحيح',
             'unique' => 'هذا الإيميل موجود بالفعل',

@@ -21,7 +21,9 @@ class TeacherStoryController extends Controller
             //dd($stories->toArray());
             return view('teachers.stories.index',compact('stories'));
     }
+    
 
+    
     /**
      * Show the form for creating a new resource.
      *

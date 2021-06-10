@@ -26,7 +26,6 @@
     <script src="{{ asset('plugins/revolution/js/jquery.themepunch.tools.min.js') }}" defer></script>
     <script src="{{ asset('plugins/revolution/js/jquery.themepunch.revolution.min.js') }}" defer></script>
     <script src="{{ asset('plugins/wow/wow.min.js') }}" defer></script>
-
     <script src="{{ asset('js/main.js') }}" defer></script>
 
 
@@ -149,6 +148,7 @@
     </div>
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
+    
 
     <script>
         // let image = document.querySelector(".navbar-brand");
@@ -465,6 +465,8 @@
             })
            
         })
+        
+        
     </script>
     @yield('script')
     

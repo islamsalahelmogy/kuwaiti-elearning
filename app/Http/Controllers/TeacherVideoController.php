@@ -7,11 +7,12 @@ use App\Models\Topic;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+
 class TeacherVideoController extends Controller
 {
 
 
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -19,10 +20,10 @@ class TeacherVideoController extends Controller
      */
     public function index()
     {
-        $teacherId = Auth::guard('teacher')->user()->id; 
-        $videos = Content::where('teacher_id',$teacherId)->where('attach_type','video')->get();
-        //dd($videos->all());
-        return view('teachers.videos.index',compact('videos'));
+        $teacherId = Auth::guard('teacher')->user()->id;
+        $videos = Content::where('teacher_id', $teacherId)->where('attach_type', 'video')->get();
+        //dd($videos->toArray());
+        return view('teachers.videos.index', compact('videos'));
     }
 
     /**
@@ -32,8 +33,8 @@ class TeacherVideoController extends Controller
      */
     public function create()
     {
-        $topics=Topic::all();
-        return view('teachers.videos.create' ,compact('topics'));
+        $topics = Topic::all();
+        return view('teachers.videos.create', compact('topics'));
     }
 
     /**
@@ -44,39 +45,36 @@ class TeacherVideoController extends Controller
      */
     public function store(Request $request)
     {
-       
-       
+
+
         $request->validate([
             'title' => 'required|max:255',
             'description' => 'required',
-           'attachment' => 'required|mimetypes:video/x-msvideo,video/mpeg,video/mp4,video/x-matroska',
+            'attachment' => 'required|mimetypes:video/x-msvideo,video/mp4,video/x-matroska',
             'topic_id' => 'required',
-         
-        ]);
-     
-        if ($request->hasFile('attachment'))
-        {
-           $video  =  new Content();
-           $teacher_id=Auth::guard('teacher')->user()->id;  
-           if(is_dir(public_path('storage\videos\\'.$teacher_id))==false)
-           {
-               mkdir(public_path('storage\videos\\'.$teacher_id));
-           }
-           $video_path=public_path('storage\videos\\'.$teacher_id); 
-           $video_name=$request->attachment->getClientOriginalName();
-           $video_file=$request->file('attachment');
-           $video_file->move($video_path,$video_name);
-           $video->attachment=$video_name;
-           $video->title=$request->title;
-           $video->description=$request->description;
-           $video->attach_type="video";
-           $video->topic_id=$request->topic_id;
-           $video->teacher_id=$teacher_id;
-           $video->save();
-        }
-        
-        return redirect(route('teacher.videos'));
 
+        ]);
+
+        if ($request->hasFile('attachment')) {
+            $video  =  new Content();
+            $teacher_id = Auth::guard('teacher')->user()->id;
+            if (is_dir(public_path('storage\videos\\' . $teacher_id)) == false) {
+                mkdir(public_path('storage\videos\\' . $teacher_id));
+            }
+            $video_path = public_path('storage\videos\\' . $teacher_id);
+            $video_name = $request->attachment->getClientOriginalName();
+            $video_file = $request->file('attachment');
+            $video_file->move($video_path, $video_name);
+            $video->attachment = $video_name;
+            $video->title = $request->title;
+            $video->description = $request->description;
+            $video->attach_type = "video";
+            $video->topic_id = $request->topic_id;
+            $video->teacher_id = $teacher_id;
+            $video->save();
+        }
+
+        return redirect(route('teacher.videos'));
     }
 
     /**
@@ -89,7 +87,7 @@ class TeacherVideoController extends Controller
     {
         $video = Content::find($id);
         //dd($video);
-        return view('teachers.videos.show',compact('video'));
+        return view('teachers.videos.show', compact('video'));
     }
 
     /**
@@ -103,11 +101,10 @@ class TeacherVideoController extends Controller
         $teacherId = Auth::guard('teacher')->user()->id;
         $video = Content::find($id);
         $topics = Topic::all();
-        $path = public_path('storage\videos\\'.$teacherId.'\\'.$video->attachment);
-        if(is_file($path)) {
-            return view('teachers.videos.edit',compact('video','path','topics'));
-        } 
-        
+        $path = public_path('storage\videos\\' . $teacherId . '\\' . $video->attachment);
+        if (is_file($path)) {
+            return view('teachers.videos.edit', compact('video', 'path', 'topics'));
+        }
     }
 
     /**
@@ -125,7 +122,7 @@ class TeacherVideoController extends Controller
             'topic_id' => 'required',
         ]);
 
-        if($request->hasFile('attachment')) {
+        if ($request->hasFile('attachment')) {
             //dd($request);
             $request->validate([
                 'attachment' => 'required|mimetypes:video/x-msvideo,video/mpeg,video/mp4,video/x-matroska',
@@ -133,20 +130,19 @@ class TeacherVideoController extends Controller
             $video = Content::find($id);
             $teacherId = Auth::guard('teacher')->user()->id;
             $file = $request->file('attachment');
-            $video_path = public_path('storage\videos\\'.$teacherId);
-            $old_video = $video_path.'\\'.$video->attachment;
+            $video_path = public_path('storage\videos\\' . $teacherId);
+            $old_video = $video_path . '\\' . $video->attachment;
             $video_name = $file->getClientOriginalName();
-            $file->move($video_path,$video_name);
+            $file->move($video_path, $video_name);
             $video->title = $request->title;
             $video->topic_id = $request->topic_id;
             $video->attachment = $video_name;
             $video->description = $request->description;
             $video->teacher_id = $teacherId;
             $video->save();
-            if(file_exists($old_video)) {
+            if (file_exists($old_video)) {
                 File::delete($old_video);
             }
-            
         } else {
             $video = Content::find($id);
             //dd($request);
@@ -158,8 +154,6 @@ class TeacherVideoController extends Controller
             $video->save();
         }
         return redirect(route('teacher.videos'));
-        
-
     }
 
     /**
@@ -173,12 +167,11 @@ class TeacherVideoController extends Controller
         $video = Content::find($id);
         $videoName = $video->attachment;
         $teacherId = Auth::guard('teacher')->user()->id;
-        $file = public_path('storage\videos\\'.$teacherId."\\".$videoName);
-        if(file_exists($file)) {
-                File::delete($file);
+        $file = public_path('storage\videos\\' . $teacherId . "\\" . $videoName);
+        if (file_exists($file)) {
+            File::delete($file);
         }
         $video->delete();
         return redirect(route('teacher.videos'));
-
     }
 }

@@ -15071,3 +15071,16 @@ html[dir="rtl"]
 .modal-content{
     direction:rtl;
 }
+
+.card-product .img-link , .card-product .img-link video{
+    height:144px;
+    background-color: black;
+}
+
+.card-product .img-link video{
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
