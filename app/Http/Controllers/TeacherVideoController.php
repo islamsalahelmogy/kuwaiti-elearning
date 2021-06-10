@@ -62,7 +62,7 @@ class TeacherVideoController extends Controller
                 mkdir(public_path('storage\videos\\' . $teacher_id));
             }
             $video_path = public_path('storage\videos\\' . $teacher_id);
-            $video_name = $request->attachment->getClientOriginalName();
+            $video_name = str_replace(' ','-',$request->attachment->getClientOriginalName());
             $video_file = $request->file('attachment');
             $video_file->move($video_path, $video_name);
             $video->attachment = $video_name;
@@ -132,7 +132,7 @@ class TeacherVideoController extends Controller
             $file = $request->file('attachment');
             $video_path = public_path('storage\videos\\' . $teacherId);
             $old_video = $video_path . '\\' . $video->attachment;
-            $video_name = $file->getClientOriginalName();
+            $video_name = str_replace(' ','-',$file->getClientOriginalName());
             $file->move($video_path, $video_name);
             $video->title = $request->title;
             $video->topic_id = $request->topic_id;

@@ -77,7 +77,8 @@
         #next-track,
         #back10,
         #forward10,
-        #stop {
+        #stop,
+        #pause{
         filter: invert(1);
         cursor: pointer;
         margin-top: 15px;
@@ -85,13 +86,14 @@
         
         }
         #play:hover,
+        #pause:hover,
         #prev-track:hover,
         #next-track:hover,
         #back10:hover,
         #forward10:hover,
         #stop:hover {
-        transform:scale(1.5);
-        color:black
+            transform:scale(1.5);
+            color:black
         }
         .next-prev {
         grid-area: three;

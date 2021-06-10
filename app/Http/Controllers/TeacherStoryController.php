@@ -44,11 +44,11 @@ class TeacherStoryController extends Controller
     public function store(Request $request)
     {
        
-       
+       //dd($request);
         $request->validate([
             'title' => 'required|max:255',
             'description' => 'required',
-           'attachment' => 'required|mimes:audio/mpeg,mp3',
+           'attachment' => 'required|mimetypes:audio/mpeg,audio/mp3',
             'topic_id' => 'required',
          
         ]);
@@ -62,7 +62,7 @@ class TeacherStoryController extends Controller
                mkdir(public_path('storage\stories\\'.$teacher_id));
            }
            $audio_path=public_path('storage\stories\\'.$teacher_id); 
-           $audio_name=$request->attachment->getClientOriginalName();
+           $audio_name=str_replace(' ','-',$request->attachment->getClientOriginalName());
            $audio_file=$request->file('attachment');
            $audio_file->move($audio_path,$audio_name);
            $audio->attachment=$audio_name;
@@ -126,14 +126,14 @@ class TeacherStoryController extends Controller
         if($request->hasFile('attachment')) {
             //dd($request);
             $request->validate([
-                'attachment' => 'required|mimes:audio/mpeg,mp3',
+                'attachment' => 'required|mimetypes:audio/mpeg,audio/mp3',
             ]);
             $story = Content::find($id);
             $teacherId = Auth::guard('teacher')->user()->id;
             $file = $request->file('attachment');
             $story_path = public_path('storage\stories\\'.$teacherId);
             $old_story = $story_path.'\\'.$story->attachment;
-            $story_name = $file->getClientOriginalName();
+            $story_name = str_replace(' ','-',$file->getClientOriginalName());
             $file->move($story_path,$story_name);
             $story->title = $request->title;
             $story->topic_id = $request->topic_id;
