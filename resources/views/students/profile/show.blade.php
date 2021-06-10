@@ -11,10 +11,10 @@
                             </div>
                             <blockquote class="blockquote blockquote-sm mt-2">
                                 <p class="font-normal mb-5"> 
-                                    محمد عوض
+                                    {{ $student->name }}
                                 </p>
                                 <p class="font-normal mb-5"> 
-                                    mohamed@gmail.com
+                                    {{ $student->email }}
                                 </p>
                             </blockquote>
                         </div>
@@ -39,7 +39,7 @@
 
                 <div class="border rounded-bottom-md border-top-0">
                     <div class="p-3">
-                        <form action="#" method="POST" role="form">
+                        <form id="stedit" action="" method="POST" role="form">
                             <div class="form-group form-group-icon">
                                 <div class="input-group mb-3">
                                     <div class="input-group-append">
@@ -47,14 +47,10 @@
                                             id="basic-addon2">الأسم</span>
                                     </div>
                                     <input type="text"
-                                        class="form-control @error('name')  is-invalid @enderror"
-                                        autocomplete="name" dir="rtl">
+                                        class="form-control" name="name"
+                                        autocomplete="name" dir="rtl" value="{{ $student->name }}">
                                 </div>
-                                @error('name')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
+                                
                             </div>
 
                             <div class="form-group form-group-icon">
@@ -64,26 +60,23 @@
                                             id="basic-addon2">الإيميل</span>
                                     </div>
                                     <input type="email"
-                                        class="form-control @error('email')  is-invalid @enderror"
-                                        autocomplete="email" dir="ltr">
+                                        class="form-control" name="email"
+                                        autocomplete="email" dir="ltr" value="{{ $student->email }}">
                                 </div>
-                                @error('email')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
+                            
                             </div>
 
                             <div class="form-group form-group-icon pl-4 row font-weight-bolder">
                                 <label class="col-4 text-color">الجنس :</label>
                                 <div class="col-3">
                                     <input id="male-te" value="male" type="radio" class="gender-input" name="gender"
-                                        checked="true">
+                                        {{ $student->gender == 'male' ? 'checked' : '' }}>
                                     <label for="male-te" class="gender"></label>
                                     <span class="text-danger ml-1">ذكر</label>
                                 </div>
                                 <div class="col-3">
-                                    <input id="female-te" value="female" type="radio" class="gender-input" name="gender">
+                                    <input id="female-te" value="female" type="radio" class="gender-input" name="gender"
+                                        {{ $student->gender == 'female' ? 'checked' : '' }}>
                                     <label for="female-te" class="gender"></label>
                                     <span class="text-danger ml-1">أنثى</label>
                                 </div>
@@ -95,14 +88,10 @@
                                             id="basic-addon2">كلمة السر</span>
                                     </div>
                                     <input type="password"
-                                        class="form-control @error('password')  is-invalid @enderror"
+                                        class="form-control" name="password"
                                         autocomplete="password" dir="ltr">
                                 </div>
-                                @error('password')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
+                                
                             </div>
                             <div class="form-group font-weight-bolder">
                                 <button type="submit" class="
@@ -122,4 +111,56 @@
         </div>
     </div>
     </section>
+@endsection
+@section('script')
+<script>
+
+    $(document).ready(() => {
+        function messageError(errorName,message) {
+            $('input[name='+errorName+']').addClass('is-invalid');
+                $('input[name='+errorName+']').parent().append(
+                    '<span id='+errorName+' class="invalid-feedback d-block px-2" role="alert">'+
+                            '<strong>'+message+'</strong>'+
+                    '</span>'
+            );
+        }
+
+        $('#stedit').submit((e) => {
+            e.preventDefault();
+            axios.post('{{ route('student.update') }}',$(e.target).serialize())
+            .then((res) => {
+                console.log(res.data)
+                var errors = res.data.errors;
+                console.log(errors);
+                if(errors) {
+                    console.log(errors)
+                    if(errors.name){
+                        messageError('name',errors.name[0]);
+
+                    }
+                    if(errors.email){
+                        messageError('email',errors.email[0]);
+
+                    }
+                    if(errors.gender){
+                        messageError('gender',errors.gender[0]);
+
+                    }
+                    if(errors.password){
+                        messageError('password',errors.password[0]);
+
+                    }
+                
+                }else{
+                    $('#modal-Edit-student').modal('hide');
+                    window.location.replace("http://127.0.0.1:8000/student/dashboard");
+                }
+            })
+        })
+
+
+        })
+
+</script>
+
 @endsection

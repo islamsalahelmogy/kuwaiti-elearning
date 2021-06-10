@@ -170,10 +170,6 @@ class TeacherController extends Controller
         } else {
             return response()->json(['errors' => ['old_password_t' => ['كلمة السر غير صحيحة']]]);
         }
-
-        
-        //return response()->json([$student]);
-
         
     }
     /**
