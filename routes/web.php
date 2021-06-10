@@ -69,8 +69,7 @@ Route::get('/', function () {
     Route::get('/teacher/story/delete/{id}', 'TeacherStoryController@destroy')->middleware('isteacher:teacher')->name('teacher.story.delete');
     Route::get('/teacher/password/edit','TeacherController@editPassword')->name('teacher.password.edit');
     Route::post('/teacher/password/update','TeacherController@updatePassword')->name('teacher.password.update');
-
-
+    Route::get('/teacher/story/get/{id}', 'TeacherStoryController@storyGet')->middleware('isteacher:teacher')->name('story.get');
 
     // student routes
 

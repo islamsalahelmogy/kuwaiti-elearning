@@ -27,13 +27,13 @@ class TeacherController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255'],
             'gender' => ['required', 'string', 'max:255'],
-            'phone' => ['required', 'numeric', 'digits:11'],
+            'phone' => ['required', 'numeric', 'digits:8'],
             'password' => ['required', 'string', 'min:8'],
             
         ],[
             'required' => 'ممنوع ترك الحقل فارغاَ',
             'numeric' => 'يجب ان يحتوى الحقل على ارقام فقط',
-            'phone.digits' => 'الرقم غير صحيح لابد ان يكون مكون من 11 خانه',
+            'phone.digits' => 'الرقم غير صحيح لابد ان يكون مكون من 8 خانات',
             'min' => 'لابد ان يكون الحقل مكون على الاقل من 8 خانات',
             'email' => 'هذا الإيميل غير صحيح',
             'string' => 'يجب الحقل ان يحتوى على رموز وارقام وحروف'
@@ -162,7 +162,8 @@ class TeacherController extends Controller
         $teacher = Teacher::find($id);
         
         if (Hash::check($request->old_password_t, $teacher->password)) {
-            $teacher->password = Hash::needsRehash($request->new_password_t) ? Hash::make($request->new_password_t) : $request->new_password_t;
+            $teacher->password = Hash::needsRehash($request->new_password_t) ? 
+                Hash::make($request->new_password_t) : $request->new_password_t;
             $teacher->save();
             Auth::guard('teacher')->attempt(['email' => $teacher->email, 'password' => $request->new_password_t]);
 
