@@ -69,7 +69,7 @@ class Content extends Model
 
 
     public function topic () {
-        return $this->belongsTo(Topic::Class);
+        return $this->belongsTo(Topic::class);
     }
     
     public function teacher () {
