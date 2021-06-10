@@ -21,7 +21,7 @@ class TeacherVideoController extends Controller
     public function index()
     {
         $teacherId = Auth::guard('teacher')->user()->id;
-        $videos = Content::where('teacher_id', $teacherId)->where('attach_type', 'video')->get();
+        $videos = Content::where('teacher_id', $teacherId)->where('attach_type', 'video')->orderBy('created_at','desc')->get();
         //dd($videos->toArray());
         return view('teachers.videos.index', compact('videos'));
     }
@@ -62,7 +62,7 @@ class TeacherVideoController extends Controller
                 mkdir(public_path('storage\videos\\' . $teacher_id));
             }
             $video_path = public_path('storage\videos\\' . $teacher_id);
-            $video_name = str_replace(' ','-',$request->attachment->getClientOriginalName());
+            $video_name = str_replace([' ','#'],'-',$request->attachment->getClientOriginalName());
             $video_file = $request->file('attachment');
             $video_file->move($video_path, $video_name);
             $video->attachment = $video_name;
@@ -132,7 +132,7 @@ class TeacherVideoController extends Controller
             $file = $request->file('attachment');
             $video_path = public_path('storage\videos\\' . $teacherId);
             $old_video = $video_path . '\\' . $video->attachment;
-            $video_name = str_replace(' ','-',$file->getClientOriginalName());
+            $video_name = str_replace([' ','#'],'-',$file->getClientOriginalName());
             $file->move($video_path, $video_name);
             $video->title = $request->title;
             $video->topic_id = $request->topic_id;

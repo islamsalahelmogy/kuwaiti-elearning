@@ -6,6 +6,7 @@ use App\Models\Content;
 use App\Models\Topic;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 
 class TeacherStoryController extends Controller
 {
@@ -17,7 +18,7 @@ class TeacherStoryController extends Controller
     public function index()
     {
             $teacherId = Auth::guard('teacher')->user()->id; 
-            $stories = Content::where('teacher_id',$teacherId)->where('attach_type','audio')->get();
+            $stories = Content::where('teacher_id',$teacherId)->where('attach_type','audio')->orderBy('created_at','desc')->get();
             //dd($stories->toArray());
             return view('teachers.stories.index',compact('stories'));
     }
@@ -62,7 +63,7 @@ class TeacherStoryController extends Controller
                mkdir(public_path('storage\stories\\'.$teacher_id));
            }
            $audio_path=public_path('storage\stories\\'.$teacher_id); 
-           $audio_name=str_replace(' ','-',$request->attachment->getClientOriginalName());
+           $audio_name=str_replace([' ','#'],'-',$request->attachment->getClientOriginalName());
            $audio_file=$request->file('attachment');
            $audio_file->move($audio_path,$audio_name);
            $audio->attachment=$audio_name;
@@ -133,7 +134,7 @@ class TeacherStoryController extends Controller
             $file = $request->file('attachment');
             $story_path = public_path('storage\stories\\'.$teacherId);
             $old_story = $story_path.'\\'.$story->attachment;
-            $story_name = str_replace(' ','-',$file->getClientOriginalName());
+            $story_name = str_replace([' ','#'],'-',$file->getClientOriginalName());
             $file->move($story_path,$story_name);
             $story->title = $request->title;
             $story->topic_id = $request->topic_id;
