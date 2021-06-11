@@ -76,7 +76,7 @@
             <li class ="@if (str_contains(Route::currentRouteName(),'password'))
                 active
             @endif">
-                <a class="scroll-link" href="{{ route('student.password') }}"><i class="fa fa-key mx-2"></i>تغيير كلمة السر</a>
+                <a class="scroll-link" href="{{ route('student.password.edit') }}"><i class="fa fa-key mx-2"></i>تغيير كلمة السر</a>
             </li>
         </ul>
 

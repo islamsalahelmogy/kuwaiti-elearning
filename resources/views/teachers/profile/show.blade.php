@@ -167,57 +167,56 @@
 @section('script')
 <script>
 
- $(document).ready(() => {
-     function messageError(errorName,message) {
-                $('input[name='+errorName+']').addClass('is-invalid');
-                    $('input[name='+errorName+']').parent().append(
-                        '<span id='+errorName+' class="invalid-feedback d-block px-2" role="alert">'+
-                                '<strong>'+message+'</strong>'+
-                        '</span>'
-                );
-            }
+    $(document).ready(() => {
+        function messageError(errorName,message) {
+                    $('input[name='+errorName+']').addClass('is-invalid');
+                        $('input[name='+errorName+']').parent().append(
+                            '<span id='+errorName+' class="invalid-feedback d-block px-2" role="alert">'+
+                                    '<strong>'+message+'</strong>'+
+                            '</span>'
+                    );
+                }
 
-$('#tedit').submit((e) => {
-                e.preventDefault();
-                axios.post('{{ route('teacher.update') }}',$(e.target).serialize())
-                .then((res) => {
-                    console.log(res.data)
+    $('#tedit').submit((e) => {
+                    e.preventDefault();
+                    axios.post('{{ route('teacher.update') }}',$(e.target).serialize())
+                    .then((res) => {
+                        console.log(res.data)
+                        var errors = res.data.errors;
+                        console.log(errors);
+                        if(errors) {
+                            console.log(errors)
+                            if(errors.name){
+                                messageError('name',errors.name[0]);
 
-                    var errors = res.data.errors;
-                    console.log(errors);
-                    if(errors) {
-                        console.log(errors)
-                        if(errors.name){
-                            messageError('name',errors.name[0]);
+                            }
+                            if(errors.email){
+                                messageError('email',errors.email[0]);
 
+                            }
+                            if(errors.phone){
+                                messageError('phone',errors.phone[0]);
+
+                            }
+                            if(errors.gender){
+                                messageError('gender',errors.gender[0]);
+
+                            }
+                            if(errors.password){
+                                messageError('password',errors.password[0]);
+
+                            }
+                        
+                        }else{
+                            $('#modal-Edit-teacher').modal('hide');
+                            window.location.replace("http://127.0.0.1:8000/teacher/dashboard");
+                        
                         }
-                        if(errors.email){
-                            messageError('email',errors.email[0]);
-
-                        }
-                        if(errors.phone){
-                            messageError('phone',errors.phone[0]);
-
-                        }
-                         if(errors.gender){
-                            messageError('gender',errors.gender[0]);
-
-                        }
-                        if(errors.password){
-                            messageError('password',errors.password[0]);
-
-                        }
-                       
-                    }else{
-                        $('#modal-Edit-teacher').modal('hide');
-                        window.location.replace("http://127.0.0.1:8000/teacher/dashboard");
-                    
-                    }
+                        
                 })
-            })
 
 
-            })
+                })
 
 </script>
 

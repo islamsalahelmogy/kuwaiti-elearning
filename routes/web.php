@@ -78,10 +78,11 @@ Route::get('/', function () {
     Route::post('/login/student/reset/password', 'Auth\LoginController@studentResetPassword')->name('student.reset.password');
     Route::post('/login/student/change/password', 'Auth\LoginController@studentChangePassword')->name('student.change.password');
     Route::get('/logout/student','Auth\LoginController@studentLogout')->name('student.logout');
-    Route::get('student/dashboard','studentController@show')->name('student.dashboard')->middleware('isstudent:student');
-    Route::get('/student/password/edit',function (Request $r) {
-        return view('students.password.index');
-    })->name('student.password');
+    Route::get('/student/dashboard','StudentController@show')->name('student.dashboard')->middleware('isstudent:student');
+    Route::post('/student/update', 'StudentController@update')->middleware('isstudent:student')->name('student.update');
+
+    Route::get('/student/password/edit','StudentController@editPassword')->name('student.password.edit');
+    Route::post('/student/password/update','StudentController@updatePassword')->name('student.password.update');
 
 
     //admin routes 
