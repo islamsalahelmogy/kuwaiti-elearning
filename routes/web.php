@@ -70,7 +70,8 @@ Route::get('/', function () {
     Route::get('/teacher/password/edit','TeacherController@editPassword')->name('teacher.password.edit');
     Route::post('/teacher/password/update','TeacherController@updatePassword')->name('teacher.password.update');
     Route::get('/teacher/story/get/{id}', 'TeacherStoryController@storyGet')->middleware('isteacher:teacher')->name('story.get');
-
+    Route::view('/questions', 'teachers.activities.questions.create');
+    //Route::get('/teacher/question', 'TeacherStoryController@storyGet')->middleware('isteacher:teacher')->name('story.get');
     // student routes
 
     Route::post('/login/student', 'Auth\LoginController@studentLogin')->name('student.login');

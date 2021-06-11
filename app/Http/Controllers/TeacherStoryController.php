@@ -63,7 +63,7 @@ class TeacherStoryController extends Controller
                mkdir(public_path('storage\stories\\'.$teacher_id));
            }
            $audio_path=public_path('storage\stories\\'.$teacher_id); 
-           $audio_name=str_replace([' ','#'],'-',$request->attachment->getClientOriginalName());
+           $audio_name=str_replace([' ','#','&','='],'-',$request->attachment->getClientOriginalName());
            $audio_file=$request->file('attachment');
            $audio_file->move($audio_path,$audio_name);
            $audio->attachment=$audio_name;
@@ -134,7 +134,7 @@ class TeacherStoryController extends Controller
             $file = $request->file('attachment');
             $story_path = public_path('storage\stories\\'.$teacherId);
             $old_story = $story_path.'\\'.$story->attachment;
-            $story_name = str_replace([' ','#'],'-',$file->getClientOriginalName());
+            $story_name = str_replace([' ','#','&','='],'-',$file->getClientOriginalName());
             $file->move($story_path,$story_name);
             $story->title = $request->title;
             $story->topic_id = $request->topic_id;

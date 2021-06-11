@@ -110,17 +110,17 @@
                             <div class="form-group form-group-icon pl-4 row font-weight-bolder">
                                         <label class="col-4 text-color">الجنس :</label>
                                         <div class="col-4 ">
-                                            <input id="male-st" value="male" type="radio" class="gender-input"
+                                            <input id="male-t" value="male" type="radio" class="gender-input"
                                                 name="gender"
                                                 {{ $teacher->gender == 'male' ? 'checked' : '' }}>
-                                            <label for="male-st" class="gender"></label>
+                                            <label for="male-t" class="gender"></label>
                                             <span class="text-danger ml-1">ذكر</span>
                                         </div>
                                         <div class="col-4 pl-0">
-                                            <input id="female-st" value="female" type="radio" class="gender-input"
+                                            <input id="female-t" value="female" type="radio" class="gender-input"
                                                 name="gender"
                                                 {{ $teacher->gender == 'female' ? 'checked' : '' }}>
-                                            <label for="female-st" class="gender"></label>
+                                            <label for="female-t" class="gender"></label>
                                             <span class="text-danger ml-1">أنثى</span>
                                         </div>
                                     </div>
