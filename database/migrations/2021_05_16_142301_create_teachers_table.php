@@ -19,7 +19,7 @@ class CreateTeachersTable extends Migration
             $table->string('email')->unique();
             $table->enum('gender', ['male','female']);
             $table->string('phone')->nullable();
-            $table->enum('role', ['admin','user'])->default('user');
+            $table->enum('role', ['admin','user','not_active'])->default('user');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

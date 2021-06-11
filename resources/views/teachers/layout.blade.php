@@ -110,7 +110,7 @@
             <li class ="@if (str_contains(Route::currentRouteName(),'admin'))
                 active
             @endif">
-                <a class="scroll-link" href="{{-- {{ route('admin.teachers') }} --}}"><i class="fa fa-user mx-2"></i>المدرسين</a>
+                <a class="scroll-link" href=" {{ route('admin.teacher.index') }} "><i class="fa fa-user mx-2"></i>المدرسين</a>
             </li>
             @endif
             <li class ="@if (str_contains(Route::currentRouteName(),'video'))

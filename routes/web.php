@@ -36,7 +36,6 @@ Route::get('/', function () {
  // teacher routes
   
     Route::post('/login/teacher', 'Auth\LoginController@teacherLogin')->name('teacher.login');
-    Route::post('/register/teacher', 'Auth\RegisterController@createTeacher')->name('teacher.register')->middleware('isadmin:teacher');
     Route::post('/login/teacher/reset/password', 'Auth\LoginController@teacherResetPassword')->name('teacher.reset.password');
     Route::post('/login/teacher/change/password', 'Auth\LoginController@teacherChangePassword')->name('teacher.change.password');
     Route::get('/logout/teacher','Auth\LoginController@teacherLogout')->name('teacher.logout'); 
@@ -83,6 +82,17 @@ Route::get('/', function () {
     Route::get('/student/password/edit',function (Request $r) {
         return view('students.password.index');
     })->name('student.password');
+
+
+    //admin routes 
+
+    Route::get('/admin/teacher/create', 'AdminController@create')->name('admin.teacher.create')->middleware('isadmin:teacher');
+    Route::post('/admin/teacher/store', 'AdminController@store')->name('admin.teacher.store')->middleware('isadmin:teacher');
+    Route::get('/admin/teacher/index','AdminController@index')->name('admin.teacher.index')->middleware('isadmin:teacher');
+    Route::get('/admin/teacher/edit/{id}', 'AdminController@edit')->name('admin.teacher.edit')->middleware('isadmin:teacher');
+    Route::post('/admin/teacher/update/{id}', 'AdminController@update')->name('admin.teacher.update')->middleware('isadmin:teacher');
+    Route::get('/admin/teacher/delete/{id}', 'AdminController@destroy')->name('admin.teacher.delete')->middleware('isadmin:teacher');
+
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 //Route::view('/home', 'home')->middleware('auth');

@@ -1,4 +1,16 @@
 @extends('teachers.layout')
+@section('style')
+
+<style>
+
+.bg-graylight{
+  background-color: white;
+  box-shadow:0px 0px 20px gray;
+}
+
+</style>
+    
+@endsection
 @section('content')
     <section class="py-8  bg-white">
         <div class="container">
@@ -14,160 +26,34 @@
             </div>
 
             <div class="row">
-                <div class="col-sm-3">
-                    <div class="card card-hover bg-transparent shadow-none">
-                        <div class="card-img-wrapper shadow-sm rounded-circle mx-auto">
-                            <img class="card-img-top rounded-circle" src="{{ asset('img/female.png')}}"
-                                alt="carousel-img" />
-                            {{-- <div class="card-img-overlay text-center rounded-circle">
-                                <ul class="list-unstyled mb-0 d-flex align-items-center h-100 justify-content-center">
-                                    <li class="mr-2">
-                                        <a href="#" class="text-white">
-                                            <i class="fa fa-facebook" aria-hidden="true"></i>
-                                        </a>
-                                    </li>
-                                    <li class="mr-2">
-                                        <a href="#" class="text-white">
-                                            <i class="fa fa-twitter" aria-hidden="true"></i>
-                                        </a>
-                                    </li>
-                                    <li class="mr-2">
-                                        <a href="#" class="text-white">
-                                            <i class="fa fa-google-plus" aria-hidden="true"></i>
-                                        </a>
-                                    </li>
-                                    <li class="mr-2">
-                                        <a href="#" class="text-white">
-                                            <i class="fa fa-pinterest-p" aria-hidden="true"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div> --}}
-                        </div>
-                        <div class="card-body text-center">
-                            <a class="text-danger font-size-20 font-weight-medium d-block mb-1"
-                                href="teachers-details.html">أ/حنان عبدالقادر</a>
-                            <span class="text-muted font-size-15">عدد الفيديوهات | 25</span>
-                        </div>
-                        <div class="text-center row">
-                            <a class="btn btn-danger font-size-20 font-weight-medium d-block mb-1 offset-1 col-5 "
-                                href="teachers-details.html">&times; حذف</a>
-                            <a class="btn btn-success font-size-20 font-weight-medium d-block mb-1 ml-2 col-5"
-                                href="teachers-details.html"><i class="fa fa-edit mr-2"></i>تعديل</a>
-                        </div>
-                    </div>
-                </div>
 
+                @foreach ($teachers as $t)
                 <div class="col-sm-3">
-                    <div class="card card-hover bg-transparent shadow-none">
+                    <div class="card card-hover bg-graylight py-3 ">
                         <div class="card-img-wrapper shadow-sm rounded-circle mx-auto">
                             <img class="card-img-top rounded-circle" src="{{ asset('img/male.png') }}"
                                 alt="carousel-img" />
-                            {{-- <div class="card-img-overlay text-center rounded-circle">
-                                <ul class="list-unstyled mb-0 d-flex align-items-center h-100 justify-content-center">
-                                    <li class="mr-2">
-                                        <a href="#" class="text-white">
-                                            <i class="fa fa-facebook" aria-hidden="true"></i>
-                                        </a>
-                                    </li>
-                                    <li class="mr-2">
-                                        <a href="#" class="text-white">
-                                            <i class="fa fa-twitter" aria-hidden="true"></i>
-                                        </a>
-                                    </li>
-                                    <li class="mr-2">
-                                        <a href="#" class="text-white">
-                                            <i class="fa fa-google-plus" aria-hidden="true"></i>
-                                        </a>
-                                    </li>
-                                    <li class="mr-2">
-                                        <a href="#" class="text-white">
-                                            <i class="fa fa-pinterest-p" aria-hidden="true"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div> --}}
+                            
                         </div>
                         <div class="card-body text-center">
                             <a class="text-danger font-size-20 font-weight-medium d-block mb-1"
-                                href="teachers-details.html">أ/مجدى عبدالرؤوف</a>
-                            <span class="text-muted font-size-15">عدد الفيديوهات | 10</span>
+                                href="">أ/{{$t->name}}</a>
+                            <span class="text-muted font-size-15 d-block">عدد الفيديوهات:{{$t->contents->where('attach_type','video')->count()}} </span>
+                            <span class="text-muted font-size-15 d-block">عدد القصص:{{$t->contents->where('attach_type','audio')->count()}} </span>
+                            <span class="text-muted font-size-15 d-block">عدد الانشطة:{{$t->activities->count()}} </span>
 
                         </div>
                         <div class="text-center row">
-                            <a class="btn btn-danger font-size-20 font-weight-medium d-block mb-1 offset-1 col-5 "
-                                href="teachers-details.html">&times; حذف</a>
-                            <a class="btn btn-success font-size-20 font-weight-medium d-block mb-1 ml-2 col-5"
-                                href="teachers-details.html"><i class="fa fa-edit mr-2"></i>تعديل</a>
+                            <a class="btn btn-danger font-size-20 font-weight-medium d-block mb-1 ml-4 col-5 "
+                                href="{{route('admin.teacher.delete',['id'=>$t->id])}}" >&times; حذف</a>
+                                
+                            <a class="btn btn-success font-size-20 font-weight-medium d-block mb-1 ml-2 col-5  admin-update-teacher"
+                                href="javascript:void(0)" id="{{$t->id}}"><i class="fa fa-edit mr-2"></i>تعديل</a>
                         </div>
                     </div>
                 </div>
+                @endforeach
 
-                <div class="col-sm-3">
-                    <div class="card card-hover bg-transparent shadow-none">
-                        <div class="card-img-wrapper shadow-sm rounded-circle mx-auto">
-                            <img class="card-img-top rounded-circle" src="{{ asset('img/female.png') }}"
-                                alt="carousel-img" />
-                        </div>
-
-                        <div class="card-body text-center">
-                            <a class="text-danger font-size-20 font-weight-medium d-block mb-1"
-                                href="teachers-details.html">أ/عبير عبدالله</a>
-                        <span class="text-muted font-size-15">عدد الفيديوهات | 20</span>
-
-                        </div>
-                        <div class="text-center row">
-                            <a class="btn btn-danger font-size-20 font-weight-medium d-block mb-1 offset-1 col-5 "
-                                href="teachers-details.html">&times; حذف</a>
-                            <a class="btn btn-success font-size-20 font-weight-medium d-block mb-1 ml-2 col-5"
-                                href="teachers-details.html"><i class="fa fa-edit mr-2"></i>تعديل</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-3">
-                    <div class="card card-hover bg-transparent shadow-none">
-                        <div class="card-img-wrapper shadow-sm rounded-circle mx-auto">
-                            <img class="card-img-top rounded-circle" src="{{ asset('img/male.png') }}"
-                                alt="carousel-img" />
-                            {{-- <div class="card-img-overlay text-center rounded-circle">
-                                <ul class="list-unstyled mb-0 d-flex align-items-center h-100 justify-content-center">
-                                    <li class="mr-2">
-                                        <a href="#" class="text-white">
-                                            <i class="fa fa-facebook" aria-hidden="true"></i>
-                                        </a>
-                                    </li>
-                                    <li class="mr-2">
-                                        <a href="#" class="text-white">
-                                            <i class="fa fa-twitter" aria-hidden="true"></i>
-                                        </a>
-                                    </li>
-                                    <li class="mr-2">
-                                        <a href="#" class="text-white">
-                                            <i class="fa fa-google-plus" aria-hidden="true"></i>
-                                        </a>
-                                    </li>
-                                    <li class="mr-2">
-                                        <a href="#" class="text-white">
-                                            <i class="fa fa-pinterest-p" aria-hidden="true"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div> --}}
-                        </div>
-
-                        <div class="card-body text-center">
-                            <a class="text-danger font-size-20 font-weight-medium d-block mb-1"
-                                href="teachers-details.html">أ/حازم</a>
-                            <span class="text-muted font-size-15">عدد الفيديوهات | 15</span>
-                        </div>
-                        <div class="text-center row">
-                            <a class="btn btn-danger font-size-20 font-weight-medium d-block mb-1 offset-1 col-5 "
-                                href="teachers-details.html">&times; حذف</a>
-                            <a class="btn btn-success font-size-20 font-weight-medium d-block mb-1 ml-2 col-5"
-                                href="teachers-details.html"><i class="fa fa-edit mr-2"></i>تعديل</a>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
@@ -238,6 +124,36 @@
                                         @enderror
                                     </div>
 
+
+                                   <div class="form-group form-group-icon">
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text border-right-0"
+                                                    id="basic-addon2">صلاحيات المدرس</span>
+                                            </div>
+
+                                            
+                                            <select class="form-control  @error('role_tr') is-invalid @enderror"  name="role_tr">
+                                            <option selected disabled>اختار صلاحيات المدرس</option>
+                                               
+                                                <option value="user" >مدرس</option>
+                                                <option value="admin" >مدير</option>
+                                                <option value="not_active">غير مفعل</option>
+                                              
+                                             </select>
+
+                                        </div>
+                                        @error('phone_tr')
+                                        <span class="invalid-feedback d-block px-2 font-weight-bolder" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
+
+
+
+
+
                                     <div class="form-group form-group-icon">
                                         <div class="input-group mb-3">
                                             <div class="input-group-append">
@@ -300,5 +216,246 @@
             </div>
         </div>
     </div>
+
+   <!-- Modal Edit teacher -->
+    <div class="modal fade" id="modal-admin-Edit-teacher" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-sm rounded" role="document">
+            <div class="modal-content">
+                <div class="bg-warning rounded-top p-2">
+                    <h3 class="text-white font-weight-bold mb-0 ml-2">
+                        تعديل بياناتك الشخصية
+                    </h3>
+                </div>
+
+
+                <div class="border rounded-bottom-md border-top-0">
+                    <div class="p-3">
+                        <form action="" id="admin-update-t" method="POST" role="form">
+                            <div class="form-group form-group-icon">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text border-right-0"
+                                            id="basic-addon2">الأسم</span>
+                                    </div>
+                                    <input type="text" name="name"
+                                        class="form-control"
+                                        autocomplete="name" dir="rtl" id="update-name-t">
+                                </div>
+                                
+                            </div>
+
+                            <div class="form-group form-group-icon">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text border-right-0"
+                                            id="basic-addon2">الإيميل</span>
+                                    </div>
+                                    <input type="email" name="email"
+                                        class="form-control" id="update-email-t"
+                                        autocomplete="email" dir="ltr" >
+                                </div>
+                            
+                            </div>
+
+                        
+
+
+                            <div class="form-group form-group-icon">
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text border-right-0"
+                                                    id="basic-addon2">صلاحيات المدرس</span>
+                                            </div>
+
+                                            
+                                            <select class="form-control"  name="role">
+                                                <option selected disabled>اختار صلاحيات المدرس</option>
+                                                
+                                                <option value="user" id="user" >مدرس</option>
+                                                <option value="admin" id="admin">مدير</option>
+                                                <option value="not_active" id="not_active">غير مفعل</option>
+                                            
+                                            </select>
+
+                                        </div>
+                            
+                            </div>
+
+                            <div class="form-group form-group-icon">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text border-right-0"
+                                            id="basic-addon2">رقم الموبايل</span>
+                                    </div>
+                                    <input type="text" name="phone"
+                                        class="form-control "
+                                        autocomplete="phone" dir="ltr" id="update-phone-t">
+                                </div>
+                            
+                            </div>
+
+
+
+
+
+                            <div class="form-group form-group-icon pl-4 row font-weight-bolder">
+                                        <label class="col-4 text-color">الجنس :</label>
+                                        <div class="col-4 ">
+                                            <input id="update-male-t" value="male" type="radio" class="gender-input"
+                                                name="gender"
+                                                >
+                                            <label for="update-male-t" class="gender"></label>
+                                            <span class="text-danger ml-1">ذكر</span>
+                                        </div>
+                                        <div class="col-4 pl-0">
+                                            <input id="update-female-t" value="female" type="radio" class="gender-input"
+                                                name="gender">
+                                            <label for="update-female-t" class="gender"></label>
+                                            <span class="text-danger ml-1">أنثى</span>
+                                        </div>
+                                    </div>
+
+
+
+
+                            <div class="form-group form-group-icon">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text border-right-0"
+                                            id="basic-addon2">كلمة السر</span>
+                                    </div>
+                                    <input type="password"
+                                        class="form-control"
+                                        autocomplete="password" dir="ltr" name="password">
+                                </div>
+                                
+                            </div>
+                            <div class="form-group font-weight-bolder">
+                                <button type="submit" class="
+                                                        btn btn-success
+                                                        text-uppercase
+                                                        w-100
+                                                    ">
+                                     حفظ التغييرات
+                                </button>
+                            </div>
+
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+
+@endsection
+
+@section('script')
+<script>
+
+$(document).ready(() => {
+    function messageError(errorName,message) {
+                $('input[name='+errorName+']').addClass('is-invalid');
+                    $('input[name='+errorName+']').parent().append(
+                        '<span id='+errorName+' class="invalid-feedback d-block px-2" role="alert">'+
+                                '<strong>'+message+'</strong>'+
+                        '</span>'
+                );
+    }
+    
+    var id;
+    $('.admin-update-teacher').on('click',(e)=>{
+        e.preventDefault();
+        id= $(e.target).attr('id');
+        console.log(id);
+        axios.get('/admin/teacher/edit/'+id)
+                .then((res) => {
+                    console.log(res);
+                    var teacher=res.data.teacher;
+                     $('#update-name-t').val(teacher.name)
+                     $('#update-email-t').val(teacher.email)
+                     $('#update-phone-t').val(teacher.phone)
+                     if(teacher.gender=="male")
+                     {
+                       $('#update-male-t').prop('checked',true)
+                     }
+                     else{
+                        $('#update-female-t').prop('checked',true)
+                     }
+
+                      if(teacher.role=="admin")
+                     {
+                       $('#admin').attr('selected',true)
+                     }
+                     else if (teacher.role=="user"){
+                        $('#user').attr('selected',true)
+                     }
+                     else
+                     {
+                        $('#not_active').attr('selected',true)
+                     }
+                 
+                 $('#modal-admin-Edit-teacher').modal('show');
+                });
+    })
+
+
+    $('#admin-update-t').submit((e) => {
+
+                e.preventDefault();
+                axios.post('/admin/teacher/update/'+id,$(e.target).serialize())
+                .then((res) => {
+                    console.log(res.data)
+
+                    var errors = res.data.errors;
+                    console.log(errors);
+                    if(errors) {
+                        console.log(errors)
+                        if(errors.name){
+                            messageError('name',errors.name[0]);
+
+                        }
+                        if(errors.email){
+                            messageError('email',errors.email[0]);
+
+                        }
+                        if(errors.role){
+                            messageError('role',errors.role[0]);
+
+                        }
+                        if(errors.phone){
+                            messageError('phone',errors.phone[0]);
+
+                        }
+                         if(errors.gender){
+                            messageError('gender',errors.gender[0]);
+
+                        }
+                        if(errors.password){
+                            messageError('password',errors.password[0]);
+
+                        }
+                    
+                    }else{
+                        $('#modal-admin-Edit-teacher').modal('hide');
+                        window.location.replace("http://127.0.0.1:8000/admin/teacher/index");
+                    
+                    }
+                })
+            })
+                
+                $('#modal-teacher-register').on('show.bs.modal', (e) =>{
+                        $(e.target).find('input.is-invalid').removeClass('is-invalid');
+                        $(e.target).find('span.invalid-feedback').remove();
+                        $(e.target).find('input.form-control').val('');
+                        $(e.target).find('input[type="checkbox"]').prop('checked',false);
+                        $(e.target).find('select>option:first').attr('selected',true);
+
+                 })
+            })
+
+
+</script>
 
 @endsection

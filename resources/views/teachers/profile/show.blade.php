@@ -200,7 +200,7 @@ $('#tedit').submit((e) => {
 
                         }
                          if(errors.gender){
-                            messageError('phone',errors.gender[0]);
+                            messageError('gender',errors.gender[0]);
 
                         }
                         if(errors.password){
