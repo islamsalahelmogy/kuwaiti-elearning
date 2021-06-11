@@ -39,12 +39,6 @@ class RegisterController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('guest');
-        $this->middleware('guest:teacher')->except('createTeacher');
-        $this->middleware('guest:student');
-    }
 
     /**
      * Get a validator for an incoming registration request.
@@ -107,7 +101,6 @@ class RegisterController extends Controller
     }
 
     protected function createTeacher(Request $request){
-        //dd($request->all());
         $data =$this->TeacherValidator($request->all());
         
         if($data->fails()) {
@@ -118,11 +111,9 @@ class RegisterController extends Controller
                 'email' => $request['email_tr'],
                 'phone' => $request['phone_tr'],
                 'gender' => $request['gender_tr'],
+                'role' => $request['role_tr'],
                 'password' => Hash::make($request['password_tr']), 
         ]);
-        //Auth::guard('teacher')->attempt(['email' => $request->email_tr, 'password' => $request->password_tr]);
-        //return redirect()->intended('/student');
-
     }
     
     public function showStudentRegisterForm()

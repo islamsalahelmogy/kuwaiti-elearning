@@ -366,7 +366,7 @@
                         }
                     }else{
                         
-                        window.location.replace("http://127.0.0.1:8000/teacher/dashboard");
+                       window.location.replace("http://127.0.0.1:8000/teacher/dashboard");
                     
                     }
                 })
@@ -374,7 +374,7 @@
             $('#tregister').submit((e) => {
                 e.preventDefault();
 
-                axios.post('{{ route('teacher.register') }}',$(e.target).serialize())
+                axios.post('{{ route('admin.teacher.store') }}',$(e.target).serialize())
                 .then((res) => {
                     console.log(res)
                     var errors = res.data.errors;
@@ -389,6 +389,9 @@
                         if(errors.phone_tr){
                             messageError('phone_tr',errors.phone_tr[0]);
                         }
+                        if(errors.role_tr){
+                            messageError('role_tr',errors.role_tr[0]);
+                        }
                         if(errors.password_tr){
                             messageError('password_tr',errors.password_tr[0]);
                         }
@@ -397,7 +400,7 @@
                         }
                     }else {
                         $('#modal-teacher-register').modal('hide');
-                        window.location.replace("http://127.0.0.1:8000/teacher/teacherDashboard");
+                        window.location.replace("http://127.0.0.1:8000/admin/teacher/index");
                     }
                 })
             })

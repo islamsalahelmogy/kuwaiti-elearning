@@ -55,11 +55,19 @@ class LoginController extends Controller
         if($validator->fails()) {
             return response()->json(['errors'=>$validator->errors()]);
         }
-        
-        $check = Auth::guard('teacher')->attempt(['email' => $request->email_tl, 'password' => $request->password_tl], 
+       $role= Teacher::where('email',$request->email_tl)->pluck('role');
+      // return response()->json($role);
+        if($role[0]!="not_active")
+        {
+            $check = Auth::guard('teacher')->attempt(['email' => $request->email_tl, 'password' => $request->password_tl], 
                 $request->get('remember_tl'));
-        if($check == false) 
-            return response()->json(['errors' => ['invalid_tl' => ['هناك خطأ ما! تأكد ان بياناتك صحيحه']]]);
+            if($check == false) 
+                return response()->json(['errors' => ['invalid_tl' => ['هناك خطأ ما! تأكد ان بياناتك صحيحه']]]);
+
+        }
+        else{
+            return response()->json(['errors'=>['invalid_tl' => ['غير مسموح لك بالدخول']]]);
+        }
 
     }
     public function teacherLogout(Request $request){

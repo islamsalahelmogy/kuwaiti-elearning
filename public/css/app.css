@@ -15084,3 +15084,7 @@ html[dir="rtl"]
     -ms-border-radius: 5px;
     -o-border-radius: 5px;
 }
+
+.bg-graylight{
+  background-color: rgb(241, 235, 235);
+}
