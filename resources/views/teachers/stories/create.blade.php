@@ -44,31 +44,36 @@
                                         </span>
                                         @enderror
                                     </div>
-                                    <div class="form-group wrapper">
-                                        <h2>ارفع القصة</h2>
-                                        <input type="file" id="file-input" name="attachment" 
-                                                class="@error('attachment') is-invalid @enderror">
-                                        <label for="file-input">
-                                            <i class="fa fa-paperclip fa-2x"></i>
-                                            <span></span>
-                                        </label>
-                                        <i class="fa fa-times-circle remove"></i>
+
+                                    <div class="form-group">
+                                        <div class="wrapper">
+                                            <h2>ارفع القصة</h2>
+                                            <input type="file" id="file-input" name="attachment" 
+                                                    class="@error('attachment') is-invalid @enderror">
+                                            <label for="file-input">
+                                                <i class="fa fa-paperclip fa-2x"></i>
+                                                <span></span>
+                                            </label>
+                                            <i class="fa fa-times-circle remove"></i>
+                                        </div>
                                         @error('attachment')
-                                            <span id="attachment" class="invalid-feedback d-block px-2 font-weight-bolder"
-                                                            role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
+                                                <span id="attachment" 
+                                                        class="invalid-feedback d-block px-2 font-weight-bolder"
+                                                        role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
                                         @enderror
                                     </div>
+
                                     <div class="form-group">
                                         <label for="exampleFormControlTextarea1" 
                                             style="color: #495057;padding-right: 13px;font-weight: 600;">اكتب وصف القصة</label>
                                         <textarea class="form-control @error('description')  is-invalid @enderror" id="exampleFormControlTextarea1" 
                                             rows="3" name="description">{{ old('description') }}</textarea>
                                         @error('description')
-                                        <span id="description" class="invalid-feedback d-block px-2 font-weight-bolder" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
+                                            <span id="description" class="invalid-feedback d-block px-2 font-weight-bolder" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
                                         @enderror
                                     </div>
                                     <div class="form-group font-weight-bolder">
@@ -89,4 +94,22 @@
             </div>
         </div>
     </section>
+@endsection
+@section('script')
+    @parent
+    <script>
+        $(document).ready(() => {
+            $('input ,textarea ,select').on('focus',(e) => {
+                var input = $(e.target)
+                if(input.hasClass('is-invalid')) {
+                    console.log(input);
+                    input.removeClass('is-invalid');
+                    $('#'+input.attr('name')).remove();
+                }
+                if($('span.invalid').length) {
+                    $('span.invalid').remove();
+                }
+            })
+        })
+    </script>
 @endsection

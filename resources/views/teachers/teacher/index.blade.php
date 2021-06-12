@@ -31,16 +31,25 @@
                 <div class="col-sm-3">
                     <div class="card card-hover bg-graylight py-3 ">
                         <div class="card-img-wrapper shadow-sm rounded-circle mx-auto">
-                            <img class="card-img-top rounded-circle" src="{{ asset('img/male.png') }}"
-                                alt="carousel-img" />
+                            <img class="card-img-top rounded-circle" src="@if($t->gender == 'male') {{ asset('img/male.png') }} @else {{ asset('img/female.png') }} @endif"
+                                alt="teacher-img"/>
                             
                         </div>
-                        <div class="card-body text-center">
-                            <a class="text-danger font-size-20 font-weight-medium d-block mb-1"
+                        <div class="card-body">
+                            <a class="text-danger font-size-20 font-weight-medium d-block mb-1 text-center"
                                 href="">أ/{{$t->name}}</a>
-                            <span class="text-muted font-size-15 d-block">عدد الفيديوهات:{{$t->contents->where('attach_type','video')->count()}} </span>
-                            <span class="text-muted font-size-15 d-block">عدد القصص:{{$t->contents->where('attach_type','audio')->count()}} </span>
-                            <span class="text-muted font-size-15 d-block">عدد الانشطة:{{$t->activities->count()}} </span>
+                            <div class="text-muted font-size-15 d-block w-75 mx-auto pl-5">
+                                <span class="w-75 d-inline-block">عدد الفيديوهات</span> 
+                                <span class="d-inline-block">{{$t->contents->where('attach_type','video')->count()}}</span>
+                            </div>
+                            <div class="text-muted font-size-15 d-block w-75 mx-auto pl-5">
+                                <span class="w-75 d-inline-block">عدد القصص</span> 
+                                <span class="d-inline-block">{{$t->contents->where('attach_type','audio')->count()}}</span>
+                            </div>
+                            <div class="text-muted font-size-15 d-block w-75 mx-auto pl-5">
+                                <span class="w-75 d-inline-block">عدد الانشطة</span> 
+                                <span class="d-inline-block">{{$t->activities->count()}}</span>
+                            </div>
 
                         </div>
                         <div class="text-center row">
@@ -352,110 +361,104 @@
 @endsection
 
 @section('script')
-<script>
+    <script>
 
-$(document).ready(() => {
-    function messageError(errorName,message) {
-                $('input[name='+errorName+']').addClass('is-invalid');
-                    $('input[name='+errorName+']').parent().append(
-                        '<span id='+errorName+' class="invalid-feedback d-block px-2" role="alert">'+
-                                '<strong>'+message+'</strong>'+
-                        '</span>'
-                );
-    }
-    
-    var id;
-    $('.admin-update-teacher').on('click',(e)=>{
-        e.preventDefault();
-        id= $(e.target).attr('id');
-        console.log(id);
-        axios.get('/admin/teacher/edit/'+id)
-                .then((res) => {
-                    console.log(res);
-                    var teacher=res.data.teacher;
-                     $('#update-name-t').val(teacher.name)
-                     $('#update-email-t').val(teacher.email)
-                     $('#update-phone-t').val(teacher.phone)
-                     if(teacher.gender=="male")
-                     {
-                       $('#update-male-t').prop('checked',true)
-                     }
-                     else{
-                        $('#update-female-t').prop('checked',true)
-                     }
-
-                      if(teacher.role=="admin")
-                     {
-                       $('#admin').attr('selected',true)
-                     }
-                     else if (teacher.role=="user"){
-                        $('#user').attr('selected',true)
-                     }
-                     else
-                     {
-                        $('#not_active').attr('selected',true)
-                     }
-                 
-                 $('#modal-admin-Edit-teacher').modal('show');
-                });
-    })
-
-
-    $('#admin-update-t').submit((e) => {
-
+        $(document).ready(() => {
+            function messageError(errorName,message) {
+                        $('input[name='+errorName+']').addClass('is-invalid');
+                            $('input[name='+errorName+']').parent().append(
+                                '<span id='+errorName+' class="invalid-feedback d-block px-2" role="alert">'+
+                                        '<strong>'+message+'</strong>'+
+                                '</span>'
+                            );
+            }
+            
+            var id;
+            $('.admin-update-teacher').on('click',(e) => {
                 e.preventDefault();
-                axios.post('/admin/teacher/update/'+id,$(e.target).serialize())
-                .then((res) => {
-                    console.log(res.data)
+                id= $(e.target).attr('id');
+                console.log(id);
+                axios.get('/admin/teacher/edit/'+id)
+                        .then((res) => {
+                            console.log(res);
+                            var teacher=res.data.teacher;
+                            $('#update-name-t').val(teacher.name)
+                            $('#update-email-t').val(teacher.email)
+                            $('#update-phone-t').val(teacher.phone)
+                            if(teacher.gender=="male") {
+                            $('#update-male-t').prop('checked',true)
+                            } else {
+                                $('#update-female-t').prop('checked',true)
+                            }
 
-                    var errors = res.data.errors;
-                    console.log(errors);
-                    if(errors) {
-                        console.log(errors)
-                        if(errors.name){
-                            messageError('name',errors.name[0]);
-
-                        }
-                        if(errors.email){
-                            messageError('email',errors.email[0]);
-
-                        }
-                        if(errors.role){
-                            messageError('role',errors.role[0]);
-
-                        }
-                        if(errors.phone){
-                            messageError('phone',errors.phone[0]);
-
-                        }
-                         if(errors.gender){
-                            messageError('gender',errors.gender[0]);
-
-                        }
-                        if(errors.password){
-                            messageError('password',errors.password[0]);
-
-                        }
-                    
-                    }else{
-                        $('#modal-admin-Edit-teacher').modal('hide');
-                        window.location.replace("http://127.0.0.1:8000/admin/teacher/index");
-                    
-                    }
-                })
-            })
-                
-                $('#modal-teacher-register').on('show.bs.modal', (e) =>{
-                        $(e.target).find('input.is-invalid').removeClass('is-invalid');
-                        $(e.target).find('span.invalid-feedback').remove();
-                        $(e.target).find('input.form-control').val('');
-                        $(e.target).find('input[type="checkbox"]').prop('checked',false);
-                        $(e.target).find('select>option:first').attr('selected',true);
-
-                 })
+                            if(teacher.role=="admin") {
+                                $('#admin').attr('selected',true)
+                            } else if (teacher.role=="user") {
+                                $('#user').attr('selected',true)
+                            } else {
+                                $('#not_active').attr('selected',true)
+                            }
+                        
+                            $('#modal-admin-Edit-teacher').modal('show');
+                        });
             })
 
 
-</script>
+            $('#admin-update-t').submit((e) => {
+
+                        e.preventDefault();
+                        axios.post('/admin/teacher/update/'+id,$(e.target).serialize())
+                        .then((res) => {
+                            console.log(res.data)
+
+                            var errors = res.data.errors;
+                            console.log(errors);
+                            if(errors) {
+                                console.log(errors)
+                                if(errors.name){
+                                    messageError('name',errors.name[0]);
+
+                                }
+                                if(errors.email){
+                                    messageError('email',errors.email[0]);
+
+                                }
+                                if(errors.role){
+                                    messageError('role',errors.role[0]);
+
+                                }
+                                if(errors.phone){
+                                    messageError('phone',errors.phone[0]);
+
+                                }
+                                if(errors.gender){
+                                    messageError('gender',errors.gender[0]);
+
+                                }
+                                if(errors.password){
+                                    messageError('password',errors.password[0]);
+
+                                }
+                            
+                            }else{
+                                $('#modal-admin-Edit-teacher').modal('hide');
+                                window.location.replace("http://127.0.0.1:8000/admin/teacher/index");
+                            
+                            }
+                        })
+            })
+                        
+            $('#modal-teacher-register').on('show.bs.modal', (e) => {
+                    $(e.target).find('input.is-invalid').removeClass('is-invalid');
+                    $(e.target).find('span.invalid-feedback').remove();
+                    $(e.target).find('input.form-control').val('');
+                    $(e.target).find('input[type="checkbox"]').prop('checked',false);
+                    $(e.target).find('select>option:first').attr('selected',true);
+
+            })
+        })
+
+
+    </script>
 
 @endsection

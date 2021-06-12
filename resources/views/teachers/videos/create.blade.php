@@ -13,6 +13,7 @@
                             <div class="p-3">
                                 <form action="{{route('teacher.video.store')}}" method="POST" role="form" enctype="multipart/form-data">
                                     @csrf
+                                    
                                     <div class="form-group check-step-gray">
                                         <select class="form-control  @error('topic_id') is-invalid @enderror" id="content-video" name="topic_id">
                                             <option selected disabled>اختار موضوع الفيديو</option>
@@ -27,6 +28,7 @@
                                         </span>
                                         @enderror
                                     </div>
+
                                     <div class="form-group form-group-icon">
                                         <div class="input-group mb-3">
                                             <div class="input-group-append">
@@ -43,20 +45,23 @@
                                         </span>
                                         @enderror
                                     </div>
-                                    <div class="form-group wrapper">
-                                        <h2>ارفع الفيديو</h2>
-                                        <input type="file" id="file-input" name="attachment" 
-                                                class="@error('attachment') is-invalid @enderror">
-                                        <label for="file-input">
-                                            <i class="fa fa-paperclip fa-2x"></i>
-                                            <span></span>
-                                        </label>
-                                        <i class="fa fa-times-circle remove"></i>
+                                    <div class="form-group">
+                                        <div class="wrapper">
+                                            <h2>ارفع الفيديو</h2>
+                                            <input type="file" id="file-input" name="attachment" 
+                                                    class="@error('attachment') is-invalid @enderror">
+                                            <label for="file-input">
+                                                <i class="fa fa-paperclip fa-2x"></i>
+                                                <span></span>
+                                            </label>
+                                            <i class="fa fa-times-circle remove"></i>
+                                        </div>
                                         @error('attachment')
-                                            <span id="attachment" class="invalid-feedback d-block px-2 font-weight-bolder"
-                                                            role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
+                                                <span id="attachment" 
+                                                        class="invalid-feedback d-block px-2 font-weight-bolder"
+                                                        role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
                                         @enderror
                                     </div>
                                     <div class="form-group">
@@ -88,4 +93,22 @@
             </div>
         </div>
     </section>
+@endsection
+@section('script')
+    @parent
+    <script>
+        $(document).ready(() => {
+            $('input ,textarea ,select').on('focus',(e) => {
+                var input = $(e.target)
+                if(input.hasClass('is-invalid')) {
+                    console.log(input);
+                    input.removeClass('is-invalid');
+                    $('#'+input.attr('name')).remove();
+                }
+                if($('span.invalid').length) {
+                    $('span.invalid').remove();
+                }
+            })
+        })
+    </script>
 @endsection

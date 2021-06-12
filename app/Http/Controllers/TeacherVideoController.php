@@ -7,7 +7,8 @@ use App\Models\Topic;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
-
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Redirect;
 class TeacherVideoController extends Controller
 {
 
@@ -46,14 +47,22 @@ class TeacherVideoController extends Controller
     public function store(Request $request)
     {
 
-
-        $request->validate([
-            'title' => 'required|max:255',
-            'description' => 'required',
+        $Validator = validator::make($request->all(),[
+            'title' => 'required|max:255|string',
+            'description' => 'required|string',
             'attachment' => 'required|mimetypes:video/x-msvideo,video/mp4,video/x-matroska',
             'topic_id' => 'required',
-
+         
+        ],[
+            'required' => 'ممنوع ترك الحقل فارغاَ',
+            'max'=> 'لا يمكن ان يكون الحقل اكبر من 225 حرف',
+            'string' => 'يجب الحقل ان يحتوى على رموز وارقام وحروف',
+            'mimetypes' => 'لا بد ان يكون نوع الملف mp4 او mkv'
         ]);
+        if($Validator->fails()){
+            return Redirect::back()->withErrors($Validator)->withInput($request->all());
+        }
+        
 
         if ($request->hasFile('attachment')) {
             $video  =  new Content();
@@ -116,17 +125,30 @@ class TeacherVideoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'title' => 'required|max:255',
-            'description' => 'required',
+        $Validator = validator::make($request->all(),[
+            'title' => 'required|max:255|string',
+            'description' => 'required|string',
             'topic_id' => 'required',
+         
+        ],[
+            'required' => 'ممنوع ترك الحقل فارغاَ',
+            'max'=> 'لا يمكن ان يكون الحقل اكبر من 225 حرف',
+            'string' => 'يجب الحقل ان يحتوى على رموز وارقام وحروف',
         ]);
-
+        if($Validator->fails()){
+            return Redirect::back()->withErrors($Validator)->withInput($request->all());
+        }
         if ($request->hasFile('attachment')) {
             //dd($request);
-            $request->validate([
-                'attachment' => 'required|mimetypes:video/x-msvideo,video/mpeg,video/mp4,video/x-matroska',
+            $valid = validator::make($request->all(),[
+            'attachment' => 'required|mimetypes:video/x-msvideo,video/mp4,video/x-matroska',
+            ],[
+                'required' => 'ممنوع ترك الحقل فارغاَ',
+                'mimetypes' => 'لا بد ان يكون نوع الملف mp4 او mkv'
             ]);
+            if($valid->fails()){
+                return Redirect::back()->withErrors($valid)->withInput($request->all());
+            }
             $video = Content::find($id);
             $teacherId = Auth::guard('teacher')->user()->id;
             $file = $request->file('attachment');
