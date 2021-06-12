@@ -9,7 +9,7 @@ use App\Models\Teacher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\File;
-
+use App\Http\Utility\TeacherRoleEnum;
 class AdminController extends Controller
 {
     /**
@@ -137,20 +137,42 @@ class AdminController extends Controller
     
         $teacher=Teacher::find($id);
 
-         if(Hash::check($request->password,$teacher->password))
-         {  
-            $teacher->update([
-                'name' => $request['name'],
-                'email' => $request['email'],
-                'role' => $request['role'],
-                'phone' => $request['phone'],
-                'gender' => $request['gender'],      
-        ]);
+        if(Hash::check($request->password,$teacher->password))
+        {  
+            if($request['role']=="admin"){
+                $teacher->update([
+                    'name' => $request['name'],
+                    'email' => $request['email'],
+                    'role' => TeacherRoleEnum::ADMIN,
+                    'phone' => $request['phone'],
+                    'gender' => $request['gender'],      
+            ]);
+                return response()->json($teacher);
+            }
+            else if($request['role']=="user"){
+                $teacher->update([
+                    'name' => $request['name'],
+                    'email' => $request['email'],
+                    'role' => TeacherRoleEnum::USER,
+                    'phone' => $request['phone'],
+                    'gender' => $request['gender'],      
+            ]);
+            }
+            else{
+                $teacher->update([
+                    'name' => $request['name'],
+                    'email' => $request['email'],
+                    'role' => TeacherRoleEnum::NOTACTIVE,
+                    'phone' => $request['phone'],
+                    'gender' => $request['gender'],      
+            ]);
 
-         }
-         else{
+            }
+            
+        }
+        else{
             return response()->json(['errors'=>['password'=>['كلمة المرور غير صحيحة']]]);
-         }
+        }
     }
 
     /**
