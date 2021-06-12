@@ -7,7 +7,8 @@ use App\Models\Topic;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
-
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Redirect;
 class TeacherStoryController extends Controller
 {
     /**
@@ -46,14 +47,21 @@ class TeacherStoryController extends Controller
     {
        
        //dd($request);
-        $request->validate([
-            'title' => 'required|max:255',
-            'description' => 'required',
-           'attachment' => 'required|mimetypes:audio/mpeg,audio/mp3',
+        $Validator = validator::make($request->all(),[
+            'title' => 'required|max:255|string',
+            'description' => 'required|string',
+            'attachment' => 'required|mimetypes:audio/mpeg,audio/mp3',
             'topic_id' => 'required',
          
+        ],[
+            'required' => 'ممنوع ترك الحقل فارغاَ',
+            'max'=> 'لا يمكن ان يكون الحقل اكبر من 225 حرف',
+            'string' => 'يجب الحقل ان يحتوى على رموز وارقام وحروف',
+            'mimetypes' => 'لا بد ان يكون نوع الملف mp3 او mpeg'
         ]);
-     
+        if($Validator->fails()){
+            return Redirect::back()->withErrors($Validator)->withInput($request->all());
+        }
         if ($request->hasFile('attachment'))
         {
            $audio  =  new Content();
@@ -118,17 +126,32 @@ class TeacherStoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'title' => 'required|max:255',
-            'description' => 'required',
+        $Validator = validator::make($request->all(),[
+            'title' => 'required|max:255|string',
+            'description' => 'required|string',
             'topic_id' => 'required',
+         
+        ],[
+            'required' => 'ممنوع ترك الحقل فارغاَ',
+            'max'=> 'لا يمكن ان يكون الحقل اكبر من 225 حرف',
+            'string' => 'يجب الحقل ان يحتوى على رموز وارقام وحروف',
         ]);
+
+        if($Validator->fails()){
+            return Redirect::back()->withErrors($Validator)->withInput($request->all());
+        }
 
         if($request->hasFile('attachment')) {
             //dd($request);
-            $request->validate([
-                'attachment' => 'required|mimetypes:audio/mpeg,audio/mp3',
+            $valid = validator::make($request->all(),[
+            'attachment' => 'required|mimetypes:audio/mpeg,audio/mp3',
+            ],[
+                'required' => 'ممنوع ترك الحقل فارغاَ',
+                'mimetypes' => 'لا بد ان يكون نوع الملف mp3 او mpeg'
             ]);
+            if($valid->fails()){
+                return Redirect::back()->withErrors($valid)->withInput($request->all());
+            }
             $story = Content::find($id);
             $teacherId = Auth::guard('teacher')->user()->id;
             $file = $request->file('attachment');

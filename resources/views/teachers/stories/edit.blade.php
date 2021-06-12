@@ -48,13 +48,18 @@
                                 <form action="{{ route('teacher.story.update',['id'=> $story->id]) }}" method="POST" role="form" enctype="multipart/form-data">
                                     @csrf
                                     <div class="form-group check-step-gray">
-                                        <select class="form-control" id="content-video" name="topic_id">
+                                        <select class="form-control @error('topic_id')  is-invalid @enderror" id="content-story" name="topic_id">
                                             <option selected disabled>اختار موضوع القصة</option>
                                                 @foreach ($topics as $topic)
                                                 <option value="{{ $topic->id }}" @if($topic->id == $story->topic_id) selected
                                                     @endif>{{ $topic->name }}</option>
                                                 @endforeach
                                         </select>
+                                        @error('topic_id')
+                                        <span id="topic_id" class="invalid-feedback d-block px-2 font-weight-bolder" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
                                     </div>
                                     <div class="form-group form-group-icon">
                                         <div class="input-group mb-3">
@@ -62,25 +67,28 @@
                                                 <span class="input-group-text border-right-0"
                                                     id="basic-addon2">عنوان القصة</span>
                                             </div>
-                                            <input type="text" name="title" value="{{ $story->title }}"class="form-control
-                                                @error('title') is-invalid @enderror"
+                                            <input type="text" name="title" 
+                                                value="@error('title') {{ old('title') }} @else {{ $story->title }} @enderror"
+                                                class="form-control @error('title') is-invalid @enderror"
                                                 autocomplete="title" dir="rtl">
                                         </div>
                                         @error('title')
-                                        <span class="invalid-feedback d-block px-2 font-weight-bolder" role="alert">
+                                        <span id="title" class="invalid-feedback d-block px-2 font-weight-bolder" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                         @enderror
                                     </div>
-                                    <div class="form-group wrapper">
-                                        <h2>ارفع القصة</h2>
-                                        <input type="file" id="file-input" name="attachment" 
-                                                class="@error('attachment') is-invalid @enderror">
-                                        <label for="file-input">
-                                            <i class="fa fa-paperclip fa-2x"></i>
-                                            <span></span>
-                                        </label>
-                                        <i class="fa fa-times-circle remove"></i>
+                                    <div class="form-group">
+                                        <div class="wrapper">
+                                            <h2>ارفع القصة</h2>
+                                            <input type="file" id="file-input" name="attachment" 
+                                                    class="@error('attachment') is-invalid @enderror">
+                                            <label for="file-input">
+                                                <i class="fa fa-paperclip fa-2x"></i>
+                                                <span></span>
+                                            </label>
+                                            <i class="fa fa-times-circle remove"></i>
+                                        </div>
                                         @error('attachment')
                                                 <span id="attachment" class="invalid-feedback d-block px-2 font-weight-bolder"
                                                             role="alert">
@@ -91,8 +99,13 @@
                                     <div class="form-group">
                                         <label for="exampleFormControlTextarea1" 
                                             style="color: #495057;padding-right: 13px;font-weight: 600;">الوصف</label>
-                                        <textarea class="form-control" id="exampleFormControlTextarea1" 
-                                            rows="3" name="description">{{ $story->description }}</textarea>
+                                                <textarea class="form-control @error('description')  is-invalid @enderror" id="exampleFormControlTextarea1" rows="3" 
+                                                    name="description">@error('description'){{old('description')}}@else{{$story->description}}@enderror</textarea>
+                                        @error('description')
+                                            <span id="description" class="invalid-feedback d-block px-2 font-weight-bolder" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                     <div class="form-group font-weight-bolder">
                                         <button type="submit" 
@@ -114,52 +127,20 @@
 </section>
 @endsection
 @section('script')
-<script>
-        $('document').ready(function(){
-            
-            var $file = $('#file-input'),
-                $label = $file.next('label'),
-                $labelText = $label.find('span'),
-                $labelRemove = $('i.remove'),
-                labelDefault = $labelText.text();
-                
-                /* if (!$file.hasClass('is-invalid')) {
-                    $path = {!! json_encode($path) !!}.split('\\').pop(),
-                    labelDefault = $labelText.text($path);
-                    $labelRemove.show();
-                } */
-                //var $old = {!! old('attachment') !!};
-                //console.log($old);
-            // on file change
-            $file.on('change', function(event){
-                //console.log(event.target);
-                var fileName = $file.val().split( '\\' ).pop();
-                
-                if( fileName ){
-                        //console.log($file)
-                        $labelText.text(fileName);
-                        $labelRemove.show();
-                }else{
-                    $labelText.text(labelDefault);
-                    $labelRemove.hide();
+    @parent
+    <script>
+        $(document).ready(() => {
+            $('input ,textarea ,select').on('focus',(e) => {
+                var input = $(e.target)
+                if(input.hasClass('is-invalid')) {
+                    console.log(input);
+                    input.removeClass('is-invalid');
+                    $('#'+input.attr('name')).remove();
                 }
-                
-                if($file.hasClass('is-invalid')) {
-                    //console.log($file);
-                    $file.removeClass('is-invalid');
-                    $('#'+$file.attr('name')).remove();
+                if($('span.invalid').length) {
+                    $('span.invalid').remove();
                 }
-            });
-            
-            // Remove file   
-            $labelRemove.on('click', function(event){
-                $file.val("");
-                $labelText.text(labelDefault);
-                $labelRemove.hide();
-                //console.log($file)
-            });
-            
-            
+            })
         })
-</script>
+    </script>
 @endsection

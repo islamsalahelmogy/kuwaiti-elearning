@@ -192,7 +192,12 @@
                     
                     <div class="card-body border-top-5 border-warning p-3 p-md-5 w-75 mx-auto my-8">
                         <h3 class="card-title text-warning mb-4">{{ $story->title }}</h3>
-                    
+                        <ul class="list-unstyled text-muted">
+                            <li>
+                                <i class="fa fa-clock-o mr-2" aria-hidden="true"></i>
+                                {{ $story->created_at->locale('Ar')->diffForHumans() }}
+                            </li>
+                        </ul>
                         <p class="">{{ $story->description }}</p>
                     
                         <p class="mb-0">بواسطة : {{ $story->teacher->name }}</p>

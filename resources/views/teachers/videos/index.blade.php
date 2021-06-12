@@ -38,11 +38,11 @@
                                         </h3>
                                         <ul class="list-unstyled text-muted">
                                             <li>
-                                                <i class="fa fa-calendar-o mr-2" aria-hidden="true"></i> 
+                                                <i class="fa fa-clock-o mr-2" aria-hidden="true"></i> 
                                                     {{ $video->created_at->locale('Ar')->diffForHumans() }}
                                             </li>
                                         </ul>
-                                        <p>{{ $video->description }}</p>
+                                        <p class="show-read-more" style="height: 145px;">{{ $video->description }}</p>
                                         <div class="d-block">
                                             <div class="row">
                                                 <a href="{{ route('teacher.video.edit',['id'=>$video->id]) }}"
@@ -108,4 +108,22 @@
             @endif
         </div>
 </section>
+@endsection
+@section('script')
+    @parent
+    <script>
+        $(document).ready(()=>{
+            var maxLength = 300;
+            $(".show-read-more").each(function(){
+                var myStr = $(this).text();
+                if($.trim(myStr).length > maxLength){
+                    var newStr = myStr.substring(0, maxLength);
+                    var removedStr = myStr.substring(maxLength, $.trim(myStr).length);
+                    $(this).empty().html(newStr);
+                    $(this).append('...');
+                    
+                }
+            });
+        });
+    </script>
 @endsection

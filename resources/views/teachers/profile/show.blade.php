@@ -7,7 +7,7 @@
                     <div class="card bg-danger card-hover col-12">
                         <div class="card-body text-center px-md-5 px-lg-6 my-2">
                             <div class="card-icon-border-large border-danger mtn-80">
-                                <img class="" src="{{ asset('img/male.png') }}" alt="male.jpg">
+                                <img class="" src="@if($teacher->gender == 'male') {{ asset('img/male.png') }} @else {{ asset('img/female.png') }} @endif" alt="male.jpg">
                             </div>
                             <blockquote class="blockquote blockquote-sm mt-2">
                                 <p class="font-normal mb-5"> 
@@ -175,49 +175,48 @@
                                     '<strong>'+message+'</strong>'+
                             '</span>'
                     );
-                }
+        }
 
-    $('#tedit').submit((e) => {
-                    e.preventDefault();
-                    axios.post('{{ route('teacher.update') }}',$(e.target).serialize())
-                    .then((res) => {
-                        console.log(res.data)
-                        var errors = res.data.errors;
-                        console.log(errors);
-                        if(errors) {
-                            console.log(errors)
-                            if(errors.name){
-                                messageError('name',errors.name[0]);
+        $('#tedit').submit((e) => {
+                        e.preventDefault();
+                        axios.post('{{ route('teacher.update') }}',$(e.target).serialize())
+                        .then((res) => {
+                            console.log(res.data)
+                            var errors = res.data.errors;
+                            console.log(errors);
+                            if(errors) {
+                                console.log(errors)
+                                if(errors.name){
+                                    messageError('name',errors.name[0]);
+                                }
+                                if(errors.email){
+                                    messageError('email',errors.email[0]);
 
+                                }
+                                if(errors.phone){
+                                    messageError('phone',errors.phone[0]);
+
+                                }
+                                if(errors.gender){
+                                    messageError('gender',errors.gender[0]);
+
+                                }
+                                if(errors.password){
+                                    messageError('password',errors.password[0]);
+
+                                }
+                            
+                            }else{
+                                $('#modal-Edit-teacher').modal('hide');
+                                window.location.replace("http://127.0.0.1:8000/teacher/dashboard");
+                            
                             }
-                            if(errors.email){
-                                messageError('email',errors.email[0]);
-
-                            }
-                            if(errors.phone){
-                                messageError('phone',errors.phone[0]);
-
-                            }
-                            if(errors.gender){
-                                messageError('gender',errors.gender[0]);
-
-                            }
-                            if(errors.password){
-                                messageError('password',errors.password[0]);
-
-                            }
-                        
-                        }else{
-                            $('#modal-Edit-teacher').modal('hide');
-                            window.location.replace("http://127.0.0.1:8000/teacher/dashboard");
-                        
-                        }
-                        
-                })
+                            
+                        })
 
 
-                })
-
+        })
+    })
 </script>
 
 @endsection
