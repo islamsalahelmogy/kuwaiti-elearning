@@ -136,7 +136,7 @@ class AdminController extends Controller
     
         $teacher=Teacher::find($id);
 
-        if(Hash::check($request->password,$teacher->password))
+        if(Hash::check($request->password,Auth::guard('teacher')->user()->password))
         {  
             $teacher->update([
                 'name' => $request['name'],
