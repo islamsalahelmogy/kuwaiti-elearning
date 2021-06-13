@@ -20,7 +20,6 @@ class Teacher extends Authenticatable
         'phone',
         'gender',
         'role',
-        'is_admin',
         'password',
     ];
 
