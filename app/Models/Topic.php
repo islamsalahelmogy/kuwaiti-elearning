@@ -12,6 +12,6 @@ class Topic extends Model
     protected $guarded = ['id'];
     
     public function contents () {
-        return $this->hasMany(Content::Class);
+        return $this->hasMany(Content::class);
     }
 }
