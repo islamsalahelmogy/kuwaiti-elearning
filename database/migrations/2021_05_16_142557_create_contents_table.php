@@ -21,6 +21,8 @@ class CreateContentsTable extends Migration
             $table->enum('attach_type',['video','audio']);
             $table->unsignedBigInteger('topic_id')->nullable();
             $table->unsignedBigInteger('teacher_id')->nullable();
+            $table->unsignedBigInteger('level_id')->nullable();
+
             $table->timestamps();
 
             $table->foreign('topic_id')
@@ -30,6 +32,10 @@ class CreateContentsTable extends Migration
             $table->foreign('teacher_id')
             ->references('id')
             ->on('teachers');
+
+            $table->foreign('level_id')
+            ->references('id')
+            ->on('levels');
         });
     }
 

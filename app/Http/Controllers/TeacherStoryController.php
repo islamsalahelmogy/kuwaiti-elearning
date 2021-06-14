@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Content;
+use App\Models\Level;
 use App\Models\Topic;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -34,7 +35,8 @@ class TeacherStoryController extends Controller
     public function create()
     {
         $topics=Topic::all();
-        return view('teachers.stories.create' ,compact('topics'));
+        $levels=Level::all();
+        return view('teachers.stories.create' ,compact('topics','levels'));
     }
 
     /**
@@ -52,6 +54,7 @@ class TeacherStoryController extends Controller
             'description' => 'required|string',
             'attachment' => 'required|mimetypes:audio/mpeg,audio/mp3',
             'topic_id' => 'required',
+            'level_id' => 'required',
          
         ],[
             'required' => 'ممنوع ترك الحقل فارغاَ',
@@ -71,7 +74,7 @@ class TeacherStoryController extends Controller
                mkdir(public_path('storage\stories\\'.$teacher_id));
            }
            $audio_path=public_path('storage\stories\\'.$teacher_id); 
-           $audio_name=str_replace([' ','#','&','='],'-',$request->attachment->getClientOriginalName());
+           $audio_name=str_replace([' ','#','&','=','?'],'-',$request->attachment->getClientOriginalName());
            $audio_file=$request->file('attachment');
            $audio_file->move($audio_path,$audio_name);
            $audio->attachment=$audio_name;
@@ -79,6 +82,7 @@ class TeacherStoryController extends Controller
            $audio->description=$request->description;
            $audio->attach_type="audio";
            $audio->topic_id=$request->topic_id;
+           $audio->level_id=$request->level_id;
            $audio->teacher_id=$teacher_id;
            $audio->save();
         }
@@ -111,9 +115,10 @@ class TeacherStoryController extends Controller
         $teacherId = Auth::guard('teacher')->user()->id;
         $story = Content::find($id);
         $topics = Topic::all();
+        $levels = Level::all();
         $path = public_path('storage\stories\\'.$teacherId.'\\'.$story->attachment);
         if(is_file($path)) {
-            return view('teachers.stories.edit',compact('story','path','topics'));
+            return view('teachers.stories.edit',compact('story','path','topics','levels'));
         } 
     }
 
@@ -130,6 +135,7 @@ class TeacherStoryController extends Controller
             'title' => 'required|max:255|string',
             'description' => 'required|string',
             'topic_id' => 'required',
+            'level_id' => 'required',
          
         ],[
             'required' => 'ممنوع ترك الحقل فارغاَ',
@@ -157,10 +163,11 @@ class TeacherStoryController extends Controller
             $file = $request->file('attachment');
             $story_path = public_path('storage\stories\\'.$teacherId);
             $old_story = $story_path.'\\'.$story->attachment;
-            $story_name = str_replace([' ','#','&','='],'-',$file->getClientOriginalName());
+            $story_name = str_replace([' ','#','&','=','?'],'-',$file->getClientOriginalName());
             $file->move($story_path,$story_name);
             $story->title = $request->title;
             $story->topic_id = $request->topic_id;
+            $story->level_id=$request->level_id;
             $story->attachment = $story_name;
             $story->description = $request->description;
             $story->teacher_id = $teacherId;
@@ -171,10 +178,10 @@ class TeacherStoryController extends Controller
             
         } else {
             $story = Content::find($id);
-            //dd($request);
             $teacherId = Auth::guard('teacher')->user()->id;
             $story->title = $request->title;
             $story->topic_id = $request->topic_id;
+            $story->level_id = $request->level_id; 
             $story->description = $request->description;
             $story->teacher_id = $teacherId;
             $story->save();

@@ -18,6 +18,7 @@ class CreateActivitiesTable extends Migration
             $table->string('title');
             $table->unsignedBigInteger('topic_id')->nullable();
             $table->unsignedBigInteger('teacher_id')->nullable();
+            $table->unsignedBigInteger('level_id')->nullable();
             $table->timestamps();
 
             $table->foreign('topic_id')
@@ -27,6 +28,10 @@ class CreateActivitiesTable extends Migration
             $table->foreign('teacher_id')
             ->references('id')
             ->on('teachers');
+
+            $table->foreign('level_id')
+            ->references('id')
+            ->on('levels');
         });
     }
 
