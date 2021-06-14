@@ -25,9 +25,9 @@ class RedirectIfAuthenticated
         if ($guard == "student" && Auth::guard($guard)->check()) {
             return redirect('/student/dashboard');
         }
-         if (Auth::guard($guard)->check()) {
-             return redirect('/');
-         }
+        if (Auth::guard($guard)->check()) {
+            return redirect('/');
+        }
 
         return $next($request);
     }

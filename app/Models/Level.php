@@ -8,19 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Level extends Model
 {
     use HasFactory;
-
-
-    protected $fillable = [
-        'name',
-    ];
-
-    public function contents()
-    {
-        return $this->hasMany('App\Models\Content');
+        protected $guarded = ['id'];
+    
+    public function contents () {
+        return $this->hasMany(Content::class);
     }
-
-    public function activities()
-    {
-        return $this->hasMany('App\Models\Activity');
+    public function activities () {
+        return $this->hasMany(Activity::class);
     }
 }

@@ -23,8 +23,8 @@
 @endsection
 @section('content')
     <div class="d-flex justify-content-around flex-wrap">
-        @foreach ($levels as $level)
-            <a class="square my-8 mx-10" href="{{ route('teachers',['levelId' => $level->id]) }}">
+        @foreach ($teachers as $teacher)
+            <a class="square my-8 mx-10" href="{{ route('teachers.topics',['teacherId' => $teacher['id'] , 'levelId' => $levelId]) }}">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -33,7 +33,7 @@
 
                 <div class="content">		
                     <h2>
-                        {{ $level->name }}
+                        {{ $teacher['name'] }}
                     </h2>
                 </div>
             </a>

@@ -75,5 +75,9 @@ class Content extends Model
     public function teacher () {
         return $this->belongsTo(Teacher::class);
     }
+    public function level()
+    {
+        return $this->belongsTo(Level::class);
+    }
 
 }

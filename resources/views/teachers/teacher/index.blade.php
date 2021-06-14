@@ -278,13 +278,11 @@
                                             </div>
 
                                             
-                                            <select class="form-control"  name="role">
+                                            <select class="form-control" name="role">
                                                 <option selected disabled>اختار صلاحيات المدرس</option>
-                                                
                                                 <option value="user" id="user" >مدرس</option>
                                                 <option value="admin" id="admin">مدير</option>
                                                 <option value="not_active" id="not_active">غير مفعل</option>
-                                            
                                             </select>
 
                                         </div>
@@ -405,12 +403,11 @@
 
 
             $('#admin-update-t').submit((e) => {
-
+                        console.log($(e.target).serialize());
                         e.preventDefault();
                         axios.post('/admin/teacher/update/'+id,$(e.target).serialize())
                         .then((res) => {
                             console.log(res.data)
-
                             var errors = res.data.errors;
                             console.log(errors);
                             if(errors) {

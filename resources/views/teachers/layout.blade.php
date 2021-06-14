@@ -165,10 +165,10 @@
             navbar-white
                 ">
         <div class="container">
-            <a class="navbar-brand" href="">
+            <a class="navbar-brand" href="{{ route('home') }}">
                 <img class="d-inline-block" src="{{ asset('img/logo.jpg') }}" alt="Kuwaiti-elearning" />
             </a>
-            <a class="btn btn-primary btn-customized open-menu" href="#" role="button">
+            <a class="btn btn-primary btn-customized open-menu" role="button">
                     <i class="fa fa-align-right"></i> <span>القائمة</span>
             </a>
         </div>

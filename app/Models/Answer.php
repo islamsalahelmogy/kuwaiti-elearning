@@ -12,5 +12,9 @@ class Answer extends Model
     protected $fillable =[
        'attach_type' 
     ];
+    public function question()
+    {
+        return $this->belongsTo(Question::class);
+    }
 
 }

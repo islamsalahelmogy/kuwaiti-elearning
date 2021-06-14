@@ -14,4 +14,7 @@ class Topic extends Model
     public function contents () {
         return $this->hasMany(Content::class);
     }
+    public function activities () {
+        return $this->hasMany(Activity::Class);
+    }
 }

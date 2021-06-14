@@ -27,4 +27,8 @@ class Student extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public function activities()
+    {
+        return $this->belongsToMany(Activity::class,'student_activity')->withTimestamps();
+    }
 }

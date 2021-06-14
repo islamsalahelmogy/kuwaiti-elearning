@@ -2,65 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Activity;
-use App\Models\Content;
+use App\Models\Teacher;
 use App\Models\Level;
+use App\Models\Content;
+use App\Models\Activity;
 use Illuminate\Http\Request;
 
-class HomeController extends Controller
+class TeachersController extends Controller
 {
-    
-
-    
     public function index()
     {
+        
         $levels = Level::all(['id','name']);
-        return view('app.home.index',compact('levels'));
+        return view('app.teachers.index',compact('levels'));
     }
-    
-    public function topics(Request $r)
+    public function teachers(Request $r)
     {
         $levelId = $r->levelId;
         $contents = Content::where('level_id',$levelId)->get();
-        $topics = [];
-        $flag = false;
-        foreach ($contents as $c) {
-            if(count($topics) > 0) {
-                foreach ($topics as $t) {
-                    if($t['id'] == $c->topic->id) {
-                        $flag = true;
-                        break;
-                    }
-                }
-            }
-            if($flag == false)
-                array_push($topics,['id'=>$c->topic->id,'name'=>$c->topic->name]);
-        }
-        $activites = Activity::where('level_id',$levelId)->get();
-        $flag = false;
-        foreach ($activites as $a) {
-            if(count($topics) > 0) {
-                foreach ($topics as $t) {
-                    if($t['id'] == $a->topic->id) {
-                        $flag = true;
-                        break;
-                    }
-                }
-            }
-            if($flag == false)
-                array_push($topics,['id'=>$a->topic->id,'name'=>$a->topic->name]);
-        }
-        return view('app.home.topics',compact('topics','levelId'));
-    }
-
-    public function teachers(Request $r)
-    {
-        $topicId = $r->topicId;
-        $levelId = $r->levelId;
-        $contents = Content::where([
-            ['topic_id',$topicId],
-            ['level_id',$levelId]
-        ])->get();
+        //dd($contents);
         $teachers = [];
         $flag = false;
         foreach ($contents as $c) {
@@ -75,12 +35,10 @@ class HomeController extends Controller
             if($flag == false)
                 array_push($teachers,['id'=>$c->teacher->id,'name'=>$c->teacher->name]);
         }
-        $activites = Activity::where([
-            ['topic_id',$topicId],
-            ['level_id',$levelId]
-        ])->get();
+        //dd($teachers);
+        $activities = Activity::where('level_id',$levelId)->get();
         $flag = false;
-        foreach ($activites as $a) {
+        foreach ($activities as $a) {
             if(count($teachers) > 0) {
                 foreach ($teachers as $t) {
                     if($t['id'] == $a->teacher->id) {
@@ -92,32 +50,77 @@ class HomeController extends Controller
             if($flag == false)
                 array_push($teachers,['id'=>$a->teacher->id,'name'=>$a->teacher->name]);
         }
-        return view('app.home.teachers',compact('teachers','topicId','levelId'));
+        
+        return view('app.teachers.teachers',compact('teachers','levelId'));
+    }
+    
+    public function topics(Request $r)
+    {
+        $teacherId = $r->teacherId;
+        $levelId = $r->levelId;
+        $contents = Content::where([
+            ['level_id' , $levelId],
+            ['teacher_id' , $teacherId],
+        ])->get();
+        //dd($contents);
+        $topics = [];
+        $flag = false;
+        foreach ($contents as $c) {
+            if(count($topics) > 0) {
+                foreach ($topics as $t) {
+                    if($t['id'] == $c->topic->id) {
+                        $flag = true;
+                        break;
+                    }
+                }
+            }
+            if($flag == false)
+                array_push($topics,['id'=>$c->topic->id,'name'=>$c->topic->name]);
+        }
+        //dd($topics);
+        $activities = Activity::where([
+            ['level_id' , $levelId],
+            ['teacher_id' , $teacherId],
+        ])->get();
+        $flag = false;
+        foreach ($activities as $a) {
+            if(count($topics) > 0) {
+                foreach ($topics as $t) {
+                    if($t['id'] == $a->topic->id) {
+                        $flag = true;
+                        break;
+                    }
+                }
+            }
+            if($flag == false)
+                array_push($topics,['id'=>$a->topic->id,'name'=>$a->topic->name]);
+        }
+        return view('app.teachers.topics',compact('topics','teacherId','levelId'));
     }
 
     public function contents(Request $r)
     {
         $topicId = $r->topicId;
-        $levelId = $r->levelId;
         $teacherId = $r->teacherId;
+        $levelId = $r->levelId;
         $types = [];
         $videos = Content::where([
             ['topic_id' , $topicId],
-            ['level_id',$levelId],
+            ['level_id' , $levelId],
             ['teacher_id' , $teacherId],
             ['attach_type' , 'video'],
 
         ])->get();
         $stories = Content::where([
             ['topic_id' , $topicId],
-            ['level_id',$levelId],
+            ['level_id' , $levelId],
             ['teacher_id' , $teacherId],
             ['attach_type' , 'audio'],
 
         ])->get();
         $activities = Activity::where([
             ['topic_id' , $topicId],
-            ['level_id',$levelId],
+            ['level_id' , $levelId],
             ['teacher_id' , $teacherId],
         ])->get();
         if(count($videos) > 0) 
@@ -127,8 +130,9 @@ class HomeController extends Controller
         if(count($activities) > 0) 
             array_push($types,'activities');
         //dd($types);
-        return view('app.home.contents',compact('teacherId','topicId','levelId','types'));
+        return view('app.teachers.contents',compact('teacherId','topicId','types','levelId'));
     }
+    
 
     public function storiesAndVideos (Request $r) {
         $topicId = $r->topicId;
@@ -142,7 +146,7 @@ class HomeController extends Controller
                 ['teacher_id',$teacherId],
                 ['attach_type','video'],
             ])->get();
-            return view('app.home.videosContent',compact('videos'));
+            return view('app.teachers.videosContent',compact('videos'));
         }
         if($type == 'stories') {
             $stories = Content::where([
@@ -151,7 +155,7 @@ class HomeController extends Controller
                 ['teacher_id',$teacherId],
                 ['attach_type','audio'],
             ])->get();
-            return view('app.home.storiesContent',compact('stories'));
+            return view('app.teachers.storiesContent',compact('stories'));
 
         }
     }
@@ -159,14 +163,14 @@ class HomeController extends Controller
     {
         $video = Content::find($id);
         //dd($video);
-        return view('app.home.videoShow', compact('video'));
+        return view('app.teachers.videoShow', compact('video'));
     }
 
     public function showstory($id)
     {
         $story = Content::find($id);
         //dd($video);
-        return view('app.home.storyShow', compact('story'));
+        return view('app.teachers.storyShow', compact('story'));
     }
     /*completed */
 
@@ -185,6 +189,7 @@ class HomeController extends Controller
             ['level_id',$levelId],
             ['teacher_id',$teacherId],
         ])->get();
-        return view('app.home.activities',compact('activities'));
+        return view('app.teachers.activities',compact('activities'));
     }
+
 }
