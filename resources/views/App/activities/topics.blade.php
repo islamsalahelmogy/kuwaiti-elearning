@@ -23,8 +23,8 @@
 @endsection
 @section('content')
     <div class="d-flex justify-content-around flex-wrap">
-        @foreach ($levels as $level)
-            <a class="square my-8 mx-10" href="{{ route('teachers',['levelId' => $level->id]) }}">
+        @foreach ($topics as $topic)
+            <a class="square my-8 mx-10" href="{{ route('activities.teachers',['levelId' => $levelId,'topicId' => $topic['id']]) }}">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -33,11 +33,15 @@
 
                 <div class="content">		
                     <h2>
-                        {{ $level->name }}
+                        {{ $topic['name'] }}
                     </h2>
                 </div>
             </a>
         @endforeach
-        
+        @if (count($topics) == 0)
+            <div class="w-50 text-dark text-center font-weight-bolder mx-auto my-10">
+                <h3>لا يوجد أنشطة</h3>
+            </div>
+        @endif
     </div>
 @endsection

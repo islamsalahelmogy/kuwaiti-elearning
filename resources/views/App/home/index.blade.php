@@ -24,7 +24,7 @@
 @section('content')
     <div class="d-flex justify-content-around flex-wrap">
         @foreach ($levels as $level)
-            <a class="square my-8 mx-10" href="{{ route('teachers',['levelId' => $level->id]) }}">
+            <a class="square my-8 mx-10" href="{{ route('home.topics',['levelId' => $level->id]) }}">
                 <span></span>
                 <span></span>
                 <span></span>

@@ -96,31 +96,53 @@ Route::get('/', function () {
     Route::get('/admin/teacher/delete/{id}', 'AdminController@destroy')->name('admin.teacher.delete')->middleware('isadmin:teacher');
 
 
-//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-//Route::view('/home', 'home')->middleware('auth');
 
-// Route::get('/home',function () {
-//     return view('app.home');
-// })->name('home');
+Route::middleware('auth')->group(function () {
+        //home
+    Route::get('/home','HomeController@index')->name('home');
+    Route::get('/home/topics','HomeController@topics')->name('home.topics');
+    Route::get('/home/topics/teachers','HomeController@teachers')->name('home.teachers');
+    Route::get('/home/topics/teachers/contents','HomeController@contents')->name('home.contents');
+    Route::get('/home/topics/teachers/contents/videos','HomeController@storiesAndVideos')->name('home.videos');
+    Route::get('/home/topics/teachers/contents/videos/video/{id}','HomeController@showvideo')->name('home.videos.show');
+    Route::get('/home/topics/teachers/contents/stories','HomeController@storiesAndVideos')->name('home.stories');
+    Route::get('/home/topics/teachers/contents/stories/story/{id}','HomeController@showstory')->name('home.stories.show');
+    Route::get('/home/topics/teachers/contents/activites','HomeController@activities')->name('home.activities');
+    Route::get('/home/topics/teachers/contents/activites/activity/{id}','HomeController@showactivity')->name('home.activities.show');
 
-// Route::get('/teachers',function () {
-//     return view('app.teachers.index');
-// })->name('teachers');
+        //teachers
+    Route::get('/teacherslevels','TeachersController@index')->name('teacherslevels');
+    Route::get('/teacherslevels/teachers','TeachersController@teachers')->name('teachers');
+    Route::get('/teacherslevels/teachers/topics','TeachersController@topics')->name('teachers.topics');
+    Route::get('/teacherslevels/teachers/topics/contents','TeachersController@contents')->name('teachers.contents');
+    Route::get('/teacherslevels/teachers/topics/contents/videos','TeachersController@storiesAndVideos')->name('teachers.videos');
+    Route::get('/teacherslevels/teachers/topics/contents/videos/video/{id}','TeachersController@showvideo')->name('teachers.videos.show');
+    Route::get('/teacherslevels/teachers/topics/contents/stories','TeachersController@storiesAndVideos')->name('teachers.stories');
+    Route::get('/teacherslevels/teachers/topics/contents/stories/story/{id}','TeachersController@showstory')->name('teachers.stories.show');
+    Route::get('/teacherslevels/teachers/topics/contents/activites','TeachersController@activities')->name('teachers.activities');
+    Route::get('/teacherslevels/teachers/topics/contents/activites/activity/{id}','TeachersController@showactivity')->name('teachers.activities.show');
 
-// Route::get('/students/profile',function () {
-//     return view('students.profile.index');
-// })->name('students.profile');
+        //videos
+    Route::get('/videos','VideosController@index')->name('videos');
+    Route::get('/videos/topics','VideosController@topics')->name('videos.topics');
+    Route::get('/videos/topics/teachers','VideosController@teachers')->name('videos.teachers');
+    Route::get('/videos/topics/teachers/allvideos','VideosController@videos')->name('videos.all');
+    Route::get('/videos/topics/teachers/allvideos/video/{id}','VideosController@showvideo')->name('videos.all.show');
 
-// Route::get('/teachers/profile',function () {
-//     return view('teachers.profile.index');
-// })->name('teachers.profile');
-// Route::get('/teachers/password/edit',function () {
-//     return view('teachers.password.index');
-// })->name('teachers.password.edit');
-// Route::get('/students/password/edit',function () {
-//     return view('students.password.index');
-// })->name('students.password.edit');
 
-Route::get('/teachers/dashboard',function () {
-    return view('teachers.teacher.index');
-})->name('teachers.teacher.index');
+        //stories
+    Route::get('/stories','StoriesController@index')->name('stories');
+    Route::get('/stories/topics','StoriesController@topics')->name('stories.topics');
+    Route::get('/stories/topics/teachers','StoriesController@teachers')->name('stories.teachers');
+    Route::get('/stories/topics/teachers/allstories','StoriesController@stories')->name('stories.all');
+    Route::get('/stories/topics/teachers/allstories/story/{id}','StoriesController@showstory')->name('stories.all.show');
+
+        //activities
+    Route::get('/activities','ActivityController@index')->name('activities');
+    Route::get('/activities/topics','ActivityController@topics')->name('activities.topics');
+    Route::get('/activities/topics/teachers','ActivityController@teachers')->name('activities.teachers');
+    Route::get('/activities/topics/teachers/allactivities','ActivityController@activities')->name('activities.all');
+    Route::get('/activities/topics/teachers/allactivities/activity/{id}','ActivityController@showactivity')->name('activities.all.show');
+
+
+});

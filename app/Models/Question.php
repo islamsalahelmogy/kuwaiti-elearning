@@ -13,4 +13,12 @@ class Question extends Model
     [
         'attach_type','attachment'
     ];
+    public function activity()
+    {
+        return $this->belongsTo(Activity::class);
+    }
+    public function answers()
+    {
+        return $this->hasMany(Answer::class);
+    }
 }

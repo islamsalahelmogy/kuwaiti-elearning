@@ -38,8 +38,7 @@ class AdminController extends Controller
             'unique' => 'هذا الإيميل موجود بالفعل',
             'same' => 'كلمة السر غير متطابقه',
             'string' => 'يجب الحقل ان يحتوى على رموز وارقام وحروف',
-        ]
-        );
+        ]);
     }
 
     public function index()
@@ -128,8 +127,7 @@ class AdminController extends Controller
             'min' => 'لابد ان يكون الحقل مكون على الاقل من 8 خانات',
             'email' => 'هذا الإيميل غير صحيح',
             'string' => 'يجب الحقل ان يحتوى على رموز وارقام وحروف',
-        ]
-        );
+        ]);
         
         if($data->fails()) {
             return response()->json(['errors'=>$data->errors()]);
@@ -137,7 +135,7 @@ class AdminController extends Controller
     
         $teacher=Teacher::find($id);
 
-         if(Hash::check($request->password,$teacher->password))
+         if(Hash::check($request->password,Auth::guard('teacher')->user()->password))
          {  
             $teacher->update([
                 'name' => $request['name'],
@@ -145,10 +143,8 @@ class AdminController extends Controller
                 'role' => $request['role'],
                 'phone' => $request['phone'],
                 'gender' => $request['gender'],      
-        ]);
-
-         }
-         else{
+            ]);
+         }else{
             return response()->json(['errors'=>['password'=>['كلمة المرور غير صحيحة']]]);
          }
     }
