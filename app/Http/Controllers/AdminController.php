@@ -21,7 +21,7 @@ class AdminController extends Controller
     protected function TeacherValidator(array $data)
     {
         return Validator::make($data, [
-            'name_tr' => ['required', 'string', 'max:255'],
+            'name_tr' => ['required', 'string', 'max:15'],
             'email_tr' => ['required', 'string', 'email', 'max:255', 'unique:teachers,email'],
             'gender_tr' => ['required', 'string', 'max:255'],
             'phone_tr' => ['required', 'numeric', 'digits:8'],
@@ -113,7 +113,7 @@ class AdminController extends Controller
     public function update(Request $request,$id)
     {
         $data =Validator::make($request->all(), [
-            'name' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'max:15'],
             'email' => ['required', 'string', 'email', 'max:255'],
             'gender' => ['required', 'string', 'max:255'],
             'phone' => ['required', 'numeric', 'digits:8'],

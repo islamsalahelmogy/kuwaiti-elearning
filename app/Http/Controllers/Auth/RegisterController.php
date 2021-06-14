@@ -49,7 +49,7 @@ class RegisterController extends Controller
     protected function TeacherValidator(array $data)
     {
         return Validator::make($data, [
-            'name_tr' => ['required', 'string', 'max:255'],
+            'name_tr' => ['required', 'string', 'max:15'],
             'email_tr' => ['required', 'string', 'email', 'max:255', 'unique:teachers,email'],
             'gender_tr' => ['required', 'string', 'max:255'],
             'phone_tr' => ['required', 'numeric', 'digits:8'],
@@ -60,7 +60,6 @@ class RegisterController extends Controller
             'numeric' => 'يجب ان يحتوى الحقل على ارقام فقط',
             'phone_tr.digits' => 'الرقم غير صحيح لابد ان يكون مكون من 8 خانات',
             'min' => 'لابد ان يكون الحقل مكون على الاقل من 8 خانات',
-            'max'=> 'لا يمكن ان يكون الحقل اكبر من 225 حرف',
             'email' => 'هذا الإيميل غير صحيح',
             'unique' => 'هذا الإيميل موجود بالفعل',
             'same' => 'كلمة السر غير متطابقه',
@@ -72,7 +71,7 @@ class RegisterController extends Controller
     protected function StudentValidator(array $data)
     {
         return Validator::make($data, [
-            'name_str' => ['required', 'string', 'max:255'],
+            'name_str' => ['required', 'string', 'max:15'],
             'email_str' => ['required', 'string', 'email', 'max:255', 'unique:students,email'],
             'gender_str' => ['required', 'string', 'max:255'],
             'password_str' => ['required', 'string', 'min:8'],
@@ -81,7 +80,6 @@ class RegisterController extends Controller
         ],[
             'required' => 'ممنوع ترك الحقل فارغاَ',
             'min' => 'لابد ان يكون الحقل مكون على الاقل من 8 خانات',
-            'max'=> 'لا يمكن ان يكون الحقل اكبر من 225 حرف',
             'email' => 'هذا الإيميل غير صحيح',
             'unique' => 'هذا الإيميل موجود بالفعل',
             'same' => 'كلمة السر غير متطابقه',

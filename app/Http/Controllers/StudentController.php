@@ -14,7 +14,7 @@ class StudentController extends Controller
     protected function StudentValidator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'max:15'],
             'email' => ['required', 'string', 'email', 'max:255'],
             'gender' => ['required', 'string', 'max:255'],
             'password' => ['required', 'string', 'min:8'],
