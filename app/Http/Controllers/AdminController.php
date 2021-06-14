@@ -9,7 +9,6 @@ use App\Models\Teacher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\File;
-
 class AdminController extends Controller
 {
     /**
@@ -146,7 +145,7 @@ class AdminController extends Controller
             ]);
          }else{
             return response()->json(['errors'=>['password'=>['كلمة المرور غير صحيحة']]]);
-         }
+        }
     }
 
     /**

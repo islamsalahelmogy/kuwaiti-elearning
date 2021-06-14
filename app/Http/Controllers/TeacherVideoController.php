@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Content;
 use App\Models\Topic;
+use App\Models\Level;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
@@ -23,7 +24,6 @@ class TeacherVideoController extends Controller
     {
         $teacherId = Auth::guard('teacher')->user()->id;
         $videos = Content::where('teacher_id', $teacherId)->where('attach_type', 'video')->orderBy('created_at','desc')->get();
-        //dd($videos->toArray());
         return view('teachers.videos.index', compact('videos'));
     }
 
@@ -35,7 +35,8 @@ class TeacherVideoController extends Controller
     public function create()
     {
         $topics = Topic::all();
-        return view('teachers.videos.create', compact('topics'));
+        $levels = Level::all();
+        return view('teachers.videos.create', compact('topics','levels'));
     }
 
     /**
@@ -52,6 +53,7 @@ class TeacherVideoController extends Controller
             'description' => 'required|string',
             'attachment' => 'required|mimetypes:video/x-msvideo,video/mp4,video/x-matroska',
             'topic_id' => 'required',
+            'level_id' => 'required'
          
         ],[
             'required' => 'ممنوع ترك الحقل فارغاَ',
@@ -71,7 +73,7 @@ class TeacherVideoController extends Controller
                 mkdir(public_path('storage\videos\\' . $teacher_id));
             }
             $video_path = public_path('storage\videos\\' . $teacher_id);
-            $video_name = str_replace([' ','#','&','='],'-',$request->attachment->getClientOriginalName());
+            $video_name = str_replace([' ','#','&','=','?'],'-',$request->attachment->getClientOriginalName());
             $video_file = $request->file('attachment');
             $video_file->move($video_path, $video_name);
             $video->attachment = $video_name;
@@ -79,6 +81,7 @@ class TeacherVideoController extends Controller
             $video->description = $request->description;
             $video->attach_type = "video";
             $video->topic_id = $request->topic_id;
+            $video->level_id = $request->level_id;
             $video->teacher_id = $teacher_id;
             $video->save();
         }
@@ -95,7 +98,6 @@ class TeacherVideoController extends Controller
     public function show($id)
     {
         $video = Content::find($id);
-        //dd($video);
         return view('teachers.videos.show', compact('video'));
     }
 
@@ -110,9 +112,10 @@ class TeacherVideoController extends Controller
         $teacherId = Auth::guard('teacher')->user()->id;
         $video = Content::find($id);
         $topics = Topic::all();
+        $levels = Level::all();
         $path = public_path('storage\videos\\' . $teacherId . '\\' . $video->attachment);
         if (is_file($path)) {
-            return view('teachers.videos.edit', compact('video', 'path', 'topics'));
+            return view('teachers.videos.edit', compact('video', 'path', 'topics','levels'));
         }
     }
 
@@ -129,6 +132,7 @@ class TeacherVideoController extends Controller
             'title' => 'required|max:255|string',
             'description' => 'required|string',
             'topic_id' => 'required',
+            'level_id' => 'required'
          
         ],[
             'required' => 'ممنوع ترك الحقل فارغاَ',
@@ -154,10 +158,11 @@ class TeacherVideoController extends Controller
             $file = $request->file('attachment');
             $video_path = public_path('storage\videos\\' . $teacherId);
             $old_video = $video_path . '\\' . $video->attachment;
-            $video_name = str_replace([' ','#','&','='],'-',$file->getClientOriginalName());
+            $video_name = str_replace([' ','#','&','=','?'],'-',$file->getClientOriginalName());
             $file->move($video_path, $video_name);
             $video->title = $request->title;
             $video->topic_id = $request->topic_id;
+            $video->level_id = $request->level_id;
             $video->attachment = $video_name;
             $video->description = $request->description;
             $video->teacher_id = $teacherId;
@@ -171,6 +176,7 @@ class TeacherVideoController extends Controller
             $teacherId = Auth::guard('teacher')->user()->id;
             $video->title = $request->title;
             $video->topic_id = $request->topic_id;
+            $video->level_id = $request->level_id;
             $video->description = $request->description;
             $video->teacher_id = $teacherId;
             $video->save();

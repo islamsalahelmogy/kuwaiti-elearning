@@ -146,3 +146,54 @@ Route::middleware('auth')->group(function () {
 
 
 });
+    //topic routes
+
+    Route::get('/admin/topic/create', 'TopicController@create')->name('topic.create')->middleware('isadmin:teacher');
+    Route::post('/admin/topic/store', 'TopicController@store')->name('topic.store')->middleware('isadmin:teacher');
+    Route::get('/admin/topic/index','TopicController@index')->name('topic.index')->middleware('isadmin:teacher');
+    Route::get('/admin/topic/edit/{id}', 'TopicController@edit')->name('topic.edit')->middleware('isadmin:teacher');
+    Route::post('/admin/topic/update/{id}', 'TopicController@update')->name('topic.update')->middleware('isadmin:teacher');
+    Route::get('/admin/topic/delete/{id}', 'TopicController@destroy')->name('topic.delete')->middleware('isadmin:teacher');
+
+
+
+    //level routes
+
+    Route::get('/admin/level/create', 'LevelController@create')->name('level.create')->middleware('isadmin:teacher');
+    Route::post('/admin/level/store', 'LevelController@store')->name('level.store')->middleware('isadmin:teacher');
+    Route::get('/admin/level/index','LevelController@index')->name('level.index')->middleware('isadmin:teacher');
+    Route::get('/admin/level/edit/{id}', 'LevelController@edit')->name('level.edit')->middleware('isadmin:teacher');
+    Route::post('/admin/level/update/{id}', 'LevelController@update')->name('level.update')->middleware('isadmin:teacher');
+    Route::get('/admin/level/delete/{id}', 'LevelController@destroy')->name('level.delete')->middleware('isadmin:teacher');
+
+
+
+
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Route::view('/home', 'home')->middleware('auth');
+
+// Route::get('/home',function () {
+//     return view('app.home');
+// })->name('home');
+
+// Route::get('/teachers',function () {
+//     return view('app.teachers.index');
+// })->name('teachers');
+
+// Route::get('/students/profile',function () {
+//     return view('students.profile.index');
+// })->name('students.profile');
+
+// Route::get('/teachers/profile',function () {
+//     return view('teachers.profile.index');
+// })->name('teachers.profile');
+// Route::get('/teachers/password/edit',function () {
+//     return view('teachers.password.index');
+// })->name('teachers.password.edit');
+// Route::get('/students/password/edit',function () {
+//     return view('students.password.index');
+// })->name('students.password.edit');
+
+Route::get('/teachers/dashboard',function () {
+    return view('teachers.teacher.index');
+})->name('teachers.teacher.index');

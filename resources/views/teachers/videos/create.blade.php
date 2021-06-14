@@ -29,6 +29,22 @@
                                         @enderror
                                     </div>
 
+
+                                    <div class="form-group check-step-gray">
+                                        <select class="form-control  @error('level_id') is-invalid @enderror" id="content-video" name="level_id">
+                                            <option selected disabled>اختار مستوي الفيديو</option>
+                                                @foreach ($levels as $level)
+                                                <option value="{{ $level->id }}" @if($level->id == old('level_id')) selected
+                                                    @endif>{{ $level->name }}</option>
+                                                @endforeach
+                                        </select>
+                                        @error('level_id')
+                                        <span id="level_id" class="invalid-feedback d-block px-2 font-weight-bolder" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
+
                                     <div class="form-group form-group-icon">
                                         <div class="input-group mb-3">
                                             <div class="input-group-append">

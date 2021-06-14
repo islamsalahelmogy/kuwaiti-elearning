@@ -106,6 +106,8 @@
             @endif">
                 <a class="scroll-link" href="{{ route('teacher.dashboard') }}"><i class="fa fa-user mx-2"></i>الصفحة الشخصية</a>
             </li>
+
+
             @if (auth('teacher')->user()->role=='admin')
             <li class ="@if (str_contains(Route::currentRouteName(),'admin'))
                 active
@@ -113,6 +115,26 @@
                 <a class="scroll-link" href=" {{ route('admin.teacher.index') }} "><i class="fa fa-user mx-2"></i>المدرسين</a>
             </li>
             @endif
+
+            @if (auth('teacher')->user()->role=='admin')
+            <li class ="@if (str_contains(Route::currentRouteName(),'topic'))
+                active
+            @endif">
+                <a class="scroll-link" href=" {{ route('topic.index') }} "><i class="fa fa-user mx-2"></i>الموضوعات</a>
+            </li>
+            @endif
+
+
+
+            @if (auth('teacher')->user()->role=='admin')
+            <li class ="@if (str_contains(Route::currentRouteName(),'level'))
+                active
+            @endif">
+                <a class="scroll-link" href=" {{ route('level.index') }} "><i class="fa fa-user mx-2"></i>المستوي</a>
+            </li>
+            @endif
+
+
             <li class ="@if (str_contains(Route::currentRouteName(),'video'))
                 active
             @endif">
