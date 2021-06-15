@@ -35,7 +35,7 @@
                                             </li>
                                                <br>
                                             <li> 
-                                               عدد الفيديوهات  :{{$t->contents->where('attach_type','audio')->count()}} 
+                                               عدد الفيديوهات  :{{$t->contents->where('attach_type','video')->count()}} 
                                             </li>
                                             <li>
                                                    عدد القصص :{{$t->contents->where('attach_type','audio')->count()}}    
