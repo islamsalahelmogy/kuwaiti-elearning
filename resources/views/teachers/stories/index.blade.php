@@ -19,10 +19,8 @@
 
         <div class="row">
             @if ($stories->count() > 0)
-            <div class="col-md-8 col-lg-9">
-                <div class="row">
                     @foreach ($stories as $story)
-                        <div class="col-sm-6 col-xl-4 col-xs-12">
+                        <div class="col-sm-6 col-lg-3 col-xs-12">
                             <div class="card">
                                     <a href="{{ route('teacher.story.show' ,['id'=>$story->id]) }}"
                                         class="position-relative">
@@ -63,46 +61,6 @@
                             </div>
                         </div>
                     @endforeach
-                </div>
-            </div>
-            <div class="col-md-4 col-lg-3 d-none">
-                <form>
-                    <div class="card shadow-none bg-transparent">
-                        <h3 class="card-header bg-warning font-weight-bold rounded-top text-white">Search</h3>
-                        <div class="card-body border border-top-0 rounded-bottom">
-                            <div class="input-group border-bottom pb-3 pt-4">
-                                <input type="text" class="form-control border-0 px-1" placeholder="Enter Your Search"
-                                    aria-describedby="basic-addon2">
-                                <span class="input-group-addon" id="basic-addon2">
-                                    <input class="btn btn-sm btn-warning text-uppercase text-white shadow-sm"
-                                        type="submit" value="Search">
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-
-                <div class="card shadow-none bg-transparent overflow-hidden">
-                    <h3 class="card-header bg-success font-weight-bold rounded-top text-white">Filter By</h3>
-                    <div class="card-body border border-top-0 rounded-bottom">
-                        <div class="filter">
-                            <div class="mb-4 pt-3">
-                                <select class="select2-select w-100 bg-white" name="state">
-                                    <option value="0">Select By Gender</option>
-                                    <option value="1">Boys</option>
-                                    <option value="2">Girls</option>
-                                </select>
-                            </div>
-
-                        </div>
-
-                        <div class="price-range-content">
-                            <input class="btn btn-success text-white text-uppercase" type="submit" value="Filter">
-                        </div>
-
-                    </div>
-                </div>
-            </div>
             @else
             <div class="w-50 text-dark text-center font-weight-bolder mx-auto">
                 <h3>لا يوجد قصص</h3>

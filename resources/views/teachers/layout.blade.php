@@ -112,7 +112,7 @@
             <li class ="@if (str_contains(Route::currentRouteName(),'admin'))
                 active
             @endif">
-                <a class="scroll-link" href=" {{ route('admin.teacher.index') }} "><i class="fa fa-user mx-2"></i>المدرسين</a>
+                <a class="scroll-link" href=" {{ route('admin.teacher.index') }} "><i class="fa fa-users mx-2"></i>المدرسين</a>
             </li>
             @endif
 
@@ -120,7 +120,7 @@
             <li class ="@if (str_contains(Route::currentRouteName(),'topic'))
                 active
             @endif">
-                <a class="scroll-link" href=" {{ route('topic.index') }} "><i class="fa fa-user mx-2"></i>الموضوعات</a>
+                <a class="scroll-link" href=" {{ route('topic.index') }} "><i class="fa fa-pencil mx-2"></i>الموضوعات</a>
             </li>
             @endif
 
@@ -130,7 +130,7 @@
             <li class ="@if (str_contains(Route::currentRouteName(),'level'))
                 active
             @endif">
-                <a class="scroll-link" href=" {{ route('level.index') }} "><i class="fa fa-user mx-2"></i>المستوي</a>
+                <a class="scroll-link" href=" {{ route('level.index') }} "><i class="fa fa-pencil mx-2"></i>المستوي</a>
             </li>
             @endif
 
@@ -138,18 +138,18 @@
             <li class ="@if (str_contains(Route::currentRouteName(),'video'))
                 active
             @endif">
-                <a class="scroll-link" href="{{ route('teacher.videos') }}"><i class="fa fa-user mx-2"></i>الفيديوهات</a>
+                <a class="scroll-link" href="{{ route('teacher.videos') }}"><i class="fa fa-video-camera mx-2"></i>الفيديوهات</a>
             
            </li>
             <li class ="@if (str_contains(Route::currentRouteName(),'stor'))
                 active
             @endif">
-                <a class="scroll-link" href="{{ route('teacher.stories') }}"><i class="fa fa-user mx-2"></i>القصص</a>
+                <a class="scroll-link" href="{{ route('teacher.stories') }}"><i class="fa fa-book mx-2"></i>القصص</a>
             </li>
             <li class ="@if(str_contains(Route::currentRouteName(),'activit'))
                 active
             @endif">
-                <a class="scroll-link" href="{{-- {{ route('teacher.activities') }} --}}"><i class="fa fa-user mx-2"></i>الأنشطة</a>
+                <a class="scroll-link" href="{{-- {{ route('teacher.activities') }} --}}"><i class="fa fa-question-circle mx-2"></i>الأنشطة</a>
             </li>
             <li class ="@if (str_contains(Route::currentRouteName(),'password'))
                 active

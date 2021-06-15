@@ -47,21 +47,6 @@
                             <div class="p-3">
                                 <form action="{{ route('teacher.story.update',['id'=> $story->id]) }}" method="POST" role="form" enctype="multipart/form-data">
                                     @csrf
-                                    <div class="form-group check-step-gray">
-                                        <select class="form-control @error('topic_id')  is-invalid @enderror" id="content-story" name="topic_id">
-                                            <option selected disabled>اختار موضوع القصة</option>
-                                                @foreach ($topics as $topic)
-                                                <option value="{{ $topic->id }}" @if($topic->id == $story->topic_id) selected
-                                                    @endif>{{ $topic->name }}</option>
-                                                @endforeach
-                                        </select>
-                                        @error('topic_id')
-                                        <span id="topic_id" class="invalid-feedback d-block px-2 font-weight-bolder" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                        @enderror
-                                    </div>
-
                                     
                                     <div class="form-group check-step-gray">
                                         <select class="form-control @error('level_id')  is-invalid @enderror" id="content-story" name="level_id">
@@ -78,6 +63,20 @@
                                         @enderror
                                     </div>
 
+                                    <div class="form-group check-step-gray">
+                                        <select class="form-control @error('topic_id')  is-invalid @enderror" id="content-story" name="topic_id">
+                                            <option selected disabled>اختار موضوع القصة</option>
+                                                @foreach ($topics as $topic)
+                                                <option value="{{ $topic->id }}" @if($topic->id == $story->topic_id) selected
+                                                    @endif>{{ $topic->name }}</option>
+                                                @endforeach
+                                        </select>
+                                        @error('topic_id')
+                                        <span id="topic_id" class="invalid-feedback d-block px-2 font-weight-bolder" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
 
                                     <div class="form-group form-group-icon">
                                         <div class="input-group mb-3">

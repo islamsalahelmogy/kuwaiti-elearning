@@ -187,13 +187,13 @@
                 </li>
                 <li class="nav-item dropdown bg-danger">
                     <a class="nav-link dropdown-toggle" href="{{ route('teacherslevels') }}">
-                        <i class="fa fa-user nav-icon" aria-hidden="true"></i>
+                        <i class="fa fa-users nav-icon" aria-hidden="true"></i>
                         <span>المدرسين</span>
                     </a>
                 </li>
                 <li class="nav-item dropdown bg-success">
                     <a class="nav-link dropdown-toggle" href="{{ route('videos') }}">
-                        <i class="fa fa-tv nav-icon" aria-hidden="true"></i>
+                        <i class="fa fa-video-camera nav-icon" aria-hidden="true"></i>
                         <span>الفيديوهات</span>
                     </a>
                 </li>
@@ -205,7 +205,7 @@
                 </li>
                 <li class="nav-item dropdown bg-pink">
                     <a class="nav-link dropdown-toggle" href="{{ route('activities') }}">
-                        <i class="fa fa-pencil-square-o nav-icon" aria-hidden="true"></i>
+                        <i class="fa fa-question-circle nav-icon" aria-hidden="true"></i>
                         <span>الأنشطة</span>
                     </a>
                 </li>

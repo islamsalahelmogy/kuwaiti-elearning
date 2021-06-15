@@ -19,16 +19,15 @@
 
         <div class="row">
             @if($levels->count() > 0)
-                <div class="col-md-8 col-lg-9">
-                    <div class="row">
-                        @foreach ($levels as $l)
-                        <div class="col-sm-6 col-xl-4 col-xs-12">
+                
+                @foreach ($levels as $l)
+                        <div class="col-sm-6 col-lg-3 col-xs-12">
                                 <div class="card">
                                     
                                     <div class="card-body border-top-5 px-3 rounded-bottom border-info">
                                         <h3 class="card-title">
                                             <a class="text-info text-capitalize d-block text-truncate" 
-                                                href="">{{ $l->name }}</a>
+                                                >{{ $l->name }}</a>
                                         </h3>
                                         <br> 
                                         <div class="d-block">
@@ -45,11 +44,8 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        @endforeach
-                    </div>
-                    
-                </div>
+                        </div>
+                @endforeach
 
 
             @else

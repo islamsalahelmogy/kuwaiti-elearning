@@ -19,16 +19,14 @@
 
         <div class="row">
             @if($topics->count() > 0)
-                <div class="col-md-8 col-lg-9">
-                    <div class="row">
-                        @foreach ($topics as $t)
-                        <div class="col-sm-6 col-xl-4 col-xs-12">
+                    @foreach ($topics as $t)
+                        <div class="col-sm-6 col-lg-3 col-xs-12">
                                 <div class="card">
                                     
                                     <div class="card-body border-top-5 px-3 rounded-bottom border-info">
                                         <h3 class="card-title">
                                             <a class="text-info text-capitalize d-block text-truncate" 
-                                                href="">{{ $t->name }}</a>
+                                                >{{ $t->name }}</a>
                                         </h3>
                                         <ul class="list-unstyled text-muted">
                                             <li>
@@ -59,12 +57,7 @@
                                     </div>
                                 </div>
                             </div>
-                        @endforeach
-                    </div>
-                    
-                </div>
-
-
+                    @endforeach
             @else
                     <div class="w-50 text-dark text-center font-weight-bolder mx-auto">
                         <h3>لا يوجد مواضيع</h3>
