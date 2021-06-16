@@ -45,18 +45,19 @@ class LoginController extends Controller
 
     public function teacherLogin(Request $request){
         $validator = Validator::make($request->all(), [
-            'email_tl'   => 'required|email',
+            'email_tl'   => 'required|email|exists:teachers,email',
             'password_tl' => 'required|min:8'
         ],[
             'required' => 'ممنوع ترك الحقل فارغاَ',
             'min' => 'لابد ان يكون الحقل مكون على الاقل من 8 خانات',
             'email' => 'هذا الإيميل غير صحيح',
+            'exists' => 'هذا الايميل غير مسجل فى الموقع'
         ]);
         if($validator->fails()) {
             return response()->json(['errors'=>$validator->errors()]);
         }
        $role= Teacher::where('email',$request->email_tl)->pluck('role');
-      // return response()->json($role);
+       //return response()->json($role);
         if($role[0]!="not_active")
         {
             $check = Auth::guard('teacher')->attempt(['email' => $request->email_tl, 'password' => $request->password_tl], 
@@ -72,9 +73,6 @@ class LoginController extends Controller
     }
     public function teacherLogout(Request $request){
         Auth::guard('teacher')->logout();
-        header('Cache-Control', 'no-cache, must-revalidate, no-store, max-age=0, private');
-        header("Pragma:no-cache");
-        header("Expires: Sat,26 Jul 1997 05:00:00: GMT");
         $request->session()->flush();
         $request->session()->regenerate();
         
@@ -83,10 +81,12 @@ class LoginController extends Controller
 
     public function teacherResetPassword (Request $request){
         $validator = Validator::make($request->all(), [
-            'email_trp'   => 'required|email',
+            'email_trp'   => 'required|email|exists:teachers,email',
         ],[
             'required' => 'ممنوع ترك الحقل فارغاَ',
             'email' => 'هذا الإيميل غير صحيح',
+            'exists' => 'هذا الايميل غير مسجل فى الموقع'
+
         ]);
         if($validator->fails()) {
             return response()->json(['errors'=>$validator->errors()]);
@@ -129,12 +129,14 @@ class LoginController extends Controller
 
     public function studentLogin(Request $request){
         $validator = Validator::make($request->all(), [
-            'email_stl'   => 'required|email',
+            'email_stl'   => 'required|email|exists:students,email',
             'password_stl' => 'required|min:8'
         ],[
             'required' => 'ممنوع ترك الحقل فارغاَ',
             'min' => 'لابد ان يكون الحقل مكون على الاقل من 8 خانات',
             'email' => 'هذا الإيميل غير صحيح',
+            'exists' => 'هذا الايميل غير مسجل فى الموقع'
+
         ]);
         if($validator->fails()) {
             return response()->json(['errors'=>$validator->errors()]);
@@ -149,10 +151,12 @@ class LoginController extends Controller
 
     public function studentResetPassword (Request $request){
         $validator = Validator::make($request->all(), [
-            'email_strp'   => 'required|email',
+            'email_strp'   => 'required|email|exists:students,email',
         ],[
             'required' => 'ممنوع ترك الحقل فارغاَ',
             'email' => 'هذا الإيميل غير صحيح',
+            'exists' => 'هذا الايميل غير مسجل فى الموقع'
+
         ]);
         if($validator->fails()) {
             return response()->json(['errors'=>$validator->errors()]);
@@ -193,9 +197,6 @@ class LoginController extends Controller
     public function studentLogout(Request $request){
     
         Auth::guard('student')->logout();
-       $request->header('Cache-Control', 'no-cache, must-revalidate, no-store, max-age=0, private');
-       $request->header("Pragma:no-cache");
-        $request->header("Expires: Sat,26 Jul 1997 05:00:00: GMT");
         $request->session()->flush();
         $request->session()->regenerate();
         return redirect('/');

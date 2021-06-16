@@ -151,18 +151,12 @@
     
 
     <script>
-        // let image = document.querySelector(".navbar-brand");
-        // image.addEventListener('click', () => {
-        //     axios.get('{{ route('welcome') }}').then(
-        //         (res) => {
-        //             document.location.reload();
-        //         }
-        //     ).catch(
-        //         (error) => {
-        //             console.log(error);
-        //         }
-        //     );
-        // });
+        
+        var perfEntries = performance.getEntriesByType("navigation");
+
+        if (perfEntries[0].type === "back_forward") {
+            location.reload(true);
+        }
     
         $(document).ready(function() {
         
@@ -203,14 +197,9 @@
                         position : "relative",bottom : 0,width:'100%'
                 });
             }
-            //console.log(p)
-            //console.log(h)
-            //console.log(document.documentElement.scrollHeight - 59)
+            
         }
         const resizeObserver = new ResizeObserver(() => {
-            // console.log(document.querySelector('#footer').offsetTop);
-            // console.log(document.documentElement.clientHeight - 59);
-            // console.log(document.documentElement.scrollHeight - 59);
             footer();
         });
 

@@ -1,6 +1,51 @@
 @extends('teachers.layout')
 @section('style')
-    <style></style>
+    <style>
+        /* .loader {
+            padding: 225px;
+            padding-left: 390px;
+            position: relative;
+        }
+        
+        .one {
+            position: absolute;
+            border-radius: 50%;
+            background: #0e0d0d;
+            opacity: .0;
+            animation: loading 1.3s .65s infinite;
+            height: 20px;
+            width: 20px;
+        }
+        
+        .two {
+            position: absolute;
+            border-radius: 50%;
+            background: #FF4081;
+            opacity: .0;
+            animation: loading 1.3s infinite;
+            height: 20px;
+            width: 20px;
+        }
+        
+        
+        @keyframes loading {
+            0% {
+                opacity: .0;
+                transform: scale(.15);
+                box-shadow: 0 0 2px rgba(black, .1);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(2);
+                box-shadow: 0 0 10px rgba(black, .1);
+            }
+            100% {
+                opacity: .0;
+                transform: scale(.15);
+                box-shadow: 0 0 2px rgba(black, .1);
+            }
+        } */
+    </style>
 @endsection
 @section('content')
     <section class="py-8  bg-white">
@@ -8,7 +53,11 @@
             <div class="card shadow-none bg-transparent mb-0">
                     <div class="position-relative">
                         <div dir="ltr" style='max-width: 800px; position: relative; margin: 0 auto; margin-top: 0px; margin-top: 64px;'>
-                            <video class="w-100" id="video" poster="" controls controlsList="nodownload">
+                            {{-- <div class="loader">
+                                <div class="one"></div>
+                                <div class="two"></div>
+                            </div> --}}
+                            <video class="w-100" id="video" poster="" preload="metadata" controls controlsList="nodownload">
                                 Your browser does not support the video tag.
                             </video>
                     
