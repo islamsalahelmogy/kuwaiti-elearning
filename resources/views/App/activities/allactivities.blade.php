@@ -28,11 +28,16 @@
 
                 <p class="show-read-more text-justify mb-lg-2">{{ $activity->description }}</p>
 
-                <div class="">
+                
                     <a href="{{ route('activities.all.show',['id'=>$activity->id]) }}" class="btn btn-sm btn-white text-uppercase mb-1 mr-2 btn-hover-warning w-25">
-                        <i class="fa fa-eye mr-2" aria-hidden="true"></i> عرض
+                        <i class="fa fa-eye mr-2" aria-hidden="true"></i> عرض الأسئلة
                     </a>
-                </div>
+                
+                
+                    <a href="{{ route('activities.all.show.results',['id'=>$activity->id]) }}" class="btn btn-sm btn-white text-uppercase mb-1 mr-2 btn-hover-warning w-25">
+                        <i class="fa fa-eye mr-2" aria-hidden="true"></i> عرض النتائج
+                    </a>
+                
             </div>
         @endforeach
 		</div>

@@ -29,6 +29,6 @@ class Student extends Authenticatable
     ];
     public function activities()
     {
-        return $this->belongsToMany(Activity::class,'student_activity')->withTimestamps();
+        return $this->belongsToMany(Activity::class,'student_activity')->withPivot('result', 'wrong_answer')->as('studentResult')->withTimestamps();
     }
 }

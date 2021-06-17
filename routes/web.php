@@ -143,6 +143,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/activities/topics/teachers','ActivityController@teachers')->name('activities.teachers');
     Route::get('/activities/topics/teachers/allactivities','ActivityController@activities')->name('activities.all');
     Route::get('/activities/topics/teachers/allactivities/activity/{id}','ActivityController@showactivity')->name('activities.all.show');
+    Route::post('/activities/topics/teachers/allactivities/activity/{id}/setresult','ActivityController@setResult')->name('activities.all.show.setResult');
+    Route::get('/activities/topics/teachers/allactivities/activity/{id}/results','ActivityController@results')->name('activities.all.show.results');
 
 
 });

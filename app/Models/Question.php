@@ -11,7 +11,7 @@ class Question extends Model
 
     protected $fillable = 
     [
-        'attach_type','attachment'
+        'attach_type','attachment','question'
     ];
     public function activity()
     {
