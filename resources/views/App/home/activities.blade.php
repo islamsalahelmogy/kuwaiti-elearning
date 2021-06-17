@@ -12,35 +12,37 @@
                     </div>
                 </a>
 
-            <div class="media-body">
-                <h3>
-                    <a class="text-warning" href="{{ route('home.activities.show',['id'=>$activity->id]) }}">
-                        {{ $activity->title }}
-                    </a>
-                </h3>
+                <div class="media-body">
+                    <h3>
+                        <a class="text-warning" href="{{ route('home.activities.show',['id'=>$activity->id]) }}">
+                            {{ $activity->title }}
+                        </a>
+                    </h3>
 
-                <ul class="list-unstyled d-flex text-muted mb-3">
-                    <li>
-                        <i class="fa fa-clock-o mr-2" aria-hidden="true"></i> 
-                            {{ $activity->created_at->locale('Ar')->diffForHumans() }}
-                    </li>
-                </ul>
+                    <ul class="list-unstyled d-flex text-muted mb-3">
+                        <li>
+                            <i class="fa fa-clock-o mr-2" aria-hidden="true"></i> 
+                                {{ $activity->created_at->locale('Ar')->diffForHumans() }}
+                        </li>
+                    </ul>
 
-                <p class="show-read-more text-justify mb-lg-2">{{ $activity->description }}</p>
+                    <p class="show-read-more text-justify mb-lg-2">{{ $activity->description }}</p>
 
-                
-                    <a href="{{ route('home.activities.show',['id'=>$activity->id]) }}" class="btn btn-sm btn-white text-uppercase mb-1 mr-2 btn-hover-warning w-25">
-                        <i class="fa fa-eye mr-2" aria-hidden="true"></i> عرض الأسئلة
-                    </a>
-                
-                
-                    <a href="{{ route('home.activities.show.results',['id'=>$activity->id]) }}" class="btn btn-sm btn-white text-uppercase mb-1 mr-2 btn-hover-warning w-25">
-                        <i class="fa fa-eye mr-2" aria-hidden="true"></i> عرض النتائج
-                    </a>
-                
+                    
+                        <a href="{{ route('home.activities.show',['id'=>$activity->id]) }}" class="btn btn-sm btn-white text-uppercase mb-1 mr-2 btn-hover-warning w-25">
+                            <i class="fa fa-eye mr-2" aria-hidden="true"></i> عرض الأسئلة
+                        </a>
+                    
+                    
+                        <a href="{{ route('home.activities.show.results',['id'=>$activity->id]) }}" class="btn btn-sm btn-white text-uppercase mb-1 mr-2 btn-hover-warning w-25">
+                            <i class="fa fa-eye mr-2" aria-hidden="true"></i> عرض النتائج
+                        </a>
+                    
+                </div>
             </div>
         @endforeach
 		</div>
+    </section>
 @endsection
 @section('script')
     @parent
