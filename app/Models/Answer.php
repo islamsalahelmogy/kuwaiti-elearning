@@ -10,7 +10,7 @@ class Answer extends Model
     use HasFactory;
 
     protected $fillable =[
-       'attach_type' 
+       'attach_type','answer' 
     ];
     public function question()
     {

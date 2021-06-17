@@ -12,6 +12,8 @@ class Activity extends Model
 
     protected $fillable = [
         'title',
+        'published',
+        'description',
     ];
 
     public function topic()
@@ -28,7 +30,7 @@ class Activity extends Model
     }
     public function students()
     {
-        return $this->belongsToMany(Student::class,'student_activity')->withTimestamps();
+        return $this->belongsToMany(Student::class,'student_activity')->withPivot('result', 'wrong_answer')->as('studentResult')->withTimestamps();
     }
     public function questions()
     {
