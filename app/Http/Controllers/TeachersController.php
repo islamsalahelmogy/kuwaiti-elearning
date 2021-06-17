@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Teacher;
 use App\Models\Level;
 use App\Models\Content;
 use App\Models\Activity;
+use App\Models\Answer;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request;
 
 class TeachersController extends Controller
@@ -192,4 +194,55 @@ class TeachersController extends Controller
         return view('app.teachers.activities',compact('activities'));
     }
 
+
+
+public function showactivity($id)
+    {
+        $activity = Activity::find($id);
+        return view('app.teachers.activityShow', compact('activity'));
+    }
+    
+    public function setResult(Request $r, $id) {
+        $activity = Activity::find($id);
+        $totalQuestions = $activity->questions->count();
+        $total = $totalQuestions*5;
+        $result = $total;
+        $rules = [];
+        foreach ($activity->questions as $q) {
+            $rules['question_'.$q->id] = 'required';
+        }
+        $validator = Validator::make($r->all(),$rules,[
+            'required' => " لابد من اختيار اجابة لهذا السؤال"
+        ]);
+        if($validator->fails()){
+            return Redirect::back()->withErrors($validator)->withInput($r->all());
+        } 
+        $i = 1;
+        $wrong_answer = [];
+        foreach($r->all() as $k => $v) {
+            if($k != '_token') {
+                $answer = Answer::find($v);
+                if($answer->correct_answer != 'true'){   
+                    $result -= 5;
+                    $j=$i;
+                    $str = 'س '. strtr(strval($j),array('0'=>'٠','1'=>'١','2'=>'٢','3'=>'٣','4'=>'٤','5'=>'٥','6'=>'٦','7'=>'٧','8'=>'٨','9'=>'٩')) ;
+                    array_push($wrong_answer,$str);
+                }
+                $i++;
+            }
+        }
+        
+        
+        $wrong = implode(',',$wrong_answer);
+        $student = Auth::guard('student')->user();
+        $student->activities()->attach([$activity->id => ['result' => $result , 'wrong_answer' => $wrong ]]);
+        return redirect(route('teachers.activities.show.results',['id'=>$activity->id]));
+        //dd($validator->getMessageBag());
+    }
+    
+    public function results($id) {
+        $activity = Activity::find($id);
+        return view('app.teachers.activitiesResult',compact('activity'));
+
+    }
 }
