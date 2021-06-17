@@ -109,6 +109,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/home/topics/teachers/contents/stories/story/{id}','HomeController@showstory')->name('home.stories.show');
     Route::get('/home/topics/teachers/contents/activites','HomeController@activities')->name('home.activities');
     Route::get('/home/topics/teachers/contents/activites/activity/{id}','HomeController@showactivity')->name('home.activities.show');
+    Route::post('/home/topics/teachers/contents/activites/activity/{id}/setresult','HomeController@setResult')->name('home.activities.show.setResult');
+    Route::get('/home/topics/teachers/contents/activites/activity/{id}/results','HomeController@results')->name('home.activities.show.results');
 
         //teachers
     Route::get('/teacherslevels','TeachersController@index')->name('teacherslevels');
@@ -121,6 +123,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/teacherslevels/teachers/topics/contents/stories/story/{id}','TeachersController@showstory')->name('teachers.stories.show');
     Route::get('/teacherslevels/teachers/topics/contents/activites','TeachersController@activities')->name('teachers.activities');
     Route::get('/teacherslevels/teachers/topics/contents/activites/activity/{id}','TeachersController@showactivity')->name('teachers.activities.show');
+    Route::post('/teacherslevels/teachers/topics/contents/activites/activity/{id}/setresult','TeachersController@setResult')->name('teachers.activities.show.setResult');
+    Route::get('/teacherslevels/teachers/topics/contents/activites/activity/{id}/results','TeachersController@results')->name('teachers.activities.show.results');
 
         //videos
     Route::get('/videos','VideosController@index')->name('videos');

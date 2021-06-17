@@ -79,6 +79,7 @@ class ActivityController extends Controller
         
     
     }
+
     public function showactivity($id)
     {
         $activity = Activity::find($id);

@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Activity;
 use App\Models\Content;
 use App\Models\Level;
+use Illuminate\Support\Facades\Validator;
+use App\Models\Answer;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -168,14 +171,7 @@ class HomeController extends Controller
         //dd($video);
         return view('app.home.storyShow', compact('story'));
     }
-    /*completed */
 
-
-
-
-
-
-    /* not complete activity*/
     public function activities(Request $r) {
         $topicId = $r->topicId;
         $levelId = $r->levelId;
@@ -186,5 +182,57 @@ class HomeController extends Controller
             ['teacher_id',$teacherId],
         ])->get();
         return view('app.home.activities',compact('activities'));
+    }
+
+
+
+    public function showactivity($id)
+    {
+        $activity = Activity::find($id);
+        return view('app.home.activityShow', compact('activity'));
+    }
+    
+    public function setResult(Request $r, $id) {
+        $activity = Activity::find($id);
+        $totalQuestions = $activity->questions->count();
+        $total = $totalQuestions*5;
+        $result = $total;
+        $rules = [];
+        foreach ($activity->questions as $q) {
+            $rules['question_'.$q->id] = 'required';
+        }
+        $validator = Validator::make($r->all(),$rules,[
+            'required' => " لابد من اختيار اجابة لهذا السؤال"
+        ]);
+        if($validator->fails()){
+            return Redirect::back()->withErrors($validator)->withInput($r->all());
+        } 
+        $i = 1;
+        $wrong_answer = [];
+        foreach($r->all() as $k => $v) {
+            if($k != '_token') {
+                $answer = Answer::find($v);
+                if($answer->correct_answer != 'true'){   
+                    $result -= 5;
+                    $j=$i;
+                    $str = 'س '. strtr(strval($j),array('0'=>'٠','1'=>'١','2'=>'٢','3'=>'٣','4'=>'٤','5'=>'٥','6'=>'٦','7'=>'٧','8'=>'٨','9'=>'٩')) ;
+                    array_push($wrong_answer,$str);
+                }
+                $i++;
+            }
+        }
+        
+        
+        $wrong = implode(',',$wrong_answer);
+        $student = Auth::guard('student')->user();
+        $student->activities()->attach([$activity->id => ['result' => $result , 'wrong_answer' => $wrong ]]);
+        return redirect(route('home.activities.show.results',['id'=>$activity->id]));
+        //dd($validator->getMessageBag());
+    }
+    
+    public function results($id) {
+        $activity = Activity::find($id);
+        //dd($activity->students()->orderBy('created_at','DESC')->get());
+        return view('app.home.activitiesResult',compact('activity'));
     }
 }
