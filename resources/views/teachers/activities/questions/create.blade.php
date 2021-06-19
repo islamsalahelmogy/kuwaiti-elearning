@@ -157,14 +157,14 @@
                                             <span class="text-danger ml-1"> الاجابة الثانية </span>
                                         </div>
 
-                                        <div class="col-6 pl-0">
+                                        <div class="col-6 pl-0 mt-2">
                                             <input id="a3"  value="answer3" type="radio" class="gender-input"
                                                 name="correct_answer" {{ old('correct_answer') == 'answer3' ? 'checked' : '' }}>
                                                 <label for="a3" class="gender"></label>
                                             <span class="text-danger ml-1"> الاجابة الثالثة</span>
                                         </div>
 
-                                        <div class="col-6 pl-0">
+                                        <div class="col-6 pl-0 mt-2">
                                             <input id="a4"  value="answer4" type="radio" class="gender-input"
                                                 name="correct_answer" {{ old('correct_answer') == 'answer4' ? 'checked' : '' }}>
                                                 <label for="a4" class="gender"></label>
@@ -204,6 +204,14 @@
                 }
                 if($('span.invalid').length) {
                     $('span.invalid').remove();
+                }
+            })
+            $('.wrapper').hide()
+            $('input[name="attach_type"]').on('change',function () {
+                if($('input#text').prop('checked') == true) {
+                    $('.wrapper').hide()
+                } else {
+                    $('.wrapper').show()
                 }
             })
         })

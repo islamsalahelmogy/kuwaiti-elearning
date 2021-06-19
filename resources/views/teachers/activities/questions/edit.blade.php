@@ -31,40 +31,21 @@
                                         @enderror
                                     </div>
 
-                                    @if($question->attach_type == 'text')
                                     <div class="form-group form-group-icon pl-4 row font-weight-bolder">
                                         <label class="col-4 text-color">نوع السؤال :</label>
                                         <div class="col-4 ">
-                                            <input id="text" value="text" type="radio" class="gender-input"
-                                                name="attach_type" checked>
-                                               <label for="text" class="gender"></label>
+                                            <input id="text" value="text" type="radio" class="answer-input"
+                                                name="attach_type" @if($question->attach_type == 'text') checked @endif>
+                                            <label for="text" class="answer"></label>
                                             <span class="text-danger ml-1">نص</span>
                                         </div>
                                         <div class="col-4 pl-0">
-                                            <input id="image"  value="image" type="radio" class="gender-input"
-                                                name="attach_type">
-                                                <label for="image" class="gender"></label>
+                                            <input id="image"  value="image" type="radio" class="answer-input"
+                                                name="attach_type" @if($question->attach_type == 'image') checked @endif>
+                                                <label for="image" class="answer"></label>
                                             <span class="text-danger ml-1"> صورة</span>
                                         </div>
                                     </div>
-                                    @else
-
-                                    <div class="form-group form-group-icon pl-4 row font-weight-bolder">
-                                        <label class="col-4 text-color">نوع السؤال :</label>
-                                        <div class="col-4 ">
-                                            <input id="text" value="text" type="radio" class="gender-input"
-                                                name="attach_type">
-                                               <label for="text" class="gender"></label>
-                                            <span class="text-danger ml-1">نص</span>
-                                        </div>
-                                        <div class="col-4 pl-0">
-                                            <input id="image"  value="image" type="radio" class="gender-input"
-                                                name="attach_type" checked>
-                                                <label for="image" class="gender"></label>
-                                            <span class="text-danger ml-1"> صورة</span>
-                                        </div>
-                                    </div>
-                                    @endif
 
 
                                     <div class="form-group">
@@ -160,141 +141,41 @@
                                     </div>
 
 
-                                    @if ($answers['0']['correct_answer'] == 'true')
+                                
 
                                     
                                     <div class="form-group form-group-icon pl-4 row font-weight-bolder">
                                         <label class="col-12 text-color"> الاجابة الصحيحة :</label>
                                         <div class="col-6 pl-0">
-                                            <input id="a1" value="answer1" type="radio" class="gender-input"
-                                                name="correct_answer"  checked>
-                                                <label for="a1" class="gender"></label>
+                                            <input id="a1" value="answer1" type="radio" class="answer-input"
+                                                name="correct_answer"  @if ($answers['0']['correct_answer'] == 'true') checked @endif >
+                                                <label for="a1" class="answer"></label>
                                             <span class="text-danger ml-1">الاجابة الاولي</span>
                                         </div>
                                         <div class="col-6 pl-0">
-                                            <input id="a2"  value="answer2" type="radio" class="gender-input"
-                                                name="correct_answer" >
-                                                <label for="a2" class="gender"></label>
+                                            <input id="a2"  value="answer2" type="radio" class="answer-input"
+                                                name="correct_answer" @if ($answers['1']['correct_answer'] == 'true') checked @endif>
+                                                <label for="a2" class="answer"></label>
                                             <span class="text-danger ml-1"> الاجابة الثانية </span>
                                         </div>
 
-                                        <div class="col-6 pl-0">
-                                            <input id="a3"  value="answer3" type="radio" class="gender-input"
-                                                name="correct_answer" >
-                                                <label for="a3" class="gender"></label>
+                                        <div class="col-6 pl-0 mt-2">
+                                            <input id="a3"  value="answer3" type="radio" class="answer-input"
+                                                name="correct_answer" @if ($answers['2']['correct_answer'] == 'true') checked @endif>
+                                                <label for="a3" class="answer"></label>
                                             <span class="text-danger ml-1"> الاجابة الثالثة</span>
                                         </div>
 
-                                        <div class="col-6 pl-0">
-                                            <input id="a4"  value="answer4" type="radio" class="gender-input"
-                                                name="correct_answer" >
-                                                <label for="a4" class="gender"></label>
+                                        <div class="col-6 pl-0 mt-2">
+                                            <input id="a4"  value="answer4" type="radio" class="answer-input"
+                                                name="correct_answer" @if ($answers['3']['correct_answer'] == 'true') checked @endif>
+                                                <label for="a4" class="answer"></label>
                                             <span class="text-danger ml-1"> الاجابة الرابعة</span>
                                         </div>
                                     </div>
 
 
-                                    @elseif ($answers['1']['correct_answer'] == 'true')
-
-                                    <div class="form-group form-group-icon pl-4 row font-weight-bolder">
-                                        <label class="col-12 text-color"> الاجابة الصحيحة :</label>
-                                        <div class="col-6 pl-0">
-                                            <input id="a1" value="answer1" type="radio" class="gender-input"
-                                                name="correct_answer">
-                                                <label for="a1" class="gender"></label>
-                                            <span class="text-danger ml-1">الاجابة الاولي</span>
-                                        </div>
-                                        <div class="col-6 pl-0">
-                                            <input id="a2"  value="answer2" type="radio" class="gender-input"
-                                                name="correct_answer" checked >
-                                                <label for="a2" class="gender"></label>
-                                            <span class="text-danger ml-1"> الاجابة الثانية </span>
-                                        </div>
-
-                                        <div class="col-6 pl-0">
-                                            <input id="a3"  value="answer3" type="radio" class="gender-input"
-                                                name="correct_answer" >
-                                                <label for="a3" class="gender"></label>
-                                            <span class="text-danger ml-1"> الاجابة الثالثة</span>
-                                        </div>
-
-                                        <div class="col-6 pl-0">
-                                            <input id="a4"  value="answer4" type="radio" class="gender-input"
-                                                name="correct_answer" >
-                                                <label for="a4" class="gender"></label>
-                                            <span class="text-danger ml-1"> الاجابة الرابعة</span>
-                                        </div>
-                                    </div>
-
-
-
-                                    @elseif ($answers['2']['correct_answer'] == 'true')
-
-                                      <div class="form-group form-group-icon pl-4 row font-weight-bolder">
-                                        <label class="col-12 text-color"> الاجابة الصحيحة :</label>
-                                        <div class="col-6 pl-0">
-                                            <input id="a1" value="answer1" type="radio" class="gender-input"
-                                                name="correct_answer">
-                                                <label for="a1" class="gender"></label>
-                                            <span class="text-danger ml-1">الاجابة الاولي</span>
-                                        </div>
-                                        <div class="col-6 pl-0">
-                                            <input id="a2"  value="answer2" type="radio" class="gender-input"
-                                                name="correct_answer"  >
-                                                <label for="a2" class="gender"></label>
-                                            <span class="text-danger ml-1"> الاجابة الثانية </span>
-                                        </div>
-
-                                        <div class="col-6 pl-0">
-                                            <input id="a3"  value="answer3" type="radio" class="gender-input"
-                                                name="correct_answer" checked >
-                                                <label for="a3" class="gender"></label>
-                                            <span class="text-danger ml-1"> الاجابة الثالثة</span>
-                                        </div>
-
-                                        <div class="col-6 pl-0">
-                                            <input id="a4"  value="answer4" type="radio" class="gender-input"
-                                                name="correct_answer" >
-                                                <label for="a4" class="gender"></label>
-                                            <span class="text-danger ml-1"> الاجابة الرابعة</span>
-                                        </div>
-                                    </div>
-
-
-
-                                    @else
-
-                                    <div class="form-group form-group-icon pl-4 row font-weight-bolder">
-                                        <label class="col-12 text-color"> الاجابة الصحيحة :</label>
-                                        <div class="col-6 pl-0">
-                                            <input id="a1" value="answer1" type="radio" class="gender-input"
-                                                name="correct_answer">
-                                                <label for="a1" class="gender"></label>
-                                            <span class="text-danger ml-1">الاجابة الاولي</span>
-                                        </div>
-                                        <div class="col-6 pl-0">
-                                            <input id="a2"  value="answer2" type="radio" class="gender-input"
-                                                name="correct_answer"  >
-                                                <label for="a2" class="gender"></label>
-                                            <span class="text-danger ml-1"> الاجابة الثانية </span>
-                                        </div>
-
-                                        <div class="col-6 pl-0">
-                                            <input id="a3"  value="answer3" type="radio" class="gender-input"
-                                                name="correct_answer" >
-                                                <label for="a3" class="gender"></label>
-                                            <span class="text-danger ml-1"> الاجابة الثالثة</span>
-                                        </div>
-
-                                        <div class="col-6 pl-0">
-                                            <input id="a4"  value="answer4" type="radio" class="gender-input"
-                                                name="correct_answer" checked >
-                                                <label for="a4" class="gender"></label>
-                                            <span class="text-danger ml-1"> الاجابة الرابعة</span>
-                                        </div>
-                                    </div>
-
-                                    @endif
+                                    
 
                                     <div class="form-group font-weight-bolder">
                                         <button type="submit" 
@@ -328,6 +209,13 @@
                 }
                 if($('span.invalid').length) {
                     $('span.invalid').remove();
+                }
+            })
+            $('input[name="attach_type"]').on('change',function () {
+                if($('input#text').prop('checked') == true) {
+                    $('.wrapper').hide()
+                } else {
+                    $('.wrapper').show()
                 }
             })
         })

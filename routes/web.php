@@ -216,6 +216,6 @@ Route::middleware('auth')->group(function () {
 //     return view('students.password.index');
 // })->name('students.password.edit');
 
-Route::get('/teachers/dashboard',function () {
-    return view('teachers.teacher.index');
-})->name('teachers.teacher.index');
+// Route::get('/teachers/dashboard',function () {
+//     return view('teachers.teacher.index');
+// })->name('teachers.teacher.index');
