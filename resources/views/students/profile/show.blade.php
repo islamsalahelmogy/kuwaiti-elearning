@@ -7,7 +7,7 @@
                     <div class="card bg-danger card-hover col-12">
                         <div class="card-body text-center px-md-5 px-lg-6 my-2">
                             <div class="card-icon-border-large border-danger mtn-80">
-                                <img class="" src="@if($student->gender == 'male') {{ asset('img/kidsmale.png') }} @else {{ asset('img/kidsfemale.png') }} @endif" alt="male.jpg">
+                                <img class="" src="@if($student->gender == 'male') {{ asset('img/kidsmale.png') }} @else {{ asset('img/kidsfemale.jpg') }} @endif" alt="male.jpg">
                             </div>
                             <blockquote class="blockquote blockquote-sm mt-2">
                                 <p class="font-normal mb-5"> 
