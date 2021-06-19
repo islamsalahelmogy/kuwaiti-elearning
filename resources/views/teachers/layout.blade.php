@@ -30,6 +30,10 @@
     cursor:pointer;
     display:none;
     }
+
+    .list-fullwidth .media-list-view .media-img .media-img-overlay { 
+            padding:6.25rem;
+        }
 </style>
 @endsection
 @section('topBar')
@@ -146,10 +150,10 @@
             @endif">
                 <a class="scroll-link" href="{{ route('teacher.stories') }}"><i class="fa fa-book mx-2"></i>القصص</a>
             </li>
-            <li class ="@if(str_contains(Route::currentRouteName(),'activit'))
+            <li class ="@if(str_contains(Route::currentRouteName(),'test') || str_contains(Route::currentRouteName(),'ques'))
                 active
             @endif">
-                <a class="scroll-link" href="{{-- {{ route('teacher.activities') }} --}}"><i class="fa fa-question-circle mx-2"></i>الأنشطة</a>
+                <a class="scroll-link" href=" {{ route('test.index') }} "><i class="fa fa-question-circle mx-2"></i>الأنشطة</a>
             </li>
             <li class ="@if (str_contains(Route::currentRouteName(),'password'))
                 active

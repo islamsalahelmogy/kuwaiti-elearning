@@ -70,7 +70,6 @@ Route::get('/', function () {
     Route::get('/teacher/password/edit','TeacherController@editPassword')->name('teacher.password.edit');
     Route::post('/teacher/password/update','TeacherController@updatePassword')->name('teacher.password.update');
     Route::get('/teacher/story/get/{id}', 'TeacherStoryController@storyGet')->middleware('isteacher:teacher')->name('story.get');
-    Route::view('/questions', 'teachers.activities.questions.create');
     //Route::get('/teacher/question', 'TeacherStoryController@storyGet')->middleware('isteacher:teacher')->name('story.get');
     // student routes
 
@@ -165,6 +164,23 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/level/edit/{id}', 'LevelController@edit')->name('level.edit')->middleware('isadmin:teacher');
     Route::post('/admin/level/update/{id}', 'LevelController@update')->name('level.update')->middleware('isadmin:teacher');
     Route::get('/admin/level/delete/{id}', 'LevelController@destroy')->name('level.delete')->middleware('isadmin:teacher');
+    
+    //test routes
+    Route::get('/admin/test/create', 'TestController@create')->name('test.create')->middleware('isadmin:teacher');
+    Route::post('/admin/test/store', 'TestController@store')->name('test.store')->middleware('isadmin:teacher');
+    Route::get('/admin/test/index','TestController@index')->name('test.index')->middleware('isadmin:teacher');
+    Route::get('/admin/test/edit/{id}', 'TestController@edit')->name('test.edit')->middleware('isadmin:teacher');
+    Route::post('/admin/test/update/{id}', 'TestController@update')->name('test.update')->middleware('isadmin:teacher');
+    Route::get('/admin/test/delete/{id}', 'TestController@destroy')->name('test.delete')->middleware('isadmin:teacher');
+    Route::get('/admin/test/result/{id}', 'TestController@result')->name('test.result')->middleware('isadmin:teacher');
+
+    //questions crud routes
+    Route::get('/admin/question/create/{id}', 'QuestionController@create')->name('question.create')->middleware('isadmin:teacher');
+    Route::post('/admin/question/store/{id}', 'QuestionController@store')->name('question.store')->middleware('isadmin:teacher');
+    Route::get('/admin/question/index/{id}','QuestionController@index')->name('question.index')->middleware('isadmin:teacher');
+    Route::get('/admin/question/edit/{id}', 'QuestionController@edit')->name('question.edit')->middleware('isadmin:teacher');
+    Route::post('/admin/question/update/{id}', 'QuestionController@update')->name('question.update')->middleware('isadmin:teacher');
+    Route::get('/admin/question/delete/{id}', 'QuestionController@destroy')->name('question.delete')->middleware('isadmin:teacher');
 
 
 
