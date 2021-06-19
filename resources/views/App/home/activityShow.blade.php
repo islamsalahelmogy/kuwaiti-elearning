@@ -49,7 +49,7 @@
             
             <div class="col-sm-10 offset-sm-1">
             @auth('student')
-                <form method="post" action="{{ route('activities.all.show.setResult',['id'=>$activity->id]) }}">
+                <form method="post" action="{{ route('home.activities.show.setResult',['id'=>$activity->id]) }}">
                     @csrf
             @endauth
                     @foreach($activity->questions as $q) 

@@ -24,6 +24,7 @@
 
 .rememberMe,
 .gender,
+.answer,
 .log {
     margin-bottom: 0;
     vertical-align: top;
@@ -39,7 +40,7 @@
     align-items: center;
     padding-top: 0;
 }
-
+.answer-input,
 .rememberMe-input,
 .gender-input,
 .log-input {
@@ -54,7 +55,7 @@
     position: absolute;
     opacity: 0;
 }
-
+.answer:before,
 .gender:before {
     border-radius: 50%;
     -webkit-border-radius: 50%;
@@ -72,6 +73,7 @@
 }
 
 .rememberMe:before,
+.answer:before,
 .gender:before,
 .log::before {
     position: absolute;
@@ -91,12 +93,14 @@
 
 .rememberMe-input:checked ~ .rememberMe:before,
 .gender-input:checked ~ .gender:before,
+.answer-input:checked ~ .answer:before,
 .log-input:checked ~ .log::before {
     border-color: #fd3741;
     background: #fd3741;
 }
 
 .rememberMe:after,
+.answer:after,
 .gender:after,
 .log:after {
     top: 0.25rem;
@@ -118,6 +122,7 @@
 
 .rememberMe-input:checked ~ .rememberMe:after,
 .gender-input:checked ~ .gender:after,
+.answer-input:checked ~ .answer:after,
 .log-input:checked ~ .log:after {
     content: "\2713";
     color: #fff;

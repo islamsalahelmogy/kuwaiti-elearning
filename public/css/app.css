@@ -14886,6 +14886,7 @@ html[dir="rtl"]
 
 .rememberMe,
 .gender,
+.answer,
 .log {
     margin-bottom: 0;
     vertical-align: top;
@@ -14897,7 +14898,7 @@ html[dir="rtl"]
     align-items: center;
     padding-top: 0;
 }
-
+.answer-input,
 .rememberMe-input,
 .gender-input,
 .log-input {
@@ -14912,7 +14913,7 @@ html[dir="rtl"]
     position: absolute;
     opacity: 0;
 }
-
+.answer:before,
 .gender:before {
     border-radius: 50%;
     -webkit-border-radius: 50%;
@@ -14930,6 +14931,7 @@ html[dir="rtl"]
 }
 
 .rememberMe:before,
+.answer:before,
 .gender:before,
 .log::before {
     position: absolute;
@@ -14949,12 +14951,14 @@ html[dir="rtl"]
 
 .rememberMe-input:checked ~ .rememberMe:before,
 .gender-input:checked ~ .gender:before,
+.answer-input:checked ~ .answer:before,
 .log-input:checked ~ .log::before {
     border-color: #fd3741;
     background: #fd3741;
 }
 
 .rememberMe:after,
+.answer:after,
 .gender:after,
 .log:after {
     top: 0.25rem;
@@ -14975,6 +14979,7 @@ html[dir="rtl"]
 
 .rememberMe-input:checked ~ .rememberMe:after,
 .gender-input:checked ~ .gender:after,
+.answer-input:checked ~ .answer:after,
 .log-input:checked ~ .log:after {
     content: "\2713";
     color: #fff;
@@ -15085,6 +15090,4 @@ html[dir="rtl"]
     -o-border-radius: 5px;
 }
 
-.bg-graylight{
-  background-color: rgb(241, 235, 235);
-}
+

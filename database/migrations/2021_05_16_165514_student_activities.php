@@ -17,6 +17,7 @@ class StudentActivities extends Migration
             $table->id();
             $table->unsignedBigInteger('activity_id')->nullable();
             $table->unsignedBigInteger('student_id')->nullable();
+            $table->string('wrong_answer');
             $table->unsignedDecimal('result');
             $table->timestamps();
 

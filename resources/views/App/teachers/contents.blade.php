@@ -55,7 +55,7 @@
                 </div>
             </a>
         @endif
-        @if (in_array('activites', $types))   
+        @if (in_array('activities', $types))   
             <a class="square my-8 mx-10" 
                 href="{{ route('teachers.activities',['levelId'=>$levelId,'topicId' => $topicId , 'teacherId' => $teacherId , 'type' => 'activities']) }}">
                 <span></span>
