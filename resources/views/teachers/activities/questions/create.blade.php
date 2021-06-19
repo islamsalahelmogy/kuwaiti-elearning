@@ -14,16 +14,11 @@
                                 <form action="{{route('question.store',['id'=> $activity_id])}}" method="POST" role="form" enctype="multipart/form-data">
                                     @csrf
                                     
-                                    <div class="form-group form-group-icon">
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-append">
-                                                <span class="input-group-text border-right-0"
-                                                    id="basic-addon2">اكتب السؤال</span>
-                                            </div>
-                                            <input type="text" name="question" value="{{ old('question') }}"class="form-control
-                                                @error('question') is-invalid @enderror"
-                                                autocomplete="question" dir="rtl">
-                                        </div>
+                                    <div class="form-group">
+                                        <label for="exampleFormControlTextarea1" 
+                                            style="color: #495057;padding-right: 13px;font-weight: 600;">أكتب السؤال</label>
+                                        <textarea class="form-control @error('question')  is-invalid @enderror" id="exampleFormControlTextarea1" 
+                                            rows="3" name="question">{{ old('question') }}</textarea>
                                         @error('question')
                                         <span id="question" class="invalid-feedback d-block px-2 font-weight-bolder" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -69,16 +64,11 @@
                                         @enderror
                                     </div>
 
-                                    <div class="form-group form-group-icon">
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-append">
-                                                <span class="input-group-text border-right-0"
-                                                    id="basic-addon2"> الاجابة الاولي</span>
-                                            </div>
-                                            <input type="text" name="answer1" value="{{ old('answer1') }}"class="form-control
-                                                @error('answer1') is-invalid @enderror"
-                                                autocomplete="answer1" dir="rtl">
-                                        </div>
+                                    <div class="form-group">
+                                        <label for="exampleFormControlTextarea2" 
+                                            style="color: #495057;padding-right: 13px;font-weight: 600;"> الاجابة الاولي</label>
+                                        <textarea class="form-control @error('answer1')  is-invalid @enderror" id="exampleFormControlTextarea2" 
+                                            rows="2" name="answer1">{{ old('answer1') }}</textarea>
                                         @error('answer1')
                                         <span id="answer1" class="invalid-feedback d-block px-2 font-weight-bolder" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -88,15 +78,10 @@
 
 
                                     <div class="form-group form-group-icon">
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-append">
-                                                <span class="input-group-text border-right-0"
-                                                    id="basic-addon2"> الاجابة  الثانية</span>
-                                            </div>
-                                            <input type="text" name="answer2" value="{{ old('answer2') }}"class="form-control
-                                                @error('answer2') is-invalid @enderror"
-                                                autocomplete="answer2" dir="rtl">
-                                        </div>
+                                        <label for="exampleFormControlTextarea3" 
+                                            style="color: #495057;padding-right: 13px;font-weight: 600;"> الاجابة الثانية</label>
+                                        <textarea class="form-control @error('answer2')  is-invalid @enderror" id="exampleFormControlTextarea3" 
+                                            rows="2" name="answer2">{{ old('answer2') }}</textarea>
                                         @error('answer2')
                                         <span id="answer2" class="invalid-feedback d-block px-2 font-weight-bolder" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -105,16 +90,11 @@
                                     </div>
 
 
-                                    <div class="form-group form-group-icon">
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-append">
-                                                <span class="input-group-text border-right-0"
-                                                    id="basic-addon2"> الاجابة  الثالثة</span>
-                                            </div>
-                                            <input type="text" name="answer3" value="{{ old('answer3') }}"class="form-control
-                                                @error('answer3') is-invalid @enderror"
-                                                autocomplete="answer3" dir="rtl">
-                                        </div>
+                                    <div class="form-group">
+                                        <label for="exampleFormControlTextarea4" 
+                                            style="color: #495057;padding-right: 13px;font-weight: 600;"> الاجابة الثالثة</label>
+                                        <textarea class="form-control @error('answer3')  is-invalid @enderror" id="exampleFormControlTextarea4" 
+                                            rows="2" name="answer3">{{ old('answer3') }}</textarea>
                                         @error('answer3')
                                         <span id="answer3" class="invalid-feedback d-block px-2 font-weight-bolder" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -123,16 +103,11 @@
                                     </div>
 
 
-                                    <div class="form-group form-group-icon">
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-append">
-                                                <span class="input-group-text border-right-0"
-                                                    id="basic-addon2"> الاجابة  الرابعة</span>
-                                            </div>
-                                            <input type="text" name="answer4" value="{{ old('answer4') }}"class="form-control
-                                                @error('answer4') is-invalid @enderror"
-                                                autocomplete="answer4" dir="rtl">
-                                        </div>
+                                    <div class="form-group">
+                                        <label for="exampleFormControlTextarea5" 
+                                            style="color: #495057;padding-right: 13px;font-weight: 600;"> الاجابة الرابعة</label>
+                                        <textarea class="form-control @error('answer4')  is-invalid @enderror" id="exampleFormControlTextarea5" 
+                                            rows="2" name="answer4">{{ old('answer4') }}</textarea>
                                         @error('answer4')
                                         <span id="answer4" class="invalid-feedback d-block px-2 font-weight-bolder" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -170,6 +145,11 @@
                                                 <label for="a4" class="gender"></label>
                                             <span class="text-danger ml-1"> الاجابة الرابعة</span>
                                         </div>
+                                        @error('correct_answer')
+                                            <span id="correct_answer" class="invalid-feedback d-block px-2 font-weight-bolder" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
 
                                     <div class="form-group font-weight-bolder">
@@ -202,11 +182,18 @@
                     input.removeClass('is-invalid');
                     $('#'+input.attr('name')).remove();
                 }
+                if(input.attr('type') == 'radio') {
+                    $('#'+input.attr('name')).remove();
+                }
                 if($('span.invalid').length) {
                     $('span.invalid').remove();
                 }
             })
-            $('.wrapper').hide()
+            if($('input#text').prop('checked') == true) {
+                $('.wrapper').hide()
+            } else {
+                $('.wrapper').show()
+            }
             $('input[name="attach_type"]').on('change',function () {
                 if($('input#text').prop('checked') == true) {
                     $('.wrapper').hide()
