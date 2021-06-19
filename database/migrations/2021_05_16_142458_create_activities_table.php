@@ -19,7 +19,7 @@ class CreateActivitiesTable extends Migration
             $table->unsignedBigInteger('topic_id')->nullable();
             $table->unsignedBigInteger('level_id')->nullable();
             $table->unsignedBigInteger('teacher_id')->nullable();
-            $table->enum('published',['true','false']);
+            $table->enum('published', ['true','false']);
             $table->text('description');
             $table->timestamps();
 

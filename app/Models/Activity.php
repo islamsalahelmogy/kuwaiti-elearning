@@ -13,7 +13,7 @@ class Activity extends Model
     protected $fillable = [
         'title',
         'published',
-        'description',
+        'description'
     ];
 
     public function topic()
