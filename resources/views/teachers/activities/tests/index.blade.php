@@ -3,6 +3,18 @@
 @section('content')
     <section class="py-4 list-fullwidth">
         <div class="container">
+
+
+        <div class="section-title justify-content-center mb-4 mb-md-8">
+            <a class="btn btn-info font-size-20 font-weight-medium d-block"
+                href="{{ route('test.create') }}">إضافة نشاط جديد</a>
+        </div>
+        <div class="section-title justify-content-center mb-4 mb-md-8">
+                <span class="shape shape-left bg-info"></span>
+                    <h2 class="text-danger">الانشطة</h2>
+                <span class="shape shape-right bg-info"></span>
+        </div>
+
             @foreach ($activities as $activity)
                 <div class="media media-list-view mb-5">
                     <a class="media-img" href="{{ route('question.index',['id'=>$activity->id]) }}">

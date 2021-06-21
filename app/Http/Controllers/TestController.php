@@ -149,7 +149,7 @@ class TestController extends Controller
         if (is_dir(public_path('storage\activities\\' . $teacher_id.'\\'.$activity->id )) == true) {
             File::deleteDirectory(public_path('storage\activities\\' . $teacher_id.'\\'.$activity->id ));
         }
-        $activity->students->dettach();
+        $activity->students()->detach();
         $activity->delete();
         return redirect(route('test.index'));
     }
