@@ -1,7 +1,7 @@
 @extends('teachers.layout')
 
 @section('content')
-    <section class="py-4 list-fullwidth">
+    <section class="py-8 list-fullwidth">
         <div class="container">
 
 
