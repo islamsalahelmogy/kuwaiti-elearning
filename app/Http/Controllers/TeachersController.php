@@ -205,7 +205,7 @@ public function showactivity($id)
     public function setResult(Request $r, $id) {
         $activity = Activity::find($id);
         $totalQuestions = $activity->questions->count();
-        $total = $totalQuestions*5;
+        $total = $totalQuestions;
         $result = $total;
         $rules = [];
         foreach ($activity->questions as $q) {
@@ -223,7 +223,7 @@ public function showactivity($id)
             if($k != '_token') {
                 $answer = Answer::find($v);
                 if($answer->correct_answer != 'true'){   
-                    $result -= 5;
+                    $result -= 1;
                     $j=$i;
                     $str = 'س '. strtr(strval($j),array('0'=>'٠','1'=>'١','2'=>'٢','3'=>'٣','4'=>'٤','5'=>'٥','6'=>'٦','7'=>'٧','8'=>'٨','9'=>'٩')) ;
                     array_push($wrong_answer,$str);
