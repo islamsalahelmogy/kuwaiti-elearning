@@ -23,7 +23,7 @@
                         <div class="form-group font-weight-bolder">
                             <a class=" btn btn-danger text-uppercase w-100 " href="javascript:void(0)"
                                 data-dismiss="modal" data-toggle="modal"
-                                data-target="#modal-register-st">
+                                data-target="#modal-student-login">
                                 الطالب
                             </a>
                         </div>
@@ -139,18 +139,6 @@
                                         ">
                                             أنشئ حسابك
                                         </button>
-                                    </div>
-                                    <div class="
-                                        form-group
-                                        text-center text-secondary
-                                        mb-0
-                                        font-weight-bolder
-                                    ">
-                                        <p class="mb-0">
-                                            إذا كنت تمتلك حساب ؟
-                                            <a class="text-danger" href="javascript:void(0)" data-dismiss="modal"
-                                                data-toggle="modal" data-target="#modal-student-login">سجل الآن</a>
-                                        </p>
                                     </div>
                                 </form>
                     </div>
@@ -415,7 +403,18 @@
                                         السر؟</a>
                                 </div>
                             </div>
-
+                            <div class="
+                                        form-group
+                                        text-center text-secondary
+                                        mb-0
+                                        font-weight-bolder
+                                    ">
+                                        <p class="mb-0">
+                                            إذا كنت لا تمتلك حساب ؟
+                                            <a class="text-danger" href="javascript:void(0)" data-dismiss="modal"
+                                                data-toggle="modal" data-target="#modal-register-st">إنشئ حساب الآن</a>
+                                        </p>
+                            </div>
                         </form>
                     </div>
                 </div>
