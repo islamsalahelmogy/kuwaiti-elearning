@@ -105,6 +105,14 @@
         
 
         <ul class="list-unstyled menu-elements mt-7 text-left">
+
+
+            <li class ="@if (str_contains(Route::currentRouteName(),'home'))
+                active
+            @endif">
+                <a class="scroll-link" href="{{ route('home') }}"><i class="fa fa-user mx-2"></i>الصفحة الرأيسية</a>
+            </li>
+
             <li class ="@if (str_contains(Route::currentRouteName(),'dashboard'))
                 active
             @endif">
@@ -134,7 +142,7 @@
             <li class ="@if (str_contains(Route::currentRouteName(),'level'))
                 active
             @endif">
-                <a class="scroll-link" href=" {{ route('level.index') }} "><i class="fa fa-pencil mx-2"></i>المستوي</a>
+                <a class="scroll-link" href=" {{ route('level.index') }} "><i class="fa fa-pencil mx-2"></i>المرحلة التعليمية</a>
             </li>
             @endif
 
@@ -185,7 +193,7 @@
         <div class="row py-4 align-items-center">
             <div class="col-sm-6 offset-sm-3">
                 <p class="copyright-text text-center">
-                    جميع الحقوق محفوظة © 2021
+                    جميع الحقوق محفوظة  Kuwaiti-kids-e-learning © 2021
                 </p>
             </div>
         </div>

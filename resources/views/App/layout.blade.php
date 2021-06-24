@@ -220,7 +220,7 @@
         <div class="row py-4 align-items-center">
             <div class="col-sm-6 offset-sm-3">
                 <p class="copyright-text text-center">
-                    جميع الحقوق محفوظة © 2021
+                    جميع الحقوق محفوظة  Kuwaiti-kids-e-learning © 2021              
                 </p>
             </div>
         </div>

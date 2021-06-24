@@ -9,11 +9,11 @@
     <div class="container">
         <div class="section-title justify-content-center mb-4 mb-md-8">
             <a class="btn btn-info font-size-20 font-weight-medium d-block"
-                href="{{ route('level.create') }}">إضافة مستوي جديد</a>
+                href="{{ route('level.create') }}">إضافة مرحلة تعليمية جديدة</a>
         </div>
         <div class="section-title justify-content-center mb-4 mb-md-8">
             <span class="shape shape-left bg-info"></span>
-            <h2 class="text-danger">المستويات</h2>
+            <h2 class="text-danger">المراحل التعليمية</h2>
             <span class="shape shape-right bg-info"></span>
         </div>
 

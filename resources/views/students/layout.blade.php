@@ -73,6 +73,15 @@
             @endif">
                 <a class="scroll-link" href="{{ route('student.dashboard') }}"><i class="fa fa-user mx-2"></i>الصفحة الشخصية</a>
             </li>
+
+
+            <li class ="@if (str_contains(Route::currentRouteName(),'home'))
+                active
+            @endif">
+                <a class="scroll-link" href="{{ route('home') }}"><i class="fa fa-user mx-2"></i>الصفحة الرأيسية</a>
+            </li>
+
+
             <li class ="@if (str_contains(Route::currentRouteName(),'password'))
                 active
             @endif">
@@ -102,7 +111,7 @@
         <div class="row py-4 align-items-center">
             <div class="col-sm-6 offset-sm-3">
                 <p class="copyright-text text-center">
-                    جميع الحقوق محفوظة © 2021
+                    جميع الحقوق محفوظة  Kuwaiti-kids-e-learning © 2021              
                 </p>
             </div>
         </div>

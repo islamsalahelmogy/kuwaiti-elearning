@@ -8,7 +8,7 @@
             <div class="col-10 col-sm-8 col-md-6 col-lg-4 offset-1 offset-sm-2 offset-md-3 offset-lg-4 row">
                 <div class="mb-4 mb-sm-0">
                         <h1 class="element-title font-weight-bold text-center mb-1">
-                            تعديل المستوي
+                            تعديل المرحلة التعليمية 
                         </h1>
 
                         <div class="border rounded-bottom-md border-top-0">
