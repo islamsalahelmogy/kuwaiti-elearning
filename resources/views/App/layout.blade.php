@@ -160,7 +160,7 @@
     </div>
 @endsection
 @section('navbar')
-    <nav class="
+<nav class="
         navbar
         navbar-expand-md
         navbar-scrollUp
