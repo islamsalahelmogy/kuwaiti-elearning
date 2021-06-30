@@ -110,7 +110,7 @@
             <li class ="@if (str_contains(Route::currentRouteName(),'home'))
                 active
             @endif">
-                <a class="scroll-link" href="{{ route('home') }}"><i class="fa fa-user mx-2"></i>الصفحة الرأيسية</a>
+                <a class="scroll-link" href="{{ route('home') }}"><i class="fa fa-home mx-2"></i>الصفحة الرئيسية</a>
             </li>
 
             <li class ="@if (str_contains(Route::currentRouteName(),'dashboard'))
