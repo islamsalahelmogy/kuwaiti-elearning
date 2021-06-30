@@ -119,7 +119,7 @@
                         data-fontsize="['25', '23', '23', '23']" data-lineheight="['30', '25', '25', '25']"
                         data-color="#FFF" data-textAlign="center" data-basealign="grid" data-responsive_offset="off"
                         data-type="text" data-whitespace="normal" style="z-index: 10">
-                        الموقع الأمثل للمعلمين لتدريس ومتابعة الطلاب أونلاين
+                        الموقع الأمثل لأطفال الروضة و للمعلمين لتدريس ومتابعة الاطفال أونلاين
                     </div>                    
                 </li>
     
