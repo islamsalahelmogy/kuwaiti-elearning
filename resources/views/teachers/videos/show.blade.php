@@ -57,7 +57,7 @@
                                 <div class="one"></div>
                                 <div class="two"></div>
                             </div> --}}
-                            <video class="w-100" id="video" poster="" preload="metadata" controls controlsList="nodownload">
+                            <video class="w-100" id="video" poster="{{ asset('img/video.jpg') }}" preload="metadata" controls controlsList="nodownload">
                                 Your browser does not support the video tag.
                             </video>
                     

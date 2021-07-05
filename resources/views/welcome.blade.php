@@ -76,7 +76,7 @@
                     </li>
                     <li class="nav-item dropdown bg-danger">
                         <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-dismiss="modal"
-                            data-toggle="modal" data-target="#modal-student-login">
+                            data-toggle="modal" data-target="#modal-login-t">
                             <i class="fa fa-sign-in nav-icon" aria-hidden="true"></i>
                             <span>تسجيل دخول المدرس</span>
                         </a>

@@ -34,6 +34,9 @@
     .list-fullwidth .media-list-view .media-img .media-img-overlay { 
             padding:6.25rem;
         }
+    video {
+            object-fit : cover;
+        }
 </style>
 @endsection
 @section('topBar')

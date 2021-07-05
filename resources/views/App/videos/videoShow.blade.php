@@ -5,7 +5,7 @@
             <div class="card shadow-none bg-transparent mb-0">
                     <div class="position-relative">
                         <div dir="ltr" style='max-width: 800px; position: relative; margin: 0 auto; margin-top: 0px; margin-top: 64px;'>
-                            <video class="w-100" id="video" poster="" controls controlsList="nodownload">
+                            <video class="w-100" id="video" poster="{{ asset('img/video.jpg') }}" controls controlsList="nodownload">
                                 Your browser does not support the video tag.
                             </video>
                     

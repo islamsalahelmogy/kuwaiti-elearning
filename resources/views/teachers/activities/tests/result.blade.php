@@ -35,10 +35,10 @@
                     @foreach ($activity->students()->orderBy('created_at','DESC')->get() as $student)
                         <tr>
                             <td class="td-product-name">{{ $student->name }}</td>
-                            <td>{{strtr(strval($activity->questions->count() ),array('0'=>'٠','1'=>'١','2'=>'٢','3'=>'٣','4'=>'٤','5'=>'٥','6'=>'٦','7'=>'٧','8'=>'٨','9'=>'٩')) }}</td>
+                            <td>{{strtr(strval($activity->questions->count()),array('0'=>'٠','1'=>'١','2'=>'٢','3'=>'٣','4'=>'٤','5'=>'٥','6'=>'٦','7'=>'٧','8'=>'٨','9'=>'٩')) }}</td>
                             <td>{{ $student->studentResult->wrong_answer }}</td>
                             <td>{{strtr(strval($student->studentResult->result + 0),array('0'=>'٠','1'=>'١','2'=>'٢','3'=>'٣','4'=>'٤','5'=>'٥','6'=>'٦','7'=>'٧','8'=>'٨','9'=>'٩')) }}</td>
-                            <td>{{strtr(strval($activity->questions->count()*5),array('0'=>'٠','1'=>'١','2'=>'٢','3'=>'٣','4'=>'٤','5'=>'٥','6'=>'٦','7'=>'٧','8'=>'٨','9'=>'٩')) }}</td>
+                            <td>{{strtr(strval($activity->questions->count()),array('0'=>'٠','1'=>'١','2'=>'٢','3'=>'٣','4'=>'٤','5'=>'٥','6'=>'٦','7'=>'٧','8'=>'٨','9'=>'٩')) }}</td>
                         </tr>
                     @endforeach
                 </tbody>
