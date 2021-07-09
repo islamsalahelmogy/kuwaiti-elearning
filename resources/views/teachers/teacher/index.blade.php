@@ -439,11 +439,7 @@
                             
                             }else{
                                 $('#modal-admin-Edit-teacher').modal('hide');
-<<<<<<< HEAD
-                                window.location.replace("http://127.0.0.1:8000/admin/teacher/index");
-=======
                                 window.location.replace("{{ route("admin.teacher.index") }}");
->>>>>>> main2/master
                             
                             }
                         })
