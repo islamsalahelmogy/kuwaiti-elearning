@@ -116,11 +116,7 @@
                         }
                     }else {
                         
-<<<<<<< HEAD
-                        window.location.replace("http://127.0.0.1:8000/student/dashboard");
-=======
                         window.location.replace("{{ route("student.dashboard") }}");
->>>>>>> main2/master
                     }
                 })
             })

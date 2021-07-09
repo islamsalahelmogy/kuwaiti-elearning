@@ -24,11 +24,7 @@
                         	<div class="col-sm-6 col-lg-3 col-xs-12">
                                 <div class="card">
                                     <a href="{{ route('teacher.video.show' ,['id'=>$video->id]) }}" class="position-relative">
-<<<<<<< HEAD
-                                        <img class="card-img-top" src="/img/courses/courses-img4.jpg" alt="Card image">
-=======
                                         <img class="card-img-top" src="{{ asset('img/courses/courses-img4.jpg') }}" alt="Card image">
->>>>>>> main2/master
                                         <div class="card-img-overlay">
                                             <span class="badge badge-info badge-rounded-circle">
                                                 <i class="fa fa-youtube-play"></i></span>

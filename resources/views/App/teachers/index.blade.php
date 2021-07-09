@@ -38,14 +38,10 @@
                 </div>
             </a>
         @endforeach
-<<<<<<< HEAD
-        
-=======
         @if(Count($levels) == 0)
             <div class="w-50 text-dark text-center font-weight-bolder mx-auto my-10">
                 <h3>لا يوجد مدرسين</h3>
             </div>
         @endif
->>>>>>> main2/master
     </div>
 @endsection
