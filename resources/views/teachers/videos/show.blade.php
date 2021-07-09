@@ -1,5 +1,9 @@
 @extends('teachers.layout')
 @section('style')
+<<<<<<< HEAD
+=======
+    @parent
+>>>>>>> main2/master
     <style>
         /* .loader {
             padding: 225px;

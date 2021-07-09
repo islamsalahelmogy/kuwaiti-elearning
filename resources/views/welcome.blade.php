@@ -93,7 +93,11 @@
             <ul>
                 <!-- SLIDE 1  -->
                 <li data-transition="fade">
+<<<<<<< HEAD
                     <img src="/img/banner/slider-1/img-1.jpg" alt="Sky" class="rev-slidebg" />
+=======
+                    <img src="{{ asset('img/banner/slider-1/img-1.jpg') }}" alt="Sky" class="rev-slidebg" />
+>>>>>>> main2/master
                     <!-- LAYERS -->
     
                     <!-- LAYER NR. 1 -->
@@ -125,7 +129,11 @@
     
                 <!-- SLIDE 2  -->
                 <li data-transition="fade">
+<<<<<<< HEAD
                     <img src="/img/banner/slider-1/img-2.jpg" alt="Sky" class="rev-slidebg" />
+=======
+                    <img src="{{ asset('img/banner/slider-1/img-2.jpg') }}" alt="Sky" class="rev-slidebg" />
+>>>>>>> main2/master
                     <!-- LAYERS-->
     
                     <!-- LAYER NR. 1 -->
@@ -157,7 +165,11 @@
     
                 <!-- SLIDE 3 -->
                 <li data-transition="fade">
+<<<<<<< HEAD
                     <img src="/img/banner/slider-1/img-3.jpg" alt="Sky" class="rev-slidebg" />
+=======
+                    <img src="{{ asset('img/banner/slider-1/img-3.jpg') }}" alt="Sky" class="rev-slidebg" />
+>>>>>>> main2/master
                     <!-- LAYERS -->
     
                     <!-- LAYER NR. 1 -->
@@ -189,7 +201,11 @@
     
                 <!-- SLIDE 4  -->
                 <li data-transition="fade">
+<<<<<<< HEAD
                     <img src="/img/banner/slider-1/img-4.jpg" alt="Sky" class="rev-slidebg" />
+=======
+                    <img src="{{ asset('img/banner/slider-1/img-4.jpg') }}" alt="Sky" class="rev-slidebg" />
+>>>>>>> main2/master
                     <!-- LAYERS -->
     
                     <!-- LAYER NR. 1 -->
@@ -226,7 +242,11 @@
             <div class="row">
                 <div class="col-sm-6 col-xs-12 order-md-1">
                     <div class="image mb-4 mb-md-0">
+<<<<<<< HEAD
                         <img class="img-fluid rounded" src="/img/features/features-img1.jpg" alt="features-img1.jpg">
+=======
+                        <img class="img-fluid rounded" src="{{ asset('img/features/features-img1.jpg') }}" alt="features-img1.jpg">
+>>>>>>> main2/master
                     </div>
                 </div>
                 <div class="col-sm-6 col-xs-12">

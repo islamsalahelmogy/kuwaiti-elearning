@@ -5,7 +5,7 @@
         @foreach ($videos as $video)
             <div class="media media-list-view mb-5">
                 <a class="media-img" href="{{ route('home.videos.show',['id'=>$video->id]) }}">
-                    <img src="/img/courses/courses-img3.jpg" alt="Image">
+                    <img src="{{ asset('img/courses/courses-img3.jpg') }}" alt="Image">
                     <div class="media-img-overlay">
                         <span class="badge badge-warning badge-rounded-circle"><i class="fa fa-youtube-play"></i></span>
                     </div>
