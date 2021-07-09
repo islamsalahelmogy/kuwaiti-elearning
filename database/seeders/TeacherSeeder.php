@@ -16,11 +16,11 @@ class TeacherSeeder extends Seeder
     public function run()
     {
         DB::table('teachers')->insert([
-            'name' => 'Admin',
+            'name' => 'أدمن',
             'email' => 'root@gmail.com',
             'password' => Hash::make('123456789'),
             'gender' => 'male',
-            'phone' => '123456',
+            'phone' => '12345678',
             'role' => 'admin',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')

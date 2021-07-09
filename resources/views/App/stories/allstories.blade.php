@@ -6,7 +6,7 @@
         @foreach ($stories as $story)
             <div class="media media-list-view mb-5">
                 <a class="media-img" href="{{ route('stories.all.show',['id'=>$story->id]) }}">
-                    <img src="/img/courses/courses-img3.jpg" alt="Image">
+                    <img src="{{ asset('img/courses/courses-img3.jpg') }}" alt="Image">
                     <div class="media-img-overlay">
                         <span class="badge badge-warning badge-rounded-circle"><i class="fa fa-headphones"></i></span>
                     </div>

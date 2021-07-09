@@ -1,5 +1,6 @@
 @extends('teachers.layout')
 @section('style')
+    @parent
     <style>
         /* .loader {
             padding: 225px;

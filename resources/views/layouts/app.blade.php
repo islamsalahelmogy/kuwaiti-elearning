@@ -246,7 +246,7 @@
                         }
                     }else{
                         
-                        window.location.replace("http://127.0.0.1:8000/student/dashboard");
+                        window.location.replace("{{ route("student.dashboard") }}");
                     
                     }
                 })
@@ -273,7 +273,7 @@
                             messageError('password_confirmation_str',errors.password_confirmation_str[0]);
                         }
                     }else {
-                        window.location.replace("http://127.0.0.1:8000/student/dashboard");
+                        window.location.replace("{{ route("student.dashboard") }}");
                     }
                 })
             })
@@ -323,7 +323,7 @@
                             messageError('password_confirmation_stcp',errors.password_confirmation_stcp[0]);
                         }
                     }else {
-                        window.location.replace("http://127.0.0.1:8000/student/dashboard");
+                        window.location.replace("{{ route("student.dashboard") }}");
 
 
                     }
@@ -355,7 +355,7 @@
                         }
                     }else{
                         
-                       window.location.replace("http://127.0.0.1:8000/teacher/dashboard");
+                       window.location.replace("{{ route("teacher.dashboard") }}");
                     
                     }
                 })
@@ -389,7 +389,7 @@
                         }
                     }else {
                         $('#modal-teacher-register').modal('hide');
-                        window.location.replace("http://127.0.0.1:8000/admin/teacher/index");
+                        window.location.replace("{{ route("admin.teacher.index") }}");
                     }
                 })
             })
@@ -437,7 +437,7 @@
                             messageError('password_confirmation_tcp',errors.password_confirmation_tcp[0]);
                         }
                     }else {
-                        window.location.replace("http://127.0.0.1:8000/teacher/dashboard");
+                        window.location.replace("{{ route("teacher.dashboard") }}");
 
 
                     }

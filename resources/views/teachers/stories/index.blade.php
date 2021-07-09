@@ -24,7 +24,7 @@
                             <div class="card">
                                     <a href="{{ route('teacher.story.show' ,['id'=>$story->id]) }}"
                                         class="position-relative">
-                                    <img class="card-img-top" src="/img/audio.jpg" alt="Card image">
+                                    <img class="card-img-top" src="{{ asset('img/audio.jpg') }}" alt="Card image">
                                     <div class="card-img-overlay">
                                         <span class="badge badge-info badge-rounded-circle">
                                             <i class="fa fa-headphones"></i></span>
