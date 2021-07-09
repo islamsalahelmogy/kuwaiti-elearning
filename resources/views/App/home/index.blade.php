@@ -23,6 +23,7 @@
 @endsection
 @section('content')
     <div class="d-flex justify-content-around flex-wrap">
+    
         @foreach ($levels as $level)
             <a class="square my-8 mx-10" href="{{ route('home.topics',['levelId' => $level->id]) }}">
                 <span></span>
@@ -38,6 +39,10 @@
                 </div>
             </a>
         @endforeach
-        
+        @if(Count($levels) == 0)
+            <div class="w-50 text-dark text-center font-weight-bolder mx-auto my-10">
+                <h3>لا يوجد اى محتوى</h3>
+            </div>
+        @endif
     </div>
 @endsection

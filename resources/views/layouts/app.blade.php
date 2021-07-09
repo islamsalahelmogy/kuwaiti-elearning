@@ -246,7 +246,11 @@
                         }
                     }else{
                         
+<<<<<<< HEAD
                         window.location.replace("http://127.0.0.1:8000/student/dashboard");
+=======
+                        window.location.replace("{{ route("student.dashboard") }}");
+>>>>>>> main2/master
                     
                     }
                 })
@@ -273,7 +277,11 @@
                             messageError('password_confirmation_str',errors.password_confirmation_str[0]);
                         }
                     }else {
+<<<<<<< HEAD
                         window.location.replace("http://127.0.0.1:8000/student/dashboard");
+=======
+                        window.location.replace("{{ route("student.dashboard") }}");
+>>>>>>> main2/master
                     }
                 })
             })
@@ -323,7 +331,11 @@
                             messageError('password_confirmation_stcp',errors.password_confirmation_stcp[0]);
                         }
                     }else {
+<<<<<<< HEAD
                         window.location.replace("http://127.0.0.1:8000/student/dashboard");
+=======
+                        window.location.replace("{{ route("student.dashboard") }}");
+>>>>>>> main2/master
 
 
                     }
@@ -355,7 +367,11 @@
                         }
                     }else{
                         
+<<<<<<< HEAD
                        window.location.replace("http://127.0.0.1:8000/teacher/dashboard");
+=======
+                       window.location.replace("{{ route("teacher.dashboard") }}");
+>>>>>>> main2/master
                     
                     }
                 })
@@ -389,7 +405,11 @@
                         }
                     }else {
                         $('#modal-teacher-register').modal('hide');
+<<<<<<< HEAD
                         window.location.replace("http://127.0.0.1:8000/admin/teacher/index");
+=======
+                        window.location.replace("{{ route("admin.teacher.index") }}");
+>>>>>>> main2/master
                     }
                 })
             })
@@ -437,7 +457,11 @@
                             messageError('password_confirmation_tcp',errors.password_confirmation_tcp[0]);
                         }
                     }else {
+<<<<<<< HEAD
                         window.location.replace("http://127.0.0.1:8000/teacher/dashboard");
+=======
+                        window.location.replace("{{ route("teacher.dashboard") }}");
+>>>>>>> main2/master
 
 
                     }

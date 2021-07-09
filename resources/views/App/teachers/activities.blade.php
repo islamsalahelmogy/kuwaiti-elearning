@@ -6,7 +6,11 @@
         @foreach ($activities as $activity)
             <div class="media media-list-view mb-5">
                 <a class="media-img" href="{{ route('teachers.activities.show',['id'=>$activity->id]) }}">
+<<<<<<< HEAD
                     <img src="/img/courses/courses-img3.jpg" alt="Image">
+=======
+                    <img src="{{ asset('img/courses/courses-img3.jpg') }}" alt="Image">
+>>>>>>> main2/master
                     <div class="media-img-overlay">
                         <span class="badge badge-warning badge-rounded-circle"><i class="fa fa-question-circle"></i></span>
                     </div>
