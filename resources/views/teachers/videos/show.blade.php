@@ -2,7 +2,7 @@
 @section('style')
     @parent
     <style>
-        /* .loader {
+        .loader {
             padding: 225px;
             padding-left: 390px;
             position: relative;
@@ -45,7 +45,7 @@
                 transform: scale(.15);
                 box-shadow: 0 0 2px rgba(black, .1);
             }
-        } */
+        } 
     </style>
 @endsection
 @section('content')
@@ -54,11 +54,12 @@
             <div class="card shadow-none bg-transparent mb-0">
                     <div class="position-relative">
                         <div dir="ltr" style='max-width: 800px; position: relative; margin: 0 auto; margin-top: 0px; margin-top: 64px;'>
-                            {{-- <div class="loader">
+                            <div class="loader" id="load">
                                 <div class="one"></div>
                                 <div class="two"></div>
-                            </div> --}}
-                            <video class="w-100" id="video" poster="{{ asset('img/video.jpg') }}" preload="metadata" controls controlsList="nodownload">
+                            </div> 
+                            <video class="w-100 d-none" id="video" poster="{{ asset('img/video.jpg') }}" 
+                                controls controlsList="nodownload">
                                 Your browser does not support the video tag.
                             </video>
                     
@@ -94,6 +95,9 @@
                 if (this.status == 200) {
                     track.src = URL.createObjectURL(this.response);
                     track.load();
+                    document.getElementById('load').classList.add('d-none');
+                    document.getElementById('video').classList.remove('d-none');
+                    
                 }
             }
             request.send();

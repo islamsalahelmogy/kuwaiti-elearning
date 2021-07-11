@@ -1,6 +1,49 @@
-@extends('app.layout')
+@extends('App.layout')
 @section('style')
     <style>
+        #load {
+            padding: 125px;
+            position: relative;
+        }
+        
+        .one {
+            position: absolute;
+            border-radius: 50%;
+            background: #0e0d0d;
+            opacity: .0;
+            animation: loading 1.3s .65s infinite;
+            height: 20px;
+            width: 20px;
+        }
+        
+        .two {
+            position: absolute;
+            border-radius: 50%;
+            background: #FF4081;
+            opacity: .0;
+            animation: loading 1.3s infinite;
+            height: 20px;
+            width: 20px;
+        }
+        
+        
+        @keyframes loading {
+            0% {
+                opacity: .0;
+                transform: scale(.15);
+                box-shadow: 0 0 2px rgba(black, .1);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(2);
+                box-shadow: 0 0 10px rgba(black, .1);
+            }
+            100% {
+                opacity: .0;
+                transform: scale(.15);
+                box-shadow: 0 0 2px rgba(black, .1);
+            }
+        } 
         #background {
         object-fit: cover;
         height: 100vh;
@@ -161,7 +204,11 @@
     <section class="py-8  bg-white">
         <div class="container">
                 <div class="card shadow-none bg-transparent mb-0">
-                    <div class="position-relative">
+                    <div id="load" style="padding-right:50%">
+                            <div class="one"></div>
+                            <div class="two"></div>
+                    </div>
+                    <div class="position-relative d-none" id="story">
                             <div class="outer-container">
                             <audio id="track">
                             </audio>
@@ -238,6 +285,8 @@
                     track.src = URL.createObjectURL(this.response);
                     track.load();
                     setInterval(progressValue, 500);
+                    document.getElementById('load').classList.add('d-none');
+                    document.getElementById('story').classList.remove('d-none');
                 }
             }
             request.send();
@@ -297,15 +346,31 @@
             } else {
                 durationTime.textContent = formatTime(track.duration);
             }
+            if(track.currentTime == track.duration) {
+                stoptrack();
+            }
         }
 
 
         function formatTime(sec) {
-            let minutes = Math.floor(sec / 60);
+            let hours =  Math.floor(sec / 60 / 60);
+            let minutes = 0;
+            if(hours > 0)
+                minutes = Math.floor(sec - hours * 60 * 60);
+            else
+                minutes = Math.floor(sec / 60);
             let seconds = Math.floor(sec - minutes * 60);
             if (seconds < 10) {
                 seconds = `0${seconds}`;
             }
+            if (minutes < 10) {
+                minutes = `0${minutes}`;
+            }
+            if (hours < 10) {
+                hours = `0${hours}`;
+            }
+            if(hours > 0)
+                return `${hours}:${minutes}:${seconds}`;
             return `${minutes}:${seconds}`;
         }
 
